@@ -1,15 +1,15 @@
-function  [Y,Scaled] = multi_procrustes(I,dim,no_of_samples)
+function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
 	% array fun
-	Z = zeros(dim,no_of_samples);
+	d = 1;
+	Z = zeros(n,2,no_of_samples);
     
     Z =I;
     
-    base = I(:,1);
-    %prevbase = ones(n,2);
-    %errorInAlign
+    base = I(:,:,1);
+    prevbase = ones(n,2);
     j=0;
     while(j<2)
-        muX = geodesic_mean(Z,no_of_samples,0.3,0.001);
+        muX = mean(base,1);
         ssqX = sum(base.^2,1);
         ssqX = sum(ssqX);
         normX = sqrt(ssqX);
@@ -20,19 +20,22 @@ function  [Y,Scaled] = multi_procrustes(I,dim,no_of_samples)
             d = 1;
             Z(:,:,i) = centered;
         end;
+
+        mean_sample = Z(:,:,1);
     
         for i = 1:no_of_samples,
-            rotated = rotate(base,Z(:,:,i),muX,normX,n);
+            rotated = rotate(mean_sample,Z(:,:,i),muX,normX,n);
             d = 1;
             Z(:,:,i) = rotated;
         end;
         % should update the new mean now
-        base  = geodesic_mean(Z,no_of_samples,0.3,0.001);
+        prevbase = base;
+        base  = Z(:,:,1);
         disp(j);
         j=j+1;
     end
-    %disp('SIze of Z');
-    %size(Z)
+    disp('SIze of Z');
+    size(Z)
     Y = mean(Z,3);
     %Y = Z(:,:,1);
     Scaled = Z;
