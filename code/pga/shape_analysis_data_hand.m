@@ -56,27 +56,23 @@ function shape_analysis_data_hand(shapes)
     disp('max eigen value')
     D;
     a =max(diag(D))
-    eigenDiff = zeros(n,2);
-    eigenDiff(:,1) = eigenVect1(1:n);
-    eigenDiff(:,2) = eigenVect1(n+1:end);
-    eigenDiff
-    meanShapeTemp = meanShape;
-    meanShape = zeros(n,2);
-    meanShape(:,1) = meanShapeTemp(1:n);
-    meanShape(:,2) = meanShapeTemp(n+1:end);
-    size(eigenDiff);
-    size(meanShape);
+    eigenValue1;
+   
     
-    meanShape2 = meanShape - 2*sqrt(a)*eigenDiff;
-    meanShape3 = meanShape + 2*sqrt(a)*eigenDiff;
-    figure();
+    size(meanShape)
+    meanShape2 = meanShape- 2*sqrt(a)*eigenVect1';
+    meanShape3  = meanShape + 2*sqrt(a)*eigenVect1';
+    meanShape2 = exp_map(meanShape,meanShape2);
+    meanShape3 = exp_map(meanShape, meanShape3);
+   
+    %figure();
     hold on;
     
     size(meanShape3);
-    %plot(meanShape2(:,1),meanShape2(:,2),'g*-');
-    %plot(meanShape3(:,1),meanShape3(:,2),'m*-');
+    plot(meanShape2(1:n),meanShape2(n+1:end),'g*-');
+    plot(meanShape3(1:n),meanShape3(n+1:end),'m*-');
     
-    plot(meanShape(:,1),meanShape(:,2),'b*-');
+    plot(meanShape(1:n),meanShape(n+1:end),'b*-');
     axis equal tight;
     
     %[row,col] = find(D == max(abs(D(:))));
