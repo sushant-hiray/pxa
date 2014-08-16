@@ -1,6 +1,5 @@
 function [ S ] = generate_points( n,dim )
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+%Generates n points on a sphere with dimension dim
 
 S = zeros(n,dim);
 %size(S)
