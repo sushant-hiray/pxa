@@ -48,6 +48,7 @@ function shape_analysis_data_hand(shapes)
     end
     %}
     
+    
    
     [eigenValue1,row] = max(diag(D));
     size(V)
