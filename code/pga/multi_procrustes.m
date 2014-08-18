@@ -7,7 +7,7 @@ function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
     
     base = I(:,:,1);
     prevbase = ones(n,2);
-    j=0;
+    j=1;
     while(j<2)
         muX = mean(base,1);
         ssqX = sum(base.^2,1);
@@ -40,6 +40,7 @@ function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
     %Y = Z(:,:,1);
     Scaled = Z;
     %Y = Z(:,:,1);
+    
 
 function z = center(X)
     [a, b]   = size(X);
@@ -49,7 +50,7 @@ function z = center(X)
     ssqI = sum(ssqI);
     normI = sqrt(ssqI);
     z = z / normI ;
-
+    
 function z = rotate(base,Y0,muX,normX,n)
 	A = double(base') * Y0;
 

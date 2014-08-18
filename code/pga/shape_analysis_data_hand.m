@@ -31,6 +31,8 @@ function shape_analysis_data_hand(shapes)
     for i =1:no_of_samples
         temp = Scaled(:,:,i);
         scaled_pcaInput(i,:) = temp(:);
+        norm_scaled = norm(scaled_pcaInput(i,:));
+        scaled_pcaInput(i,:) = scaled_pcaInput(i,:)/norm_scaled;
     end
    
     %compute the variance
@@ -49,7 +51,7 @@ function shape_analysis_data_hand(shapes)
     %}
     
     
-   
+    
     [eigenValue1,row] = max(diag(D));
     size(V)
     eigenVect1 = V(:,row);
@@ -58,13 +60,21 @@ function shape_analysis_data_hand(shapes)
     D;
     a =max(diag(D))
     eigenValue1;
-   
-    
+    'dot of meanshape and eigenVect'
+    dot(meanShape,eigenVect1)
     size(meanShape)
-    meanShape2 = meanShape- 2*sqrt(a)*eigenVect1';
-    meanShape3  = meanShape + 2*sqrt(a)*eigenVect1';
+    meanShape2 = - 2*sqrt(a)*eigenVect1';
+    meanShape3  = + 2*sqrt(a)*eigenVect1';
+    
+    'here'
+    dot (meanShape, meanShape2)
+    dot (meanShape, meanShape3)
+    
     meanShape2 = exp_map(meanShape,meanShape2);
     meanShape3 = exp_map(meanShape, meanShape3);
+   
+    norm (meanShape)
+    norm (meanShape2)
    
     %figure();
     hold on;
