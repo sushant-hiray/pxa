@@ -44,33 +44,16 @@ function shape_analysis_data_hand(shapes)
     
     %compute the variance
     [meanShape,V,D] = pga(scaled_pcaInput);
-    disp('V and D sizes');
-    size(V)
-    size(D)    
-   
+    
     [eigenValue1,row] = max(diag(D));
-    size(V)
     eigenVect1 = V(:,row);
-    size(eigenVect1)
-    disp('max eigen value')
-    D;
-    a =max(diag(D))
-    eigenValue1;
-    'dot of meanshape and eigenVect'
-    dot(meanShape,eigenVect1)
-    size(meanShape)
+    
+    a = max(diag(D));
     meanShape2 = - 2*sqrt(a)*eigenVect1';
     meanShape3  = + 2*sqrt(a)*eigenVect1';
     
-    'here'
-    dot (meanShape, meanShape2)
-    dot (meanShape, meanShape3)
-    
     meanShape2 = exp_map(meanShape,meanShape2);
     meanShape3 = exp_map(meanShape, meanShape3);
-   
-    norm (meanShape)
-    norm (meanShape2)
    
     figure();
     hold on;
@@ -82,10 +65,8 @@ function shape_analysis_data_hand(shapes)
     
     [row,col] = find(D == max(abs(D(:))));
     
-    
     eigenVect2 = V(:,row-1);
     eigenVect3 = V(:,row-2);
-    
     
     meanShape4 = - 2*sqrt(a)*eigenVect2';
     meanShape5  = + 2*sqrt(a)*eigenVect2';
@@ -127,6 +108,4 @@ function shape_analysis_data_hand(shapes)
     end
     subplot(3,3,9);
     plot(meanShape(1:n),meanShape(n+1:end),'b*-');
-    
-    
     

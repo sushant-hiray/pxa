@@ -1,5 +1,4 @@
 function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
-	% array fun
 	d = 1;
 	Z = zeros(n,2,no_of_samples);
     
@@ -31,15 +30,10 @@ function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
         % should update the new mean now
         prevbase = base;
         base  = Z(:,:,1);
-        disp(j);
         j=j+1;
     end
-    disp('SIze of Z');
-    size(Z)
     Y = mean(Z,3);
-    %Y = Z(:,:,1);
     Scaled = Z;
-    %Y = Z(:,:,1);
     
 
 function z = center(X)
@@ -60,6 +54,3 @@ function z = rotate(base,Y0,muX,normX,n)
 
 
 	z = normX * Y0 * T + double(repmat(muX, n, 1));
-
-
-%  plot(x1(:,1),x1(:,2),'r*', x2(:,1),x2(:,2),'g*', Z(:,1),Z(:,2),'bx');
