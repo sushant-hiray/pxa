@@ -13,15 +13,11 @@ function [ mean ] = geodesic_mean(S,N,step_size,threshold)
     iter = 0;
     
     while(norm(meanChange) > threshold)
-        'jfkdjkslfjldjflkdjl'
-        %norm(mean)
+        
         sums = zeros(1,data_dim(1));
         iter = iter+1;
         
         for i = 1:N
-            %norm(S(i,:))
-            %'fdkjfkjk'
-            %pause
             sums = sums+log_map(mean,S(i,:));
         end
         gradF = (-1/N)*sums;
@@ -30,6 +26,3 @@ function [ mean ] = geodesic_mean(S,N,step_size,threshold)
         prevmean = mean;
         
     end
-    
-    disp('iterations')
-    disp(iter);
