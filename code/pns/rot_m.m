@@ -11,5 +11,7 @@ function [ r ] = rot_m(v, e_m)
     c = v - e_m*(e_m'*v);
     c = c / max(norm(c), 1e-4);
     A = e_m*c' - c*e_m';
+    'skew symmetric'
+    A
     r = expm(theta*A);
 end
