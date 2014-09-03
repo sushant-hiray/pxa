@@ -7,8 +7,8 @@ function [ X ] = genData(v,r,n )
     
     for i=1:n
         X(i,dim) = cos(r);
-        rest = rand(1,dim-1) -0.5;
-        rest = rest'*2;
+        rest = rand(1,dim-1);
+        rest = rest';
         rest = (sin(r)/norm(rest))*rest;
         X(i,1:dim-1) = rest;
        
