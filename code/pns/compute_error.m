@@ -2,7 +2,7 @@ function [E] = compute_error(v)
 global Data;
 X = Data;
 global r;
-
+    
 v = v/norm(v);
 applyToGivenRow = @(func, matrix,u) @(row) func(matrix(row, :),u);
 applyToRows = @(func, matrix,u) arrayfun(applyToGivenRow(func, matrix,u), 1:size(matrix,1) )';

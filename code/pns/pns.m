@@ -10,13 +10,31 @@ function [Mapping] = pns( X )
     X_new = X;
     while data_dim > 2
         
+        %%%%%%%%%%%%%%%%%%%%%%%%%%
+        %finding the vector with least error(Best Rep)
         [v1 r1]=  applyLM(X_new);
         CurrMap.v = v1;
         CurrMap.r = r1;
         Mapping = [Mapping CurrMap];
+        'Error at dim ' 
+        data_dim 
+        compute_error(v1)
+        %v1
+        %pause
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % This code is fine
         %project data on to the surface
-
-        X_temp = project_all(v1,r1,X_new);
+        X_temp = project_all(v1,r1,X_new);  
+        % check if v1. all X_temp is zero
+        v1_temp = repmat(v1,size(X_temp,1),1);
+        assert(sum(sum(X_temp.*v1_temp,2).^2) < 1E-2, 'projection and normal not perpendicular');
+        %prependicular is verified
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+      
         X_new = fk_all(v1,r1,X_temp);
         data_dim = data_dim -1; 
         %now apply the next iteration
