@@ -10,9 +10,18 @@ function [Mapping] = pns( X )
     X_new = X;
     while data_dim > 2
         
+        %%%%%%%%%%%%%%%%%%%%%%%%%
+        
+        
+        
         %%%%%%%%%%%%%%%%%%%%%%%%%%
         %finding the vector with least error(Best Rep)
-        [v1 r1]=  applyLM(X_new);
+        if(data_dim == 4)
+            [v1 r1]=  applyLM(X_new, [ 0.3406   -0.5214   -0.2961    0.7242]');
+        else
+             [v1 r1]=  applyLM(X_new, rand(data_dim,1));
+        end
+        
         CurrMap.v = v1;
         CurrMap.r = r1;
         Mapping = [Mapping CurrMap];

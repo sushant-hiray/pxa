@@ -12,6 +12,7 @@ E = applyToRows(myFunc,X,v);
 
 E = E -r;
 E = norm(E)^2;
+E = E/size(X,1);
 end
 
 function z = normLog_map(b,c)
