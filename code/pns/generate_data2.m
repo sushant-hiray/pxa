@@ -17,6 +17,7 @@ function [X,Mapping] = generate_data2(dim,N)
                  %so we need only dim - 2 iterations
     currentDim = 2;
     % Holds the mapping of data. i.e v and r
+    % TODO: preallocate the size to Mapping
     Mapping = [];
     currentMap.v = geoMean;
     currentMap.r = 0;
@@ -60,8 +61,8 @@ function [X,Mapping] = generate_data2(dim,N)
         %while loop post processing        
         currentDim = currentDim +1;
         d = d - 1;
-        X = rotate_data(X,rotationMat) %rotate the points via rotationMatrix
-                                       %formed using e and v
+        X = rotate_data(X,rotationMat); %rotate the points via rotationMatrix
+                                        %formed using e and v
     end
     
 end
