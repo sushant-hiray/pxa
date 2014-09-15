@@ -1,4 +1,5 @@
 function [E] = compute_error(v)
+
 global Data;
 X = Data;
 global r;
@@ -9,8 +10,8 @@ applyToRows = @(func, matrix,u) arrayfun(applyToGivenRow(func, matrix,u), 1:size
 
 myFunc =@normLog_map;
 E = applyToRows(myFunc,X,v);
-
-E = E -r;
+% residual = pho(x, v) - r
+E = E - r;
 E = norm(E)^2;
 E = E/size(X,1);
 end
