@@ -1,20 +1,10 @@
 function [Mapping] = pns( X )
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
-    
-    data_dim = size(X,2);
-    orignal_dim = data_dim;
+%X is the data points. datadim x no.of data points
+
+    data_dim = size(X,1);
     Mapping =[];
-    V = zeros(0,orignal_dim);
-    R = zeros(0,0);
     X_new = X;
     while data_dim > 2
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%
-        
-        
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%
         %finding the vector with least error(Best Rep)
         %global Data is set in applyLM
         if(data_dim == 4)
@@ -30,9 +20,9 @@ function [Mapping] = pns( X )
         CurrMap.v = v1;
         CurrMap.r = r1;
         Mapping = [Mapping CurrMap];
-        'Converged at dim ' 
+        'Converged at dim';
         data_dim 
-        'with error'
+        'with error';
         compute_error(v1)
         %pause
         %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,8 +33,8 @@ function [Mapping] = pns( X )
         %project data on to the surface
         X_temp = project_all(v1,r1,X_new);  
         % check if v1. all X_temp is zero
-        v1_temp = repmat(v1,size(X_temp,1),1);
-        assert(sum(sum(X_temp.*v1_temp,2).^2) < 1E-2, 'projection and normal not perpendicular');
+        v1_temp = repmat(v1, 1, size(X_temp,2));
+        assert(sum(sum(X_temp.*v1_temp,1).^2) < 1E-2, 'projection and normal not perpendicular');
         %prependicular is verified
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
@@ -68,19 +58,5 @@ function [Mapping] = pns( X )
     
     
 
-end
-
-function [v] = getFinalVec(V,R,v1)
-
-    depth = size(V,1)
-    assert(size(R,1)==size(V,1), 'r and v dont match');
-    v=v1;
-    if depth ==0
-        v1 =v;
-        return;
-    end
-    for i=depth:1
-        v = f_inv(V(i,:),R(i),v)
-    end
 end
 

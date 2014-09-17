@@ -5,10 +5,10 @@ function [X,Mapping] = generate_data2(dim,N)
     assert(dim>=2, 'dim has to be greater than 2')    
     
     % generate Data for 2 dim
-    X = abs(randn(N,2));   %Nx2 matrix
+    X = abs(randn(2,N));   %2xN matrix
     Y = sqrt(sum(X.^2,2)); 
     Y = repmat(Y,[1 2]);
-    X = X./Y;
+    X = normc(X);
     % 2D data generated
     
     
@@ -38,26 +38,23 @@ function [X,Mapping] = generate_data2(dim,N)
         rotationMat = rot_m(e, v); %matrix of dim [currentDim+1 x currentDim+1]
                                    %rotates v to e
         
-        currentMap.v = v'; % currentMap stores v as row
+        currentMap.v = v; % currentMap stores v as row
         currentMap.r = r;
         Mapping = [Mapping currentMap]; %append currentMap
         
         radius = sin(r);
-        radius = repmat(radius,N,currentDim); %row vector [1 1 1] of dim currentDim
+        %radius = repmat(radius,N,currentDim); %row vector [1 1 1] of dim currentDim
                                               %corresponding to each
                                               %matrix dim: [NxcurrentDim]
         
         
-        X = X./radius; %row Vector corresponding to each n
+        X = X/radius; %row Vector corresponding to each n
         
-        Y = repmat(cos(r),N,1); %col vector of size N
-        Y  = Y + abs(sigmaNoise*randn(N,1));
-        
-        X = [X Y];
-        X = normc(X'); %normalize the matrix X over its rows.
-        X = X';        %normc normalizes over cols so pass X'
-                       %again regain its original matrix dimensions
-        
+        Y = repmat(cos(r),1,N); %col vector of size N
+        Y  = Y + abs(sigmaNoise*randn(1,N));
+        X = [X;Y];
+        X = normc(X); %normalize the matrix X over its cols.
+                       
         %while loop post processing        
         currentDim = currentDim +1;
         d = d - 1;
