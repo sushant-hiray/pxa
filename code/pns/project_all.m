@@ -4,7 +4,7 @@ function [ Y ] = project_all(normal_vec , angle , X  )
 %X: column
 
     assert(iscolumn(normal_vec), '[project_all]: normal_vec should be column');
-    assert(iscolumn(X), '[project_all]: X should be column');
+    %assert(iscolumn(X), '[project_all]: X should be column');
     
 %     applyToGivenRow = @(func, matrix,v,r) @(row) func(v,r,matrix(row, :));
 %     applyToRows = @(func, matrix,v,r) arrayfun(applyToGivenRow(func, matrix,v,r), 1:size(matrix,1), 'UniformOutput', false)';

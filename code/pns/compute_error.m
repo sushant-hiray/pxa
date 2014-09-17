@@ -6,7 +6,7 @@ X = Data;
 global r;
 v = v/norm(v);
 E = cellfun(@(x)(normLog_map(x, v)), num2cell(X, 1));
-E = cell2mat(E);
+%E = cell2mat(E);
 E = E - r;
 E = norm(E)^2;
 E = E/size(X,2); %normalizing by number of data points
@@ -27,6 +27,7 @@ end
 
 
 function z = normLog_map(b,c)
-    b = cell2mat(b);
+    b;
+    %b = cell2mat(b);
     z = norm(log_map(b,c));
 end

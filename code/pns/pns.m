@@ -7,16 +7,20 @@ function [Mapping] = pns( X )
     while data_dim > 2
         %finding the vector with least error(Best Rep)
         %global Data is set in applyLM
+        %{
         if(data_dim == 4)
-             [v1 r1]=  applyLM(X_new, [  -0.3885   -0.3314   -0.6442   -0.5694 ]');
+             [v1 r1]=  applyLM(X_new, [ -0.2396   -0.8620   -0.0272   -0.4459]');
+        elseif(data_dim == 5)
+            [v1 r1]=  applyLM(X_new, [ 0.4847    0.0601    0.0212    0.5398   -0.6853]');
         elseif(data_dim == 3)
-             [v1 r1]=  applyLM(X_new, [  0.2267    0.1507   -0.9622 ]');
+             [v1 r1]=  applyLM(X_new, [0.1486   -0.1190   -0.9817]');
         elseif(data_dim == 2)
-             [v1 r1]=  applyLM(X_new, [  0.2522    0.9677 ]');
+             [v1 r1]=  applyLM(X_new, [ 0.2522    0.9677 ]');
         else
              [v1 r1]=  applyLM(X_new, rand(data_dim,1));
         end
-        
+        %}
+        [v1 r1]=  applyLM(X_new, rand(data_dim,1));
         CurrMap.v = v1;
         CurrMap.r = r1;
         Mapping = [Mapping CurrMap];

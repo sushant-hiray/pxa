@@ -51,7 +51,7 @@ function [X,Mapping] = generate_data2(dim,N)
         X = X/radius; %row Vector corresponding to each n
         
         Y = repmat(cos(r),1,N); %col vector of size N
-        Y  = Y + abs(sigmaNoise*randn(1,N));
+        %Y  = Y + abs(sigmaNoise*randn(1,N));
         X = [X;Y];
         X = normc(X); %normalize the matrix X over its cols.
                        
