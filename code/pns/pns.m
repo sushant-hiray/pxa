@@ -6,7 +6,7 @@ function [Mapping] = pns( X )
     orignal_dim = data_dim;
     Mapping =[];
     V = zeros(0,orignal_dim);
-    R =zeros(0,0);
+    R = zeros(0,0);
     X_new = X;
     while data_dim > 2
         
@@ -16,8 +16,13 @@ function [Mapping] = pns( X )
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%
         %finding the vector with least error(Best Rep)
+        %global Data is set in applyLM
         if(data_dim == 4)
-            [v1 r1]=  applyLM(X_new, [ 0.3406   -0.5214   -0.2961    0.7242]');
+             [v1 r1]=  applyLM(X_new, [  -0.3885   -0.3314   -0.6442   -0.5694 ]');
+        elseif(data_dim == 3)
+             [v1 r1]=  applyLM(X_new, [  0.2267    0.1507   -0.9622 ]');
+        elseif(data_dim == 2)
+             [v1 r1]=  applyLM(X_new, [  0.2522    0.9677 ]');
         else
              [v1 r1]=  applyLM(X_new, rand(data_dim,1));
         end
@@ -25,10 +30,10 @@ function [Mapping] = pns( X )
         CurrMap.v = v1;
         CurrMap.r = r1;
         Mapping = [Mapping CurrMap];
-        'Error at dim ' 
+        'Converged at dim ' 
         data_dim 
+        'with error'
         compute_error(v1)
-        %v1
         %pause
         %%%%%%%%%%%%%%%%%%%%%%%%%%%
         
@@ -43,7 +48,7 @@ function [Mapping] = pns( X )
         %prependicular is verified
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
-      
+        % rotate data to north pole
         X_new = fk_all(v1,r1,X_temp);
         data_dim = data_dim -1; 
         %now apply the next iteration

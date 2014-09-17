@@ -1,8 +1,7 @@
 function [v,r] = applyLM(X,v)
+    % v = Initial Seed Value
     global Data;
     Data = X;
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
     global r;
     r = pi/2;
     

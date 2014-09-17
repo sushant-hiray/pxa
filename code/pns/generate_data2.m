@@ -35,7 +35,7 @@ function [X,Mapping] = generate_data2(dim,N)
         e(currentDim+1) = 1; % e is [0 0. . .0 1]'
         
         
-        rotationMat = rot_m(v, e); %matrix of dim [currentDim+1 x currentDim+1]
+        rotationMat = rot_m(e, v); %matrix of dim [currentDim+1 x currentDim+1]
                                    %rotates v to e
         
         currentMap.v = v'; % currentMap stores v as row
