@@ -1,9 +1,11 @@
-function [Mapping] = pns( X )
+function [Mapping, X_pns] = pns( X )
 %X is the data points. datadim x no.of data points
 
     data_dim = size(X,1);
-    Mapping =[];
+    Mapping = [];
+    X_pns = [];
     X_new = X;
+    r_prod = 1;
     while data_dim > 2
         %finding the vector with least error(Best Rep)
         %global Data is set in applyLM
@@ -21,13 +23,20 @@ function [Mapping] = pns( X )
         end
         %}
         [v1 r1]=  applyLM(X_new, rand(data_dim,1));
+        r_prod = r_prod*sin(r1);
+        
         CurrMap.v = v1;
         CurrMap.r = r1;
+        CurrMap.r_prod = r_prod;
+        
         Mapping = [Mapping CurrMap];
         'Converged at dim';
         data_dim 
         'with error';
         compute_error(v1)
+        CurrError = residual_error(X_new, v1, r1, r_prod);
+        X_pns = [X_pns; CurrError];
+        
         %pause
         %%%%%%%%%%%%%%%%%%%%%%%%%%%
         
@@ -42,6 +51,8 @@ function [Mapping] = pns( X )
         %prependicular is verified
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
+        
+        
         % rotate data to north pole
         X_new = fk_all(v1,r1,X_temp);
         data_dim = data_dim -1; 
@@ -52,15 +63,12 @@ function [Mapping] = pns( X )
     v = geodesic_mean(X_new);
     CurrMap.v = v;
     CurrMap.r = 0;
+    CurrMap.r_prod = r_prod;
+    CurrError = residual_error(X_new, v, 0, r_prod);
     Mapping = [Mapping CurrMap];
-    
-    
-    
+    X_pns = [X_pns; CurrError];
+
     %Now you are done finding all the parameters:
     
     %Reconstruct the vector back
-    
-    
-
 end
-
