@@ -1,4 +1,4 @@
-function [ err ] = residual_error(x, v, r, r_prod)
+function [ err ] = residual_error(X, v, r, r_prod)
 % returns the residual error pho(x,v) -r for all n points in a row vector
 
 %v must be column vector

@@ -1,4 +1,4 @@
-function MComp = shape_analysis_data_hand(shapes)
+function [MComp, Xpns] = shape_analysis_data_hand(shapes)
 
     shapes1 = shapes';
    
@@ -43,5 +43,5 @@ function MComp = shape_analysis_data_hand(shapes)
     
     
     %compute the variance
-    MComp = pns(scaled_pcaInput');
+    [MComp,Xpns] = pns(scaled_pcaInput');
 end
