@@ -11,10 +11,18 @@ function [v,r] = applyLM(X,v)
     
     v = v/norm(v);
     'inital error';
-    compute_error(v)
+    compute_error(v);
+    
+    
     
     v = lsqnonlin(@(x) compute_error(x),v,[],[],options);
+    
+    %optimize_for_v(x);
+    
+    
     'final error';
+    
+    
     v = v/norm(v);  
     compute_error(v)
    

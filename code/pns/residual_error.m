@@ -11,5 +11,6 @@ function [a] = res_single(x, v, r)
 
 t1 = acos(dot(x,v));
 a = r - t1;
+a =a*a;
 end
 
