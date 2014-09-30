@@ -35,6 +35,17 @@ function [Mapping, X_pns] = pns( X )
         'with error';
         compute_error(v1)
         CurrError = residual_error(X_new, v1, r1, r_prod);
+        
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %Compute Error at this layer, project the data to the final layer
+        
+        
+        
+        
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
         X_pns = [CurrError; X_pns];
         
         %pause
