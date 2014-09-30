@@ -1,8 +1,8 @@
 function vec = log_map(p1, p2)
 %LOG_MAP returns the vector in tangent space of p1 in direction of p2
 
-assert (abs(1 - norm (p1)) < 1e-5, 'p1 error');
-assert (abs(1 - norm (p2)) <  1e-5,'p2 error');
+assert (abs(1 - norm (p1)) < 1e-5, '[log_map]: p1 error');
+assert (abs(1 - norm (p2)) <  1e-5,'[log_map]: p2 error');
 
 dot_p = dot (p1, p2);
 %assert(dot_p ~= 1,  '[log_map]: inner product of the parameters cannot be one');
