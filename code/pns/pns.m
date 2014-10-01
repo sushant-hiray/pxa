@@ -1,4 +1,4 @@
-function [Mapping, X_pns] = pns( X )
+function [Mapping, X_pns,X_BackErr] = pns( X )
 %X is the data points. datadim x no.of data points
 
     data_dim = size(X,1);
@@ -6,6 +6,7 @@ function [Mapping, X_pns] = pns( X )
     X_pns = [];
     X_new = X;
     r_prod = 1;
+    X_BackErr =[];
     while data_dim > 2
         %finding the vector with least error(Best Rep)
         %global Data is set in applyLM
@@ -22,7 +23,7 @@ function [Mapping, X_pns] = pns( X )
              [v1 r1]=  applyLM(X_new, rand(data_dim,1));
         end
         %}
-        [v1 r1]=  applyLM2(X_new, rand(data_dim,1));
+        [v1, r1]=  applyLM2(X_new, rand(data_dim,1));
         r_prod = r_prod*sin(r1);
         
         CurrMap.v = v1;
@@ -31,10 +32,10 @@ function [Mapping, X_pns] = pns( X )
         
         Mapping = [Mapping CurrMap];
         'Converged at dim';
-        data_dim 
+        data_dim;
         'with error';
-        compute_error(v1)
-        CurrError = residual_error(X_new, v1, r1, r_prod);
+        %compute_error(v1)
+        %CurrError = residual_error(X_new, v1, r1, r_prod);
         
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -46,7 +47,7 @@ function [Mapping, X_pns] = pns( X )
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
-        X_pns = [CurrError; X_pns];
+        %X_pns = [CurrError; X_pns];
         
         %pause
         %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,6 +67,15 @@ function [Mapping, X_pns] = pns( X )
         
         % rotate data to north pole
         X_new = fk_all(v1,r1,X_temp);
+        
+        backErr = X - backProject(X_new, Mapping);
+        backErr = backErr.^2;
+        backErr = sum(backErr(:));
+        'backErr is'
+        backErr
+        'for dimension'
+        data_dim
+        X_BackErr = [X_BackErr backErr];       
         data_dim = data_dim -1; 
         %now apply the next iteration
     end

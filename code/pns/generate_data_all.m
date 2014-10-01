@@ -57,9 +57,11 @@ function [Data_X1,X,Mapping] = generate_data_all(dim,N)
                        
         %while loop post processing        
         currentDim = currentDim +1;
-        d = d - 1;
         X = rotate_data(X,rotationMat); %rotate the points via rotationMatrix
-       
+        if (d==dim-2) 
+            Data_X1 = X;
+        end
+        d = d - 1;
     end
     
 end
