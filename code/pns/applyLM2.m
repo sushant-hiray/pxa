@@ -20,7 +20,7 @@ function [v,r] = applyLM2(X,vInitial)
     v = v0;
     v1 =v0;
     prevV1 = 0;
-    while(norm(v1) > threshold && abs(norm(v1)-norm(prevV1)) > threshold)
+    while(norm(v1) > threshold && abs(norm(v1)-norm(prevV1)) > 0.01*threshold)
         v = lsqnonlin(@(x) compute_error2(x),v,[],[],options);
         %optimize_for_v(x);
         v0 =normc(v0);

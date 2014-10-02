@@ -21,7 +21,7 @@ function [Data_X1,X,Mapping] = generate_data_all(dim,N)
     Mapping = [];
     currentMap.v = geoMean;
     currentMap.r = 0;
-    Mapping = [Mapping currentMap];
+    Mapping = [currentMap Mapping];
     sigmaNoise = 0.05; %noise is added as the data is not 
                        %exactly k dim without it. it remains 2 dimensional
     Data_X1 = X;
@@ -40,7 +40,7 @@ function [Data_X1,X,Mapping] = generate_data_all(dim,N)
         
         currentMap.v = v'; % currentMap stores v as row
         currentMap.r = r;
-        Mapping = [Mapping currentMap]; %append currentMap
+        Mapping = [currentMap Mapping]; %append currentMap
         
         radius = sin(r);
         %radius = repmat(radius,N,currentDim); %row vector [1 1 1] of dim currentDim
