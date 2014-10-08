@@ -4,6 +4,7 @@ function [Mapping, X_pns,X_BackErr] = pns( X )
     data_dim = size(X,1);
     Mapping = [];
     X_pns = [];
+    InitialData = X;
     X_new = X;
     r_prod = 1;
     X_BackErr =[];
@@ -70,11 +71,11 @@ function [Mapping, X_pns,X_BackErr] = pns( X )
         
         backErr = X - backProject(X_new, Mapping);
         backErr
-        
-        
+      
+         
         
         backErr = backErr.^2;
-        backErr = sum(backErr(:));
+        backErr = sum(backErr(:))/size(X,2);
         'backErr is'
         backErr
         'for dimension'
