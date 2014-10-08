@@ -69,6 +69,10 @@ function [Mapping, X_pns,X_BackErr] = pns( X )
         X_new = fk_all(v1,r1,X_temp);
         
         backErr = X - backProject(X_new, Mapping);
+        backErr
+        
+        
+        
         backErr = backErr.^2;
         backErr = sum(backErr(:));
         'backErr is'

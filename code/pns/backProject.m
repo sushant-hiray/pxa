@@ -3,7 +3,7 @@ function [ Output ] = backProject( Input, T  )
 %   the highest layer
     tempInput = Input;
     isempty(T);
-    noOfPoints  = size(Input,2);
+    noOfPoints  = size(Input,2)
     size(T);
     'nilesh';
     T;
@@ -23,6 +23,8 @@ function [ Output ] = backProject( Input, T  )
         e_m = e_m';
         
         v = ImmTrans.v;
+        'size v is '
+        size(v)
 %{
         v = v';
         'fkdjshkfhdsk'

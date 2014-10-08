@@ -3,7 +3,7 @@ function [ mean ] = geodesic_mean(X)
     % N is number of Samples
     N = size(X,2);
     assert(N ~= 0,  '[geodesic_mean]: No of Samples cannot be zero');
-    threshold = 0.01;
+    threshold = 1E-5;
     step_size = 0.1;
     assert(threshold < 1,  '[geodesic_mean]: Threshold should be less than 1');
     

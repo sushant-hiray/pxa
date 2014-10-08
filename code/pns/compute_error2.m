@@ -7,7 +7,7 @@ global Data;
 X = Data;
 global r;
 
-E = cellfun(@(x)(normLog_map(x,v)), num2cell(X, 1));
+E = cellfun(@(x)(normLog_map(x,v,v0)), num2cell(X, 1));
 %E = cell2mat(E);
 E = E - r;
 E = norm(E)^2;
@@ -28,11 +28,13 @@ end
 
 
 
-function z = normLog_map(point,v)
+function z = normLog_map(point,v,v0)
     size(point);
     %size(normal)
     norm(point);
+    
+    p1 = log_map(v0,point);
     %b = cell2mat(b);
-    z = norm(point -v);
+    z = norm(p1-v);
     
 end
