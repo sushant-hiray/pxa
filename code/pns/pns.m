@@ -100,10 +100,22 @@ function [Mapping, X_pns,X_BackErr,Modes,Var] = pns( X )
    
     
     
+    
+    
     %Now you are done finding all the parameters:
     
     %Reconstruct the vector back
 
+    
+    noOfModes = size(Mapping,2);
+    variances = zeros(1,noOfModes);
+    for i=2:noOfModes
+        noOfModes
+        B = Mapping(noOfModes -i +1:end-1);
+        variances(i) = compute_variances(X_new,v,Mapping(noOfModes -i+1:end-1));
+    end
+    Var = variances
+    
 
     % compute the modes of variation:
     Modes = find_modes_of_variation(Mapping);
@@ -111,6 +123,8 @@ function [Mapping, X_pns,X_BackErr,Modes,Var] = pns( X )
     % Now computer variances along each of there directions with respect to
     % the geodesic mean.
     
+    
+    %{ 
     gm_rep = back_proj_gm(:,ones(size(InitialData,2),1));
     Error = InitialData -gm_rep;
    
@@ -118,6 +132,8 @@ function [Mapping, X_pns,X_BackErr,Modes,Var] = pns( X )
     Var = Var.^2;
     Var = sum(Var,2);
     Var = normc(Var);
+    %}
+    
     % now project these error on each of the principal modes and compute
     % variances
     
