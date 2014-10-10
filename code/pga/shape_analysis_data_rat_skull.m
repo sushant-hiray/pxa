@@ -1,4 +1,4 @@
-function shape_analysis_data_rat_skull( shapes )
+function D = shape_analysis_data_rat_skull( shapes )
     X = shapes(:,1:8);
     X = X';
     k =size(X);
@@ -103,7 +103,9 @@ function shape_analysis_data_rat_skull( shapes )
     subplot(3,3,9);
     plot(meanShape(1:n),meanShape(n+1:end),'b*-');
     
-    
+    'eigenValue 1 is'
+    eigenValue1
+    D
     
 
 end
