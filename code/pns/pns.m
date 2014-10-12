@@ -11,19 +11,7 @@ X_BackErr =[];
 while data_dim > 2
     %finding the vector with least error(Best Rep)
     %global Data is set in applyLM
-    %{
-        if(data_dim == 4)
-             [v1 r1]=  applyLM(X_new, [ -0.2396   -0.8620   -0.0272   -0.4459]');
-        elseif(data_dim == 5)
-            [v1 r1]=  applyLM(X_new, [ 0.4847    0.0601    0.0212    0.5398   -0.6853]');
-        elseif(data_dim == 3)
-             [v1 r1]=  applyLM(X_new, [0.1486   -0.1190   -0.9817]');
-        elseif(data_dim == 2)
-             [v1 r1]=  applyLM(X_new, [ 0.2522    0.9677 ]');
-        else
-             [v1 r1]=  applyLM(X_new, rand(data_dim,1));
-        end
-    %}
+   
     [v1, r1]=  applyLM2(X_new, rand(data_dim,1));
     r_prod = r_prod*sin(r1);
     
@@ -70,10 +58,6 @@ while data_dim > 2
     X_new = fk_all(v1,r1,X_temp);
     
     backErr = X - backProject(X_new, Mapping);
-    backErr
-    
-    
-    
     backErr = backErr.^2;
     backErr = sum(backErr(:))/size(X,2);
     'backErr is'

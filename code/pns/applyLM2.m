@@ -31,12 +31,12 @@ function [v,r] = applyLM2(X,vInitial)
         %v1 =v;
         %v1 = v1/norm(v1);
         %v1 = v1 - v0* dot(v1,v0)/norm(v0)
-        dot(v1,v0);
+        %dot(v1,v0);
         v0 = exp_map(v0,v1);
         v0 =normc(v0);
         
-        'norm v1 ';
-        norm(v1);
+        %'norm v1 ';
+        %norm(v1);
        
     end
     'final error'
