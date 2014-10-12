@@ -13,7 +13,7 @@ function [v,r] = applyLM2(X,vInitial)
     Data = X;
     %Data = cellfun(@(x)(log_map(x, v0)), num2cell(X, 1),'UniformOutput',false);
     %Data = cell2mat(Data);
-    threshold = 0.001;
+    threshold = 0.01;
     %size(v0)
     'inital error'
     compute_error2(1E-5*rand(data_dim,1))
@@ -21,7 +21,7 @@ function [v,r] = applyLM2(X,vInitial)
     v = v0;
     v1 =v0;
     prevV1 = 0;
-    while(norm(v1) > threshold && abs(norm(v1)-norm(prevV1)) > 0.01*threshold)
+    while(norm(v1) > threshold && abs(norm(v1)-norm(prevV1)) > 0.1*threshold)
         prevV1= v1;
         v = lsqnonlin(@(x) compute_error2(x),v,[],[],options);
         %optimize_for_v(x);
@@ -35,8 +35,8 @@ function [v,r] = applyLM2(X,vInitial)
         v0 = exp_map(v0,v1);
         v0 =normc(v0);
         
-        'norm v1 '
-        norm(v1)
+        'norm v1 ';
+        norm(v1);
        
     end
     'final error'
