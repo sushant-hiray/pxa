@@ -1,4 +1,4 @@
-function [Mapping, X_pns,X_BackErr,Modes,Var] = pns( X )
+function [Mapping, X_pns,X_BackErr,Modes,gm,Var] = pns( X )
 %X is the data points. datadim x no.of data points
 
 data_dim = size(X,1);
@@ -12,7 +12,8 @@ while data_dim > 2
     %finding the vector with least error(Best Rep)
     %global Data is set in applyLM
    
-    [v1, r1]=  applyLM2(X_new, rand(data_dim,1));
+%    [v1, r1]=  applyLM2(X_new, rand(data_dim,1));
+    [v1 r1]  = applyLM(X_new,rand(data_dim,1));
     r_prod = r_prod*sin(r1);
     
     CurrMap.v = v1;
@@ -77,7 +78,7 @@ CurrMap.r_prod = r_prod;
 CurrError = residual_error(X_new, v, 0, r_prod);
 
 back_proj_gm =  backProject(v, Mapping);
-
+gm = back_proj_gm;
 Mapping = [Mapping CurrMap];
 X_pns = [CurrError; X_pns];
 
@@ -94,7 +95,6 @@ X_pns = [CurrError; X_pns];
 noOfModes = size(Mapping,2);
 variances = zeros(1,noOfModes);
 for i=2:noOfModes
-    
     noOfModes
     B = Mapping(i +1:end-1);
     gm_k = backProject(v,Mapping(noOfModes -i+1:end-1));

@@ -18,7 +18,7 @@ no_of_samples = size(X,2);
 
 tangentSpace_X = cellfun(@(x)(normLog_map(x,gm)), num2cell(X_new, 1), 'UniformOutput', false);
 tangentSpace_X = cell2mat(tangentSpace_X);
-var = norm(tangentSpace_X)/no_of_samples;
+var = norm(tangentSpace_X)^2/no_of_samples;
 
 end
 
