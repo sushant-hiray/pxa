@@ -13,12 +13,7 @@ function [v,r] = applyLM(X,v)
     'inital error';
     compute_error(v);
     
-    
-    
     v = lsqnonlin(@(x) compute_error(x),v,[],[],options);
-    
-    %optimize_for_v(x);
-    
     
     'final error';
     

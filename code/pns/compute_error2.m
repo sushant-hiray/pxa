@@ -11,7 +11,7 @@ E = cellfun(@(x)(normLog_map(x,v,v0)), num2cell(X, 1));
 %E = cell2mat(E);
 E = E - r;
 E = norm(E)^2;
-E = E/size(X,2); %normalizing by number of data points
+%E = E/size(X,2); %normalizing by number of data points
 end
 
 % v = v/norm(v);

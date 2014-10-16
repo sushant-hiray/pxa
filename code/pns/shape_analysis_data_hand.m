@@ -43,7 +43,7 @@ function [MComp, Xpns, XBackErr] = shape_analysis_data_hand(shapes)
     hold on;
     
     %compute the variance
-    [MComp,Xpns, XBackErr] = pns(scaled_pcaInput');
+    [Mapping, X_pns,X_BackErr,Modes,gm,Var] = pns(scaled_pcaInput');
     backProjectGm = backProject(MComp(end).v, MComp(1:(end-1)));
     plot(backProjectGm(1:n),backProjectGm(n+1:end),'b*-')
 end

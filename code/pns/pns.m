@@ -1,6 +1,6 @@
 function [Mapping, X_pns,X_BackErr,Modes,gm,Var] = pns( X )
 %X is the data points. datadim x no.of data points
-
+rng(0);
 data_dim = size(X,1);
 Mapping = [];
 X_pns = [];
@@ -12,8 +12,8 @@ while data_dim > 2
     %finding the vector with least error(Best Rep)
     %global Data is set in applyLM
    
-%    [v1, r1]=  applyLM2(X_new, rand(data_dim,1));
-    [v1 r1]  = applyLM(X_new,rand(data_dim,1));
+%      [v1, r1]=  applyLM2(X_new, rand(data_dim,1));
+    [v1 r1]  = applyLM2(X_new,rand(data_dim,1));
     r_prod = r_prod*sin(r1);
     
     CurrMap.v = v1;
@@ -21,10 +21,11 @@ while data_dim > 2
     CurrMap.r_prod = r_prod;
     
     Mapping = [Mapping CurrMap];
-    'Converged at dim';
-    data_dim;
-    'with error';
-    %compute_error(v1)
+    'Converged at dim'
+    data_dim
+    'with error'
+    compute_error(v1)
+    
     %CurrError = residual_error(X_new, v1, r1, r_prod);
     
     
