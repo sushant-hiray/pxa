@@ -1,4 +1,4 @@
-function [ X ] = make_gaussian_data(mu,SIGMA,n)
+function [ X ] = make_gaussian_data
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
     X = mvnrnd(mu,SIGMA,n);

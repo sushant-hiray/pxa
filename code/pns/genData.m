@@ -11,8 +11,7 @@ function [ X ] = genData(v,r,n )
         rest = rest';
         rest = (sin(r)/norm(rest))*rest;
         X(i,1:dim-1) = rest;
-       
-        
     end
+    X = normc(X);
 end
 

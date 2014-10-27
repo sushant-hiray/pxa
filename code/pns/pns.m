@@ -11,14 +11,24 @@ X_BackErr =[];
 while data_dim > 2
     %finding the vector with least error(Best Rep)
     %global Data is set in applyLM
+    %% 
+    % v0 for every iteration is initialized using PCA on the Data and giving the direction which captures the data least.
+    X_Corr = X_new*X_new';
+    [V,D] = eigs(X_Corr,2);
+    
+    v0 = normc(V(:,2));  
+    size(v0)
    
-%    [v1, r1]=  applyLM2(X_new, rand(data_dim,1));
-    [v1 r1]  = applyLM(X_new,rand(data_dim,1));
+    %v0 =rand(data_dim,1);
+    %%
+    
+    [v1, r1]=  applyLM2(X_new, v0);
+%    [v1 r1]  = applyLM(X_new,rand(data_dim,1));
     r_prod = r_prod*sin(r1);
     
     CurrMap.v = v1;
     CurrMap.r = r1;
-    CurrMap.r_prod = r_prod;
+    CurrMap.r_prod = r_prod;    
     
     Mapping = [Mapping CurrMap];
     'Converged at dim';
@@ -70,7 +80,9 @@ while data_dim > 2
     %now apply the next iteration
 end
 %Now find geodesic Mean.
-
+size(X_new)
+X_norm = normc(X_new);
+X_norm-X_new;
 v = geodesic_mean(X_new);
 CurrMap.v = v;
 CurrMap.r = 0;

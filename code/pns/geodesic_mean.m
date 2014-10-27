@@ -25,6 +25,7 @@ function [ mean ] = geodesic_mean(X)
         end
         gradF = (-1/N)*sums;
         mean = exp_map(mean,(step_size*(-gradF)));
+        mean = normc(mean);
         meanChange = log_map(prevmean,mean)/(2*pi);
         prevmean = mean;
 

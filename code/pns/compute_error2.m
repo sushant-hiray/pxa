@@ -31,7 +31,7 @@ end
 function z = normLog_map(point,v,v0)
     %size(point);
     %size(normal)
-    %norm(point);
+    norm(point);
     p1 = log_map(v0,point);
     %b = cell2mat(b);
     z = norm(p1-v); 
