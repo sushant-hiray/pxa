@@ -5,7 +5,8 @@ function [X,Mapping] = generate_data2(dim,N)
     assert(dim>=2, 'dim has to be greater than 2')    
     
     % generate Data for 2 dim
-    X = abs(randn(2,N));   %2xN matrix
+    X = abs(randn(2,N)) ;   %2xN matrix
+    X(1,:) = X(1,:) - 0.5;
     Y = sqrt(sum(X.^2,2)); 
     Y = repmat(Y,[1 2]);
     X = normc(X);
@@ -29,6 +30,8 @@ function [X,Mapping] = generate_data2(dim,N)
         r = pi/2;
         
         v = randn(1,currentDim+1);
+        %v = [ 0 0 1];
+        % hard coding here CHANGE LATER
         v= v'/norm(v); %col vector (v is a random point in currentDim + 1)
         
         e = zeros(currentDim+1,1); %col vector

@@ -6,7 +6,7 @@ global v0;
 global Data;
 X = Data;
 global r;
-X = cellfun(@(x)(log_map(x,v0)), num2cell(X, 1),'UniformOutput',false);
+X = cellfun(@(x)(log_map(v0,x)), num2cell(X, 1),'UniformOutput',false);
 X = cell2mat(X);
 Temp = repmat(v,1,size(X,2));
 %sigma -2(||xi - v|| -r)(xi-v)/|xi-r|

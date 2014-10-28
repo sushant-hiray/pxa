@@ -11,16 +11,16 @@ X_BackErr =[];
 while data_dim > 2
     %finding the vector with least error(Best Rep)
     %global Data is set in applyLM
-    %% 
     % v0 for every iteration is initialized using PCA on the Data and giving the direction which captures the data least.
     X_Corr = X_new*X_new';
-    [V,D] = eigs(X_Corr,2);
+    [V,D] = eigs(X_Corr);
     
-    v0 = normc(V(:,2));  
+    v0 = normc(V(:,end)); 
+    
     size(v0)
    
     %v0 =rand(data_dim,1);
-    %%
+    
     
     [v1, r1]=  applyLM2(X_new, v0);
 %    [v1 r1]  = applyLM(X_new,rand(data_dim,1));

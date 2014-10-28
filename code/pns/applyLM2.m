@@ -21,7 +21,7 @@ function [v,r] = applyLM2(X,vInitial)
     
     %%% Need to initialize v0 and v1 etc %%%
     
-    DataProj = cellfun(@(x)(log_map(x, v0)), num2cell(X, 1),'UniformOutput',false);
+    DataProj = cellfun(@(x)(log_map(v0, x)), num2cell(X,1),'UniformOutput',false);
     DataProj = cell2mat(DataProj);
     
     v = mean(DataProj,2);
@@ -49,7 +49,7 @@ function [v,r] = applyLM2(X,vInitial)
         %v1 = v1 - v0* dot(v1,v0)/norm(v0)
         %dot(v1,v0);
         v0 = exp_map(v0,v1);
-        v0 =normc(v0);
+%        v0 =normc(v0);
         curr_val = compute_error2(1E-5*rand(data_dim,1));
         curr_val
         %'norm v1 ';
