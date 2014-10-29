@@ -19,10 +19,16 @@ function [ mean ] = geodesic_mean(X)
         
         sums = zeros(1,data_dim);
         iter = iter+1;
-        
+            
+        DataProj = cellfun(@(x)(log_map(mean, x)), num2cell(X,1),'UniformOutput',false);
+        DataProj = cell2mat(DataProj);
+    
+        sums = sum(DataProj,2);
+        %{
         for i = 1:N
             sums = sums+log_map(mean,X(:,i));
         end
+        %}
         gradF = (-1/N)*sums;
         mean = exp_map(mean,(step_size*(-gradF)));
         mean = normc(mean);
