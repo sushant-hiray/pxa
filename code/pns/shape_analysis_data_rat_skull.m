@@ -39,7 +39,7 @@ function [MComp, Xpns,XBackErr,Modes,Var,gm] = shape_analysis_data_rat_skull( sh
     hold on;
     
     %compute the variance
-    [MComp, Xpns,XBackErr,Modes,Var] = pns(scaled_pcaInput');
+    [MComp, Xpns,XBackErr,Modes,gm,Var] = pns(scaled_pcaInput');
     backProjectGm = backProject(MComp(end).v, MComp(1:(end-1)));
     plot(backProjectGm(1:n),backProjectGm(n+1:end),'b*-')
     gm = backProjectGm;
