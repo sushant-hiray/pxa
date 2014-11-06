@@ -23,7 +23,7 @@ while data_dim > 2
     
     
     [v1, r1]=  applyLM2(X_new, v0);
-%    [v1 r1]  = applyLM(X_new,rand(data_dim,1));
+%   [v1 r1]  = applyLM(X_new,rand(data_dim,1));
     r_prod = r_prod*sin(r1);
     
     CurrMap.v = v1;
@@ -67,8 +67,9 @@ while data_dim > 2
     
     % rotate data to north pole
     X_new = fk_all(v1,r1,X_temp);
-    
-    backErr = X - backProject(X_new, Mapping);
+    alpha = backProject(X_new, Mapping(end));
+    assert(max(max(abs(alpha-X_temp))) < 1E-3, 'backProject not working');
+    backErr = X - backProject(X_new, Mapping)   ;
     backErr = backErr.^2;
     backErr = sum(backErr(:))/size(X,2);
     'backErr is'
