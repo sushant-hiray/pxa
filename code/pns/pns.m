@@ -1,5 +1,13 @@
-function [Mapping, X_pns,X_BackErr,Modes,gm,Var] = pns( X )
+function [Mapping, X_pns,X_BackErr,Modes,gm,Var] = pns( X, DEBUG )
 %X is the data points. datadim x no.of data points
+global debug_flag;
+debug_flag = DEBUG;
+
+
+if debug_flag == 1 && (size(X,1) ==3)
+    plot3(X(1,:),X(2,:),X(3,:), 'y*')
+    hold on;
+end
 
 data_dim = size(X,1);
 Mapping = [];
@@ -57,6 +65,12 @@ while data_dim > 2
     % This code is fine
     %project data on to the surface
     X_temp = project_all(v1,r1,X_new);
+        
+    if debug_flag == 1 && (size(X_temp,1) ==3)
+        plot3(X_temp(1,:),X_temp(2,:),X_temp(3,:), 'g*')
+        hold on;
+    end
+
     % check if v1. all X_temp is zero
     v1_temp = repmat(v1, 1, size(X_temp,2));
     assert(sum(sum(X_temp.*v1_temp,1).^2) < 1E-2, 'projection and normal not perpendicular');
@@ -70,6 +84,18 @@ while data_dim > 2
     alpha = backProject(X_new, Mapping(end));
     assert(max(max(abs(alpha-X_temp))) < 1E-3, 'backProject not working');
     backErr = X - backProject(X_new, Mapping)   ;
+    
+    if debug_flag == 1 && (size(X_new,1) ==2) 
+        plot3(X_new(1,:),X_new(2,:),zeros(size(X_new(2,:))), 'c*')
+        hold on;
+    end
+     if debug_flag == 1 && (size(alpha,1) ==3)
+        plot3(alpha(1,:),alpha(2,:),alpha(3,:), 'b*')
+        %assert(isequal(X_temp, alpha) , 'alpha should be equal to x_temp');
+        hold on;
+        plot3(X_temp(1,:),X_temp(2,:),X_temp(3,:), 'g*')
+        hold on;
+    end
     backErr = backErr.^2;
     backErr = sum(backErr(:))/size(X,2);
     'backErr is'
