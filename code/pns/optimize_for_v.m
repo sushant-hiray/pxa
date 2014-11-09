@@ -13,7 +13,7 @@ function [v] = optimize_for_v(error_f, gradient_f, vInitial )
     grad = gradient_f(v);
     
     forcedContinue = false;
-    while((forcedContinue || abs(prev_val-current_val)/abs(current_val) > threshold) && eta > 1E-10)
+    while((forcedContinue || abs(prev_val-current_val)/abs(current_val) > threshold) && eta > 1E-11)
         forcedContinue = false;
         temp_val = prev_val;
         prev_val = current_val;

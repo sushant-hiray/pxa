@@ -21,12 +21,16 @@ function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
         end;
 
         mean_sample = Z(:,:,1);
+        
     
         for i = 1:no_of_samples,
             rotated = rotate(mean_sample,Z(:,:,i),muX,normX,n);
             d = 1;
             Z(:,:,i) = rotated;
         end;
+        
+        
+        
         % should update the new mean now
         prevbase = base;
         base  = Z(:,:,1);
@@ -40,7 +44,7 @@ function z = center(X)
     [a, b]   = size(X);
     muX = mean(X,1);
     z = X - repmat(muX, a, 1);
-    ssqI = sum(X.^2,1);
+    ssqI = sum(z.^2,1);
     ssqI = sum(ssqI);
     normI = sqrt(ssqI);
     z = z / normI ;

@@ -1,4 +1,4 @@
-function [MComp, Xpns, XBackErr] = shape_analysis_data_hand(shapes)
+function [MComp, Xpns,XBackErr,Modes,Var,gm,gm1] = shape_analysis_data_hand(shapes)
 
     shapes1 = shapes';
    
@@ -43,7 +43,9 @@ function [MComp, Xpns, XBackErr] = shape_analysis_data_hand(shapes)
     hold on;
     
     %compute the variance
-    [MComp,Xpns, XBackErr] = pns(scaled_pcaInput');
-    backProjectGm = backProject(MComp(end).v, MComp(1:(end-1)));
-    plot(backProjectGm(1:n),backProjectGm(n+1:end),'b*-')
+    
+    [MComp, Xpns,XBackErr,Modes,gm,Var]= pns(scaled_pcaInput',0);
+    
+    %backProjectGm = backProject(MComp(end).v, MComp(1:(end-1)));
+    plot(gm(1:n),gm(n+1:end),'b*-')
 end

@@ -1,6 +1,8 @@
 function [Mapping, X_pns,X_BackErr,Modes,gm,Var] = pns( X, DEBUG )
 %X is the data points. datadim x no.of data points
 global debug_flag;
+global regnerate_flag;
+regnerate_flag= 1;
 debug_flag = DEBUG;
 
 
@@ -70,6 +72,7 @@ while data_dim > 2
         plot3(X_temp(1,:),X_temp(2,:),X_temp(3,:), 'g*')
         hold on;
     end
+    
 
     % check if v1. all X_temp is zero
     v1_temp = repmat(v1, 1, size(X_temp,2));
@@ -78,12 +81,24 @@ while data_dim > 2
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     
+    if regnerate_flag ==1
+       gm_k = geodesic_mean(X_temp); 
+        
+    end
     
     % rotate data to north pole
     X_new = fk_all(v1,r1,X_temp);
     alpha = backProject(X_new, Mapping(end));
     assert(max(max(abs(alpha-X_temp))) < 1E-3, 'backProject not working');
     backErr = X - backProject(X_new, Mapping)   ;
+    
+    
+    if regnerate_flag ==1
+       gm_k = geodesic_mean(X_temp); 
+       gm_k_1 = geodesic_mean(X_new);
+       gm_k_1_bp = backProject(gm_k_1, Mapping(end));
+       assert(norm(gm_k_1 -gm_k_1_bp) < 1E-3, 'norms of bp gm and gm dont match');
+    end
     
     if debug_flag == 1 && (size(X_new,1) ==2) 
         plot3(X_new(1,:),X_new(2,:),zeros(size(X_new(2,:))), 'c*')
