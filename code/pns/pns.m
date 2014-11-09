@@ -2,7 +2,7 @@ function [Mapping, X_pns,X_BackErr,Modes,gm,Var] = pns( X, DEBUG )
 %X is the data points. datadim x no.of data points
 global debug_flag;
 global regnerate_flag;
-regnerate_flag= 1;
+regnerate_flag= 0;
 debug_flag = DEBUG;
 
 
