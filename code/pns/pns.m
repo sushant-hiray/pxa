@@ -22,6 +22,7 @@ while data_dim > 2
     %finding the vector with least error(Best Rep)
     %global Data is set in applyLM
     % v0 for every iteration is initialized using PCA on the Data and giving the direction which captures the data least.
+    
     X_Corr = X_new*X_new';
     [V,D] = eigs(X_Corr);
     
