@@ -15,18 +15,25 @@ data_dim = size(X,1);
 Mapping = [];
 X_pns = [];
 InitialData = X;
-X_new = X;
+MeanX = mean(X,2);
+X_new =X;
+%X_new = normc(X - MeanX(:,ones(1,size(X,2))));
 r_prod = 1;
 X_BackErr =[];
 while data_dim > 2
     %finding the vector with least error(Best Rep)
     %global Data is set in applyLM
     % v0 for every iteration is initialized using PCA on the Data and giving the direction which captures the data least.
-    
+    MeanX = mean(X_new,2);
+    X_new1 = X_new - MeanX(:,ones(1,size(X_new,2)));
     X_Corr = X_new*X_new';
+    X_Corr1 = X_new1*X_new1';
+    
     [V,D] = eigs(X_Corr);
     
-    v0 = normc(V(:,end)); 
+    [V1,D1] = eigs(X_Corr1);
+    
+    v0 = normc(V1(:,end)); 
     
     size(v0)
    
@@ -92,7 +99,10 @@ while data_dim > 2
     alpha = backProject(X_new, Mapping(end));
     assert(max(max(abs(alpha-X_temp))) < 1E-3, 'backProject not working');
     backErr = X - backProject(X_new, Mapping)   ;
-    
+    A = backProject(X_new, Mapping);
+    save_plot_data(A,strcat(num2str(data_dim),'.png'));
+    'plotted'
+    close all
     
     if regnerate_flag ==1
        gm_k = geodesic_mean(X_temp); 

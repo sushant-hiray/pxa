@@ -17,11 +17,13 @@ function [ ellipse_data ] = generate_ellipse(no_of_ellipse,N)
     f_half = f_half.*a;
     s_half = s_half.*b;
     
-    f_half = f_half' ;%+ 0.1*randn(1);
-    %f_half = f_half + 0.05*randn(size(f_half));
+    %f_half = f_half' + 0.1*randn(1);
+    f_half = f_half' 
+    f_half = f_half + 0.01*randn(size(f_half));
     
-    s_half = s_half' ;%+ 0.1*randn(1);
-    %s_half = s_half + 0.05*randn(size(s_half));
+    %s_half = s_half' + 0.1*randn(1);
+    s_half = s_half';
+    s_half = s_half + 0.01*randn(size(s_half));
     
     ellipse_data = [ f_half; s_half];
     ellipse_data = normc(ellipse_data);

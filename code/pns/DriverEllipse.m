@@ -1,6 +1,6 @@
-
+rng(0)
 no_of_samples = 100;
-n = 4
+n = 6
 
 [ shapes] = generate_ellipse(no_of_samples,n);
 shapes = shapes'

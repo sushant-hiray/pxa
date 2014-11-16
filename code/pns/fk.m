@@ -14,7 +14,7 @@ r = r(1:l-1,:); %remove the last row
 
 
 x_new = r*x;
-x_new = x_new.*sin(rk);
+x_new = x_new./sin(rk);
 % returns a col vector
 end
 

@@ -25,14 +25,18 @@ function [v,r] = applyLM2(X,vInitial)
     DataProj = cell2mat(DataProj);
     
     v = mean(DataProj,2);
+    v = zeros(size(v));
     v1 =v;
+    
     %v1 =v0
     %v = v0;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     prevV1 = 0;
     prev_val = compute_error2(v);
     curr_val = compute_error2(1E-5*rand(data_dim,1));
-    while(norm(v1) > threshold && abs(norm(v1)-norm(prevV1)) > 0.1*threshold && abs(curr_val -prev_val) > 1E-2 )
+    forcedContinue = true;
+    while(forcedContinue || (norm(v1) > threshold && abs(norm(v1)-norm(prevV1)) > 0.1*threshold && abs(curr_val -prev_val) > 1E-2 ))
+        forcedContinue = false;
         prevV1= v1;
         prev_val = curr_val;
         % replace with gradient Descent

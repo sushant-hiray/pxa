@@ -1,4 +1,4 @@
-
+rng(0);
 no_of_samples = 100;
 n = 3;
 [ shapes] = generate_triangles(no_of_samples);
