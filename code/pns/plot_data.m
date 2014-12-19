@@ -14,6 +14,6 @@ function plot_data( X,new_fig )
     end
     %plot(X(1:n,1),X(n+1:end,1),'*-','Color',rand(3,1))
     hold off;
-
+    axis equal tight;
 end
 

@@ -6,7 +6,8 @@ function [X,Mapping] = generate_data2(dim,N)
     
     % generate Data for 2 dim
     X = abs(randn(2,N)) ;   %2xN matrix
-    X(1,:) = X(1,:) - 0.5;
+    X = randn(2,N)
+    %X(1,:) = X(1,:) - 0.5;
     Y = sqrt(sum(X.^2,2)); 
     Y = repmat(Y,[1 2]);
     X = normc(X);

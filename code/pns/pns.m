@@ -28,12 +28,33 @@ while data_dim > 2
     X_new1 = X_new - MeanX(:,ones(1,size(X_new,2)));
     X_Corr = X_new*X_new';
     X_Corr1 = X_new1*X_new1';
+    %[V,D] = eigs(X_Corr)
+    delta = 1e-10;
+    [V,D] = eig(X_Corr + delta * eye(size(X_Corr)));
+
+    [minEig, minInd] = min(abs(diag(D)));
     
-    [V,D] = eigs(X_Corr);
+    [V1,D1] = eig(X_Corr1+delta * eye(size(X_Corr1)));
+
     
-    [V1,D1] = eigs(X_Corr1);
+    [minEig1, minInd1] = min(abs(diag(D1)));
+    %[V1,D1] = eigs(X_Corr1)
     
-    v0 = normc(V1(:,end)); 
+    v0 = normc(V(:,end)); 
+    
+    directionBefore = v0'*X_new;
+    directionMean = mean(directionBefore);
+    before = max(abs(directionBefore))
+    %{
+    if(directionMean < 0 )
+        'sign changing here'
+        v0 = -v0;
+    else
+        'no sign change'
+    end 
+    %}
+ %   hist(directionBefore,20)
+    pause
     
     size(v0)
    
@@ -42,6 +63,26 @@ while data_dim > 2
     
     [v1, r1]=  applyLM2(X_new, v0);
 %   [v1 r1]  = applyLM(X_new,rand(data_dim,1));
+
+    'after optimization'
+    directionAfter = v1'*X_new;
+    directionMean = mean(directionAfter);
+    before
+    max(abs(directionAfter))
+    directionMean
+    %{
+    if(directionMean < 0 )
+        'sign changing here'
+        %v0 = -v0;
+    else
+        'no sign change'
+    end
+    %}
+    
+   % hist(directionAfter,20)
+    
+    pause
+    
     r_prod = r_prod*sin(r1);
     
     CurrMap.v = v1;
@@ -100,7 +141,7 @@ while data_dim > 2
     assert(max(max(abs(alpha-X_temp))) < 1E-3, 'backProject not working');
     backErr = X - backProject(X_new, Mapping)   ;
     A = backProject(X_new, Mapping);
-    save_plot_data(A,strcat(num2str(data_dim),'.png'));
+    %save_plot_data(A,strcat(num2str(data_dim),'.png'));
     'plotted'
     close all
     
