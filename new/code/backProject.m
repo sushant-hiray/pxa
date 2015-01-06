@@ -1,8 +1,9 @@
 function [Bx] = backProject(Data,Mapping)
     maps = size(Mapping);
-    i = maps;
+    i = maps(2);
     tempInput = Data;
     while(i>0)
+        i
         currentTrans = Mapping(i);
         r = currentTrans.r;
         v = currentTrans.v;
@@ -13,7 +14,6 @@ function [Bx] = backProject(Data,Mapping)
         e = zeros(size(v));
         e(end) =1;
         rotm = rot(v,e);
-        
         tempInput = rotateAll(tempInput,rotm);
         i = i-1;
     end
