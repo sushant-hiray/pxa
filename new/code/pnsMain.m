@@ -1,5 +1,5 @@
-function [Mapping,BkGm] = pnsMain(Data, debugMode)
-	% Initialize with 
+function [Mapping,BkGm,Var] = pnsMain(Data, debugMode)
+	%% Initialize with null, and start finding the modes of variation 
 	Mapping = [];
 
 	data_dim = size(Data,1);
@@ -24,12 +24,16 @@ function [Mapping,BkGm] = pnsMain(Data, debugMode)
 	CurrentMapping.v = gm;
 	CurrentMapping.r = pi/2;
 	Mapping = [Mapping CurrentMapping];
-	
-    
-    
-    
+	BkGm = backProject(gm,Mapping(1:end-1));
     
     
     %% Write code to backProject and compute Variances etc;
-    BkGm = backProject(gm,Mapping(1:end-1));
+    %Modes = modesofVariation(Data,Mapping);
+    Var = computeVariances(Data,Mapping);
+    'Variances computed'
+    Var
+    
+    
+    
+    
 end
