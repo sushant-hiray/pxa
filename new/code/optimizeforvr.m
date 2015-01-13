@@ -4,7 +4,7 @@
 	gradient = computeGrad(TData,initialV,initialR);
 	currentResidual = residualT(TData,initialV,initialR);
 	prevResidual = 2*pi;
-	alpha = 1E-2;
+	alpha = 1E-4;
 	v = initialV;
 	r = initialR;
 	stepSize = 1E-3;
@@ -39,12 +39,13 @@
 			break;
 		else
 			V = v(:,ones(1,size(TData,2)));
-			currUpdate = V -TData;
-			temp = ones(1, size(TData,1));
-			curUpdate = sum(sqrt(temp*curUpdate));
+			curUpdate = V -TData;
+            curUpdate = curUpdate.^2;
+			
+			curUpdate = sum(sqrt(sum(curUpdate,1)))/size(TData,2);
 			r = curUpdate;
             prevOverall = currentOverall;
-            currentOverall = residualT(TData,v,r)
+            currentOverall = residualT(TData,v,r);
         end
 		
 	end

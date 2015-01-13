@@ -1,4 +1,4 @@
-
+load('../../data/ratskullData.mat');
 
 shapes = A;
 X = shapes(:,1:2:end);
@@ -51,7 +51,8 @@ plot_rat_skull(scaled_pcaInput',0);
 axis equal tight;
 hold on;
 subplot(1,2,2)
-[Mapping, BkGm, Var] = pnsMain(scaled_pcaInput',1);
+PGS =1;
+[Mapping, BkGm, Var,Res] = pnsMain(scaled_pcaInput',1,PGS);
 plot_rat_skull(BkGm,0);
 %plot(scaled_pcaInput(1,1:2:end),scaled_pcaInput(1,2:2:end),'r*-');
 axis equal tight;

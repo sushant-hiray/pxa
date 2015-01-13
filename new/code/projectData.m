@@ -16,7 +16,7 @@ function [X] = projectData(Data,Map)
 	X = rotateAll(NewData,rotationMatrix);
 	%Step2: Project all the data on the circle.
 	X = X(1:end-1,:);
-    
+    X = X./sin(Map.r);
     norm(X(:,1))
     
 end
