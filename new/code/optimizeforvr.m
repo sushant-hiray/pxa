@@ -1,7 +1,10 @@
     function [v,r] = optimizeforvr(TData, Itype)
 	initialV = zeros(size(mean(TData,2)));
 	initialR = pi/2;
-	gradient = computeGrad(TData,initialV,initialR);
+    if(Itype ==0)
+        initialR = pi/3;
+    end
+    gradient = computeGrad(TData,initialV,initialR);
 	currentResidual = residualT(TData,initialV,initialR);
 	prevResidual = 2*pi;
 	alpha = 1E-4;

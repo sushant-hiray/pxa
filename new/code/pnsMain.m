@@ -1,17 +1,18 @@
-function [Mapping,BkGm,Var,R] = pnsMain(Data, debugMode,mode)
+function [Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data, debugMode,mode)
 	%% Initialize with null, and start finding the modes of variation 
 	Mapping = [];
 
 	data_dim = size(Data,1);
 	X = Data;
     Res = [];
+    RProd = 1;
 	while data_dim > 2
 		[v,r] = findSphere(X,mode);
 		CurrentMapping.v = v;
 		CurrentMapping.r = r;
 		res = residualVec(X,v,r);
-        
-        Res = [res;Res];
+        Res = [RProd*res;Res];
+        RProd = RProd *sin(r);
         
         Mapping = [Mapping CurrentMapping];
 		fprintf('Error at Dim  %d is %f',data_dim,residual(X,CurrentMapping.v,CurrentMapping.r));
@@ -30,15 +31,25 @@ function [Mapping,BkGm,Var,R] = pnsMain(Data, debugMode,mode)
 	CurrentMapping.r = pi/2;
 	Mapping = [Mapping CurrentMapping];
 	BkGm = backProject(gm,Mapping(1:end-1));
-    res = residualVec(X,gm,0);
-    Res = [res;Res]
+    res = residualVecGM(X,gm);
+    Res = [RProd*res;Res]
     
     %% Write code to backProject and compute Variances etc;
     %Modes = modesofVariation(Data,Mapping);
-    Var = computeVariances(Data,Mapping);
-    'Variances computed'
-    Var
+    
     R  = sum(Res.^2,2);
     R = R*100/sum(R);
     
+    
+    
+    %% Now compute the variations in shape
+    NewPData = applyProjection(Data,Mapping(1:end-1));
+    NewBPData = backProject(NewPData,Mapping(1:end-1));
+    
+    
+    % move along the mode of variation
+    
+    
+    
+    %%
 end

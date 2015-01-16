@@ -45,15 +45,16 @@ assert(abs(mean(scaled_pcaInput(1,n+1:end))) <= 1E-15, 'mean error ');
 
 
 
-
 subplot(1,2,1)
 plot_rat_skull(scaled_pcaInput',0);
 axis equal tight;
 hold on;
+
+PGS =0;
+[Mapping, BkGm,Res,NewBPData,AllRes] = pnsMain(scaled_pcaInput',1,PGS);
+
 subplot(1,2,2)
-PGS =1;
-[Mapping, BkGm, Var,Res] = pnsMain(scaled_pcaInput',1,PGS);
 plot_rat_skull(BkGm,0);
-%plot(scaled_pcaInput(1,1:2:end),scaled_pcaInput(1,2:2:end),'r*-');
 axis equal tight;
 hold on;
+plot_rat_skull_same(NewBPData,0);
