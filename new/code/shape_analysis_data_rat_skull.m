@@ -1,5 +1,5 @@
 load('../../data/ratskullData.mat');
-
+rng(0);
 shapes = A;
 X = shapes(:,1:2:end);
 X = X';
@@ -50,7 +50,7 @@ plot_rat_skull(scaled_pcaInput',0);
 axis equal tight;
 hold on;
 
-PGS =0;
+PGS =1;
 [Mapping, BkGm,Res,NewBPData,AllRes] = pnsMain(scaled_pcaInput',1,PGS);
 
 subplot(1,2,2)

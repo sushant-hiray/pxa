@@ -1,8 +1,15 @@
     function [v,r] = optimizeforvr(TData, Itype)
 	initialV = zeros(size(mean(TData,2)));
+    %initialV = mean(TData,2);
 	initialR = pi/2;
-    if(Itype ==0)
-        initialR = pi/3;
+    if(Itype ==0 && size(TData,1) < 12)
+        m = mean(TData,2);
+        M = m(:,ones(1,size(TData,2)));
+		curUpdate = M -TData;
+        curUpdate = curUpdate.^2;		
+		curUpdate = sum(sqrt(sum(curUpdate,1)))/size(TData,2);
+        initialR = curUpdate;    
+        initialV = m;
     end
     gradient = computeGrad(TData,initialV,initialR);
 	currentResidual = residualT(TData,initialV,initialR);
@@ -28,17 +35,17 @@
 				stepSize = stepSize*1.1; %increase gradient rate;
             end	
             %stepSize
-            if stepSize <alpha
+            if stepSize <alpha*1E-1
                 break
             end
         end
 
         
-		if(Itype == 1)
+		if(Itype == 1 || size(TData,1) ==12)
 		% r is pi/2
 			r =pi/2;
             prevOverall = currentOverall;
-            currentOverall = residualT(TData,v,r)
+            currentOverall = residualT(TData,v,r);
 			break;
 		else
 			V = v(:,ones(1,size(TData,2)));
