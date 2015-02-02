@@ -5,9 +5,11 @@ function [center, r] = findSphere(Data, rtype)
 dim = size(Data,1);
 X_corr = Data * Data';
 
-[V D] = eigs(X_corr); % gives the smallest EigenValue Vector
+%[U D] = eigs(X_corr); % gives the smallest EigenValue Vector
+[U dd] = svd(Data);
 
-V = V(:,end);
+V = U(:,end);
+
 
 %{
 if(dim==3)
@@ -24,7 +26,7 @@ end
 %}
 
 V = normc(V);
-
+%V(:) =0; V(end)=1;
 % Now start applying gradient descent with the objective function to
 % optimize for v and r depending upon the parameter type
 

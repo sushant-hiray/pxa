@@ -6,7 +6,7 @@ function [center, r] = applyOptimization(Data,V0,itype)
 
 	% Average can never be greater than 2*pi
 	prevError = 2*pi;
-	alpha = 1E-2; % this referred to as alpa in the act
+	alpha = 1E-5; % this referred to as alpa in the act
 	
 	while(abs(prevError - error)/abs(error)  > alpha )
 		% First map the data to tangent space by using log_map w.r.t to the give V0

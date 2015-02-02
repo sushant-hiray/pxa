@@ -6,8 +6,22 @@ function [Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data, debugMode,mode)
 	X = Data;
     Res = [];
     RProd = 1;
+    newMode =0;
 	while data_dim > 2
-		[v,r] = findSphere(X,mode);
+		v = 0;
+        r =0;
+        if(newMode ==2)
+            newMode =2;
+        elseif(mode==0)
+            newMode = runTests(X,v,r);
+            [v,r] = findSphere(X,1);
+            if(newMode==0)
+                [v,r] = findSphere(X,0);
+            end
+        else
+            [v,r] = findSphere(X,1);
+        end
+        
 		CurrentMapping.v = v;
 		CurrentMapping.r = r;
 		res = residualVec(X,v,r);
