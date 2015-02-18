@@ -90,10 +90,11 @@ while data_dim > 2
     CurrMap.r_prod = r_prod;    
     
     Mapping = [Mapping CurrMap];
-    'Converged at dim';
-    data_dim;
-    'with error';
-    %compute_error(v1)
+    'Converged at dim'
+    data_dim
+    'with error'
+    compute_error(v1)
+    
     %CurrError = residual_error(X_new, v1, r1, r_prod);
     
     

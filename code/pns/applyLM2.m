@@ -1,12 +1,15 @@
 function [v,r] = applyLM2(X,vInitial)
     % v = Initial Seed Value
     
-    global r;
-    r = pi/2;
     global Data;
-    data_dim = size(X,1); 
-    options = optimoptions(@lsqnonlin,'Algorithm', ['levenberg-marquardt'],'TolFun',1e-5,'TolX',1e-5);
-    %currently fix r 
+    Data = X;
+    global r;
+    r = pi/2; %currently fix r
+    Data = X;
+    options = optimoptions(@lsqnonlin,'Algorithm', 'levenberg-marquardt','TolFun',1e-5,'TolX',1e-5);
+    
+    data_dim = size(X,1);
+    
     global v0;
     v0 = vInitial;
     v0 = v0/norm(v0);
