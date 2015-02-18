@@ -3,7 +3,7 @@ function [center, r] = findSphere(Data, rtype)
 %type =1 r = pi/2
 
 dim = size(Data,1);
-X_corr = Data * Data';
+%X_corr = Data * Data';
 
 %[U D] = eigs(X_corr); % gives the smallest EigenValue Vector
 [U dd] = svd(Data);
@@ -35,6 +35,7 @@ V = normc(V);
 if (rtype == 1)
 % r=pi/2
 	r=pi/2;
+    
 	center = applyOptimization(Data,V,rtype);
 elseif (rtype ==0)
 	[center r] = applyOptimization(Data,V,rtype);

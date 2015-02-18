@@ -25,10 +25,10 @@ function p = parametric_bootstrap_test(Data,v,r,alpha)
 end
 
 function [p] = getParametric(Data,v,r)
-    n = sum(Data,2);
+    n = size(Data,2);
     res = residualVec(Data,v,r);
     mean = sum(res)/n;
     vari = res-mean;
-    vari = sum(vari.^2);
-    p = mean/(vari/n-1)^0.5;
+    vari = max(sum(vari.^2),1E-10);
+    p = mean/(vari/(n-1))^0.5;
 end

@@ -7,13 +7,17 @@ function [center, r] = applyOptimization(Data,V0,itype)
 	% Average can never be greater than 2*pi
 	prevError = 2*pi;
 	alpha = 1E-5; % this referred to as alpa in the act
-	
+    d =size(Data,1);
+	Data_mapped = log_map(center,Data);
+    %[center r] = LMFsphereFit(Data_mapped,zeros(d,1),itype);
+    
 	while(abs(prevError - error)/abs(error)  > alpha )
 		% First map the data to tangent space by using log_map w.r.t to the give V0
 		errorMsg1=  '[apply Optimization Center undefined incorrectly no lying on a shpere of radius 1]';
 		assert(abs(center' *center -1) < 1E-3,  errorMsg1);
 		Data_mapped = log_map(center,Data);
         'optimizie v r'
+        
 		[vdagger rdagger]  = optimizeforvr(Data_mapped, itype);
         'end optimize v r'
 		vdagger = vdagger - (vdagger'*center)*center;
@@ -25,4 +29,5 @@ function [center, r] = applyOptimization(Data,V0,itype)
         error
 		%disp(['current Error ' error]);		
     end
+    
 end

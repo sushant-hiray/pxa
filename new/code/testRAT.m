@@ -37,7 +37,7 @@ plot_rat_skull(passed_data,0);
 axis equal tight;
 hold on;
 
-PGS =1;
+PGS =2;
 [Mapping, BkGm,Res,NewBPData,AllRes] = pnsMain(currentSphere,1,PGS);
 
 subplot(1,2,2)

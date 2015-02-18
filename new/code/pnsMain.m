@@ -13,8 +13,10 @@ function [Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data, debugMode,mode)
         if(newMode ==2)
             newMode =2;
         elseif(mode==0)
-            newMode = runTests(X,v,r);
+            [v,r] = findSphere(X,0); 
+        elseif(mode==2)
             [v,r] = findSphere(X,1);
+            newMode = runTests(X,v,r);
             if(newMode==0)
                 [v,r] = findSphere(X,0);
             end
