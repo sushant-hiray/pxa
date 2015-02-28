@@ -28,32 +28,23 @@ function [Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data, debugMode,mode)
 		X = XUpdated;
 		data_dim = data_dim -1;
     end
-    
 	%% Find the geodesic mean for the Data
 	gm = geodesic_mean(X);
 	CurrentMapping.v = gm;
 	CurrentMapping.r = pi/2;
 	Mapping = [Mapping CurrentMapping];
-	BkGm = backProject(gm,Mapping(1:end-1));
+	BkGm = gm;
+    %BkGm = backProject(gm,Mapping(1:end-1));
     res = residualVecGM(X,gm);
-    Res = [RProd*res;Res]
-    
+    Res = [RProd*res;Res];
     %% Write code to backProject and compute Variances etc;
     %Modes = modesofVariation(Data,Mapping);
-    
     R  = sum(Res.^2,2);
     R = R*100/sum(R);
-    
-    
-    
     %% Now compute the variations in shape
     NewPData = applyProjection(Data,Mapping(1:end-1));
-    NewBPData = backProject(NewPData,Mapping(1:end-1));
-    
-    
-    % move along the mode of variation
-    
-    
-    
+    NewBPData = NewPData;
+    %NewBPData = backProject(NewPData,Mapping(1:end-1));
+    % move along the mode of variation 
     %%
 end

@@ -2,7 +2,7 @@
 %  to compute modes of variations and geodesic mean. 
 Data = randvonMisesFisherm(3,1000, 100, [0 0 1])
 
-[Mapping,gm_pns,Var] = pnsMain(Data,1);
+[Mapping,gm_pns,Var] = pnsMain(Data,1,1);
 gm_intrinsic = geodesic_mean(Data);
 
 plot3(Data(1,:),Data(2,:),Data(3,:),'b.');

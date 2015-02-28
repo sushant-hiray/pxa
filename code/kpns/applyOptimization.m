@@ -17,12 +17,16 @@ function [center, r] = applyOptimization(Data,V0,itype,prevMapping)
 		assert(abs(center' *center -1) < 1E-3,  errorMsg1);
 		Data_mapped = log_map(center,Data);
         'optimizie v r'
-        
 		[vdagger rdagger]  = optimizeforvr(Data_mapped, itype);
         'end optimize v r'
 		vdagger = vdagger - (vdagger'*center)*center;
 		center = exp_map(center,vdagger);
-		center = removeExcessComponents(center,prevMapping.v)
+        if(size(prevMapping,1) == 0)
+            tempV = [];
+        else
+            tempV = prevMapping.v;
+        end
+		center = removeExcessComponents(center,tempV);
 		size(center);
 		r = rdagger;
 		prevError= error;

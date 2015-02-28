@@ -1,5 +1,6 @@
 function v = removeExcessComponents(inpV,V)
 	v = inpV;
+    'kjfdk'
 	for i=1:size(V,2)
 		temp = V(:,i);
 		v = inpV - (inpV'*temp)*temp/sqrt(temp'*temp);

@@ -54,7 +54,6 @@
 			V = v(:,ones(1,size(TData,2)));
 			curUpdate = V -TData;
             curUpdate = curUpdate.^2;
-			
 			curUpdate = sum(sqrt(sum(curUpdate,1)))/size(TData,2);
 			r = curUpdate;
             prevOverall = currentOverall;

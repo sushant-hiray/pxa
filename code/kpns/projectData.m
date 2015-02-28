@@ -9,7 +9,7 @@ function [X] = projectData(Data,Map)
     Vrep =v(:,ones(1,size(Data,2)));
 	NewData = (sin(Map.r)*Data + sin(phoxv - Map.r).*Vrep);
     NewData = NewData./sin(phoxv);
-    
+    X = NewData;
     
     %e = zeros(size(NewData,1),1);
 	%e(end) = 1;
