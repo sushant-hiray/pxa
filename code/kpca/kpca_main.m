@@ -35,17 +35,17 @@ sigma = 1;
 size(data_in,2)
 K = zeros(size(data_in,2),size(data_in,2));
 for row = 1:size(data_in,2)
-    for col = 1:row
+    for col = 1:size(data_in,2)
         temp = sum(((data_in(:,row) - data_in(:,col)).^2));
         K(row,col) = exp(-temp)/(sigma*sigma);
         K(row,col) = data_in(:,row)'*data_in(:,col);
     end
 end
-K = K + K'; 
+%K = K + K'; 
 % Dividing the diagonal element by 2 since it has been added to itself
-for row = 1:size(data_in,2)
-    K(row,row) = K(row,row)/2;
-end
+%for row = 1:size(data_in,2)
+%    K(row,row) = K(row,row)/2;
+%end
 
 % centering the data:
 % Appendix B: Kij = Kij - 1*K - K*1 + 1*K*1
