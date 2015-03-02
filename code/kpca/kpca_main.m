@@ -1,4 +1,4 @@
-function [ eigvec, eig_val ] = kpca_main(data_in, options)
+function [ eigvec, eig_val ] = kpca_main(data_in)
 %
 % This function does principal component analysis (non-linear) on the given
 % data set using the Kernel trick
@@ -31,11 +31,14 @@ function [ eigvec, eig_val ] = kpca_main(data_in, options)
 
 %% Using the Gaussian Kernel to construct the gram matrix K
 % K(x,y) = -exp((x-y)^2/(sigma)^2)
+sigma = 1;
+size(data_in,2)
 K = zeros(size(data_in,2),size(data_in,2));
 for row = 1:size(data_in,2)
     for col = 1:row
         temp = sum(((data_in(:,row) - data_in(:,col)).^2));
         K(row,col) = exp(-temp)/(sigma*sigma);
+        K(row,col) = data_in(:,row)'*data_in(:,col);
     end
 end
 K = K + K'; 
@@ -50,7 +53,7 @@ end
 
 one_mat = ones(size(K))./size(data_in,2);
 K_center = K - one_mat*K - K*one_mat + one_mat*K*one_mat;
-clear K
+clear K;
 
 
 %% Obtaining the low dimensional projection
@@ -61,13 +64,12 @@ opts.issym=1;
 opts.disp = 0; 
 opts.isreal = 1;
 neigs = 30;
-[eigvec eigval] = eigs(K_center,[],neigs,'lm',opts);
-eig_val = eigval ~= 0;
+[eigvec, eig_val] = eig(K_center);
 eig_val = eig_val./size(data_in,2); % Normalizing the lambda
-
+eig_val = diag(eig_val);
 % 1 = lamda*<alpha,alpha> (Equation 2.14)
 for col = 1:size(eigvec,2)
-    eigvec(:,col) = eigvec(:,col)./(sqrt(eig_val(col,col)));
+    eigvec(:,col) = eigvec(:,col)./(sqrt(eig_val(col)));
 end
 
 end
