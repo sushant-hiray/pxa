@@ -7,7 +7,17 @@ function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
     base = I(:,:,1);
     prevbase = ones(n,2);
     j=1;
-    while(j<2)
+    
+    
+    % Normalize and center data
+    for i = 1:no_of_samples,
+        centered = center(Z(:,:,i));
+        d = 1;
+        Z(:,:,i) = scaled(centered);
+        
+    end;
+   
+    while(j<10)
         muX = mean(base,1);
         ssqX = sum(base.^2,1);
         ssqX = sum(ssqX);
@@ -28,9 +38,7 @@ function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
             d = 1;
             Z(:,:,i) = rotated;
         end;
-        
-        
-        
+
         % should update the new mean now
         prevbase = base;
         base  = Z(:,:,1);
@@ -38,8 +46,11 @@ function  [Y,Scaled] = multi_procrustes(I,n,no_of_samples)
     end
     Y = mean(Z,3);
     Scaled = Z;
-    
-
+end 
+function z = scaled(X)
+    s = sum(X(:).^2);
+    z = X./s;
+end
 function z = center(X)
     [a, b]   = size(X);
     muX = mean(X,1);
@@ -48,7 +59,8 @@ function z = center(X)
     ssqI = sum(ssqI);
     normI = sqrt(ssqI);
     z = z / normI ;
-    
+end
+
 function z = rotate(base,Y0,muX,normX,n)
 	A = double(base') * Y0;
 
@@ -57,4 +69,7 @@ function z = rotate(base,Y0,muX,normX,n)
 	T = M * L';
 
 
-	z = normX * Y0 * T + double(repmat(muX, n, 1));
+	%z = normX * Y0 * T + double(repmat(muX, n, 1));
+    z = Y0 * T;
+
+end

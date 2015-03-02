@@ -37,7 +37,7 @@ K = zeros(size(data_in,2),size(data_in,2));
 for row = 1:size(data_in,2)
     for col = 1:size(data_in,2)
         temp = sum(((data_in(:,row) - data_in(:,col)).^2));
-        K(row,col) = exp(-temp)/(sigma*sigma);
+        %K(row,col) = exp(-temp)/(sigma*sigma);
         K(row,col) = data_in(:,row)'*data_in(:,col);
     end
 end
@@ -50,6 +50,8 @@ end
 % centering the data:
 % Appendix B: Kij = Kij - 1*K - K*1 + 1*K*1
 % here 1 refers to 1/M
+
+%K_center = K;
 
 one_mat = ones(size(K))./size(data_in,2);
 K_center = K - one_mat*K - K*one_mat + one_mat*K*one_mat;
