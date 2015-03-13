@@ -1,4 +1,4 @@
-function [ eigvec, eig_val ] = kpca_main(data_in)
+function [ eigvec, eig_val, data_out ] = kpca_main(data_in, options)
 %
 % This function does principal component analysis (non-linear) on the given
 % data set using the Kernel trick
@@ -32,13 +32,24 @@ function [ eigvec, eig_val ] = kpca_main(data_in)
 %% Using the Gaussian Kernel to construct the gram matrix K
 % K(x,y) = -exp((x-y)^2/(sigma)^2)
 sigma = 1;
-size(data_in,2)
 K = zeros(size(data_in,2),size(data_in,2));
 for row = 1:size(data_in,2)
     for col = 1:row
-        temp = sum(((data_in(:,row) - data_in(:,col)).^2));
-        K(row,col) = exp(-temp)/(sigma*sigma);
-        K(row,col) = data_in(:,row)'*data_in(:,col);
+        switch lower(options.KernelType)
+            case {lower('Gaussian')}        %  e^{-(|x-y|^2)/2t^2
+                temp = sum(((data_in(:,row) - data_in(:,col)).^2));
+                K(row,col) = exp(-temp)/(2*sigma*sigma);
+            case {lower('PolyPlus')}      % (x'*y + 1)^d
+                d = 2;
+                K(row,col) = (data_in(:,row)'*data_in(:,col) + 1)^d;
+            case {lower('Polynomial')}      % (x'*y)^d
+                d = 2;
+                K(row,col) = (data_in(:,row)'*data_in(:,col))^d;
+            case {lower('Linear')}      % x'*y
+                K(row,col) = data_in(:,row)'*data_in(:,col);
+            otherwise
+                error('KernelType does not exist!');
+        end            
     end
 end
 K = K + K'; 
@@ -70,6 +81,19 @@ eig_val = diag(eig_val);
 % 1 = lamda*<alpha,alpha> (Equation 2.14)
 for col = 1:size(eigvec,2)
     eigvec(:,col) = eigvec(:,col)./(sqrt(eig_val(col)));
+end
+
+[~, index] = sort(eig_val,'descend');
+eigvec = eigvec(:,index);
+
+eig_val
+%% Projecting the data in lower dimensions
+% for now, num_dim = dimension of init data
+num_dim = size(data_in,1);
+% num_dim = 1;
+data_out = zeros(num_dim,size(data_in,2));
+for count = 1:num_dim
+    data_out(count,:) = eigvec(:,count)'*K_center';
 end
 
 end
