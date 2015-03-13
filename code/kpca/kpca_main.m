@@ -32,6 +32,7 @@ function [ eigvec, eig_val, data_out ] = kpca_main(data_in, options)
 %% Using the Gaussian Kernel to construct the gram matrix K
 % K(x,y) = -exp((x-y)^2/(sigma)^2)
 sigma = 1;
+data_in
 K = zeros(size(data_in,2),size(data_in,2));
 for row = 1:size(data_in,2)
     for col = 1:row
@@ -52,7 +53,8 @@ for row = 1:size(data_in,2)
         end            
     end
 end
-K = K + K'; 
+K = K + K';
+%K  = K + 0.01*eye(size(K));
 % Dividing the diagonal element by 2 since it has been added to itself
 for row = 1:size(data_in,2)
    K(row,row) = K(row,row)/2;
@@ -63,10 +65,11 @@ end
 % here 1 refers to 1/M
 
 K_center = K;
-
 one_mat = ones(size(K))./size(data_in,2);
 K_center = K - one_mat*K - K*one_mat + one_mat*K*one_mat;
 clear K;
+
+size(K_center)
 
 
 %% Obtaining the low dimensional projection
@@ -86,12 +89,11 @@ for col = 1:size(eigvec,2)
 end
 
 [~, index] = sort(eig_val,'descend');
-eigvec = eigvec(:,index);
-eig_val
+eigvec = eigvec(:,index(1));
 %% Projecting the data in lower dimensions
 % for now, num_dim = dimension of init data
 num_dim = size(data_in,1);
 % num_dim = 1;
-data_out=eigvec(:,end)
+data_out=eigvec;
 end
 
