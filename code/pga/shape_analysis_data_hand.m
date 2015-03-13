@@ -47,7 +47,9 @@ function shape_analysis_data_hand(shapes)
     
     [eigenValue1,row] = max(diag(D));
     eigenVect1 = V(:,row);
-    
+    eigval = diag(D);
+    eigval = sort(eigval);
+    100*eigval/sum(eigval)
     a = max(diag(D));
     meanShape2 = - 2*sqrt(a)*eigenVect1';
     meanShape3  = + 2*sqrt(a)*eigenVect1';
