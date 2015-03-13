@@ -55,12 +55,14 @@ end
 K = K + K'; 
 % Dividing the diagonal element by 2 since it has been added to itself
 for row = 1:size(data_in,2)
-    K(row,row) = K(row,row)/2;
+   K(row,row) = K(row,row)/2;
 end
 
 % centering the data:
 % Appendix B: Kij = Kij - 1*K - K*1 + 1*K*1
 % here 1 refers to 1/M
+
+K_center = K;
 
 one_mat = ones(size(K))./size(data_in,2);
 K_center = K - one_mat*K - K*one_mat + one_mat*K*one_mat;
