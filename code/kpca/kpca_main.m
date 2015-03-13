@@ -87,16 +87,11 @@ end
 
 [~, index] = sort(eig_val,'descend');
 eigvec = eigvec(:,index);
-
 eig_val
 %% Projecting the data in lower dimensions
 % for now, num_dim = dimension of init data
 num_dim = size(data_in,1);
 % num_dim = 1;
-data_out = zeros(num_dim,size(data_in,2));
-for count = 1:num_dim
-    data_out(count,:) = eigvec(:,count)'*K_center';
-end
-
+data_out=eigvec(:,end)
 end
 
