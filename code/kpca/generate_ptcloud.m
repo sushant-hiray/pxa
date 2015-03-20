@@ -2,8 +2,8 @@ function [ pts ] = generate_ptcloud( num_points, noise_scale )
 
 r_ideal = 5;
 r1 = r_ideal+(rand(num_points,1)-.5)*noise_scale; %r_ideal = ideal radius; noise_scale= deviation
-% r_ideal = 10;
-% r2 = r_ideal+(rand(num_points,1)-.5)*noise_scale; %r_ideal = ideal radius; noise_scale= deviation
+%r_ideal = 10;
+%r2 = r_ideal+(rand(num_points,1)-.5)*noise_scale; %r_ideal = ideal radius; noise_scale= deviation
 % r_ideal = 15;
 % r3 = r_ideal+(rand(num_points,1)-.5)*noise_scale; %r_ideal = ideal radius; noise_scale= deviation
 %You'd probably also want a theta:
