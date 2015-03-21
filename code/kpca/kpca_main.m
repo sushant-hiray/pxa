@@ -68,7 +68,8 @@ K_center = K;
 one_mat = ones(size(K))./size(data_in,2);
 K_center = K - one_mat*K - K*one_mat + one_mat*K*one_mat;
 clear K;
-K_center = K_center + 0.01*ones(size(K_center));
+%% Find the mininum value in kcenter and then add 1/100 of it to the diagonal
+K_center = K_center + 0.01*eye(size(K_center));
 size(K_center)
 
 
@@ -80,17 +81,19 @@ opts.issym=1;
 opts.disp = 0; 
 opts.isreal = 1;
 neigs = 30;
-[eigvec, eig_val] = eigs(K_center,30);
+%[eigvec, eig_val] = eig(K_center);
+[eigvec eig_val V] = svd(K_center);
+
 eig_val = eig_val./size(data_in,2); % Normalizing the lambda
 eig_val = diag(eig_val);
 % 1 = lamda*<alpha,alpha> (Equation 2.14)
 for col = 1:size(eigvec,2)
     eigvec(:,col) = eigvec(:,col)./(sqrt(eig_val(col)));
 end
-
+eig_val;
 [~, index] = sort(eig_val,'descend');
-%eigvec = eigvec(:,index(1));
-eigvec = eigvec(:,[index(1) index(2)]);
+eigvec = eigvec(:,index(1:4));
+%eigvec = eigvec(:,1:4);
 
 %% Projecting the data in lower dimensions
 % for now, num_dim = dimension of init data
