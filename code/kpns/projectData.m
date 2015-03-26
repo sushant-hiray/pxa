@@ -1,6 +1,6 @@
 function [X] = projectData(Data,Map)
 	%Step1 : Rotate data so that Map.v becomes north pole.
-    
+    % Rotation is commented in here so not rotation only projection
     phoxv = log_map(Map.v,Data);
     phoxv = phoxv.^2;
     phoxv = sqrt(sum(phoxv,1));

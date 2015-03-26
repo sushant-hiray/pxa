@@ -1,7 +1,17 @@
 function [center, r] = findSphere(Data, rtype,singular_value,prevMapping) 
 %type =0 r not fixed to pi/2
 %type =1 r = pi/2
-
+    %% 
+    %center =  \sum\limits_{i=1}^{l} \alpha_{i} \phi(x_{i})
+    % r = pi/2
+    
+    %Kpca on the data that is mapped into the kernel feature space G = Gram
+    %Matrix 
+    % Consiedering the eigen vectors
+    % e1 = \sum \limits_{i=1}^{l}  \beta_{i} \phi(x_{i})
+    
+    
+    %%
 	dim = size(Data,1);
 	%X_corr = Data * Data';
 	%[U D] = eigs(X_corr); % gives the smallest EigenValue Vector

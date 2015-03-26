@@ -67,7 +67,7 @@ axis equal tight;
 hold on;
 subplot(1,2,2)
 PGS =0;
-[Mapping, BkGm, Var] = pnsMain(scaled_pcaInput',1,PGS);
+[Mapping, BkGm,Res,NewBPData,AllRes] = pnsMain(scaled_pcaInput',1,PGS);
 plot_hand(BkGm,0);
 %plot(scaled_pcaInput(1,1:2:end),scaled_pcaInput(1,2:2:end),'r*-');
 axis equal tight;
