@@ -16,12 +16,11 @@ function  kernel_log_map(Data,v0)
     assert(size(v0,1) == num_points, 'vo not represented correctly in kernel feature space, kernel_lop_map');
     num_feat  = size(Data,1);
     repData = eye(num_points,num_points);
-    
+    G = generateGramMatrix(Data);
     alpha_rep = v0(:,ones(1,num_points));
-    repData = 
+    repData = G.*alpha_rep;
+    repData = sqrt(sum(repData,1));
+    Gamma = alpha_rep - D*eye(num_points,num_points);
     
     
-
-
-
 end
