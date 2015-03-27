@@ -29,6 +29,7 @@ function [center, r] = findSphere(Data, rtype,singular_value,prevMapping)
 		r=pi/2;
 	   	center = applyOptimization(Data,V,rtype,prevMapping);
 	elseif (rtype ==0)
-		[center r] = applyOptimization(Data,V,rtype);
+		error('currently the support is only available for r = pi/2');
+        %[center r] = applyOptimization(Data,V,rtype);
 	end
 end
