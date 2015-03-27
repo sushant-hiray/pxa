@@ -13,8 +13,14 @@ function  kernel_log_map(Data,v0)
     % Data is x_i's
     %<v0,Data>
     num_points = size(Data,2);
-    num_feat  = size
-    repData = eye(size(Data,
+    assert(size(v0,1) == num_points, 'vo not represented correctly in kernel feature space, kernel_lop_map');
+    num_feat  = size(Data,1);
+    repData = eye(num_points,num_points);
+    
+    alpha_rep = v0(:,ones(1,num_points));
+    repData = 
+    
+    
 
 
 
