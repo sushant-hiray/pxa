@@ -24,9 +24,9 @@ function shape_analysis_data_hand(shapes,method)
     if (method ==0)
         [meanShape,Scaled] = multi_procrustes(I,n,no_of_samples);
         %plot(meanShape(:,1),meanShape(:,2),'b*');
-    elseif(method ==1)
-        meanShape = tangent_space_projection(I,n,no_of_samples);
-        plot(meanShape(:,1),meanShape(:,2),'b*');
+%     elseif(method ==1)
+%         meanShape = tangent_space_projection(I,n,no_of_samples);
+%         plot(meanShape(:,1),meanShape(:,2),'b*');
     else
         Y = pca(I,100,no_of_samples)
     end
@@ -35,6 +35,8 @@ function shape_analysis_data_hand(shapes,method)
     %compute the variance 
     [V,D] = pca(meanShape,Scaled,n,no_of_samples);
     [row,col] = find(D == max(abs(D(:))));
+    eigval = diag(D)
+    100*eigval/sum(eigval)
     eigenVect1 = V(:,row);
     eigenVect2 = V(:,row-1);
     eigenVect3 = V(:,row-2);
@@ -51,7 +53,6 @@ function shape_analysis_data_hand(shapes,method)
     tem = diag(D);
     eigenVal2 = tem(row-1); 
     eigenVal3 = tem(row-2); 
-    %disp('column number is : ' + row);
     eigenDiff = zeros(n,2);
     eigenDiff(:,1) = eigenVect1(1:n);
     eigenDiff(:,2) = eigenVect1(n+1:end);
