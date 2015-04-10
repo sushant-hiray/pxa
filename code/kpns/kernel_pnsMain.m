@@ -1,4 +1,4 @@
-function [Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data, debugMode,mode)
+function [Mapping,BkGm,R,NewBPData,Res] = kernel_pnsMain(Data, debugMode,mode)
 	%% Initialize with null, and start finding the modes of variation 
 	Mapping = [];
 
@@ -8,26 +8,27 @@ function [Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data, debugMode,mode)
     RProd = 1;
     newMode =0;
     lowest_eig = data_dim;
-
+    G = generateGramMatrix(Data,'Linear');
+    num_points = size(Data,2);
+    KData = eye(num_points,num_points);
+    kernel_dim = num_points;
+    KData = normalizeKernelData(KData,G);
 	while data_dim > 2
-		v = 0;
-        r =0;
-        [v,r] = findSphere(X,1,lowest_eig,Mapping);
+        [v,r] = kernel_findSphere(G,KData,lowest_eig,Mapping,kerenl_dim);
 		CurrentMapping.v = v;
 		CurrentMapping.r = r;
-		res = residualVec(X,v,r);
-        Res = [RProd*res;Res];
-        RProd = RProd *sin(r);
-        
+% 		res = residualVec(KData,v,r);
+%         Res = [RProd*res;Res];
+%         RProd = RProd *sin(r);
+%         
         Mapping = [Mapping CurrentMapping];
 		fprintf('Error at Dim  %d is %f',data_dim,residual(X,CurrentMapping.v,CurrentMapping.r));
         %Residual = [Residual residual(X,CurrentMapping.v,CurrentMapping.r)];
         %Update the Data dimensionality and rotate the data.
-        lowest_eig = lowest_eig -1;
-		XUpdated = projectData(X,CurrentMapping);
-	    assert(abs(norm(X(:,1)) -1) <1E-4, 'norm not 1'); 
-		X = XUpdated;
-		data_dim = data_dim -1;
+       
+		KData = kernel_projectData(KData,CurrentMapping);
+	    %assert(abs(norm(K(:,1)) -1) <1E-4, 'norm not 1'); 
+        kernel_dim = kernel_dim -1;
     end
 	%% Find the geodesic mean for the Data
 	gm = geodesic_mean(X);

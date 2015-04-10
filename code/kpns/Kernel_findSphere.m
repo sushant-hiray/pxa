@@ -1,4 +1,4 @@
-function [center, r] = findSphere(Data, rtype,singular_value,prevMapping) 
+function [center, r] = Kernel_findSphere(G,KData,prevMapping) 
 %type =0 r not fixed to pi/2
 %type =1 r = pi/2
     %% 
@@ -27,7 +27,7 @@ function [center, r] = findSphere(Data, rtype,singular_value,prevMapping)
 
 	if (rtype == 1)
 		r=pi/2;
-	   	center = applyOptimization(Data,V,rtype,prevMapping);
+        center = kernel_optimization_find_v(G,KData,V,prevMapping);
     elseif (rtype ==0)
 		error('currently the support is only available for r = pi/2');
         %[center r] = applyOptimization(Data,V,rtype);
