@@ -1,4 +1,4 @@
-function [center, r] = Kernel_findSphere(G,KData,prevMapping) 
+function [center, r] = Kernel_findSphere(G,KData,prevMapping,singular_value) 
 %type =0 r not fixed to pi/2
 %type =1 r = pi/2
     %% 
@@ -10,26 +10,27 @@ function [center, r] = Kernel_findSphere(G,KData,prevMapping)
     % Consiedering the eigen vectors
     % e1 = \sum \limits_{i=1}^{l}  \beta_{i} \phi(x_{i})
     
-    
     %%
-	dim = size(Data,1);
-	%X_corr = Data * Data';
-	%[U D] = eigs(X_corr); % gives the smallest EigenValue Vector
-	[U dd] = svd(Data);
-
-	V = U(:,singular_value);
-
-	V = normc(V);
-	%V(:) =0; V(end)=1;
+    %[ eigvec, eig_val, K_center ] = kpca_main(KData, options)
+    N = size(KData,2);
+    NewK = KData'*G*KData;
+    one_mat = ones(size(K))./N;
+    K_center = NewK - one_mat*NewK - NewK*one_mat + one_mat*NewK*one_mat;
+    [eigvec,eigval] = svd(K_center);
+    
+    [~, index] = sort(eigval,'descend');
+   
+    V = eigvec(:,index(singular_value));
+    TempMat1 = (ones(size(NewK)) -eye(size(NewK)))/N + eye(size(NewK));
+    Vfinal = KData*TempMat1*V;
+    
+    
+    %V(:) =0; V(end)=1;
 	% Now start applying gradient descent with the objective function to
 	% optimize for v and r depending upon the parameter type
 	% Initialization happens using V as the intial value of V0
-
-	if (rtype == 1)
-		r=pi/2;
-        center = kernel_optimization_find_v(G,KData,V,prevMapping);
-    elseif (rtype ==0)
-		error('currently the support is only available for r = pi/2');
-        %[center r] = applyOptimization(Data,V,rtype);
-	end
+    
+    r=pi/2;
+    center = kernel_optimization_find_v(G,KData,Vfinal,prevMapping);
+   
 end

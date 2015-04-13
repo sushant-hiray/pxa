@@ -7,28 +7,26 @@ function [Mapping,BkGm,R,NewBPData,Res] = kernel_pnsMain(Data, debugMode,mode)
     Res = [];
     RProd = 1;
     newMode =0;
-    lowest_eig = data_dim;
+    
     G = generateGramMatrix(Data,'Linear');
     num_points = size(Data,2);
     KData = eye(num_points,num_points);
     kernel_dim = num_points;
-    KData = normalizeKernelData(KData,G);
+    KData = normalizeKernelData(G,KData);
 	while data_dim > 2
-        [v,r] = kernel_findSphere(G,KData,lowest_eig,Mapping,kerenl_dim);
+        [v,r] = Kernel_findSphere(G,KData,Mapping,kernel_dim);
 		CurrentMapping.v = v;
 		CurrentMapping.r = r;
 % 		res = residualVec(KData,v,r);
 %         Res = [RProd*res;Res];
-%         RProd = RProd *sin(r);
-%         
+%         RProd = RProd *sin(r); 
         Mapping = [Mapping CurrentMapping];
-		fprintf('Error at Dim  %d is %f',data_dim,residual(X,CurrentMapping.v,CurrentMapping.r));
+		fprintf('Error at Dim  %d is %f',data_dim,residual(KData,CurrentMapping.v,CurrentMapping.r));
         %Residual = [Residual residual(X,CurrentMapping.v,CurrentMapping.r)];
         %Update the Data dimensionality and rotate the data.
-       
 		KData = kernel_projectData(KData,CurrentMapping);
 	    %assert(abs(norm(K(:,1)) -1) <1E-4, 'norm not 1'); 
-        kernel_dim = kernel_dim -1;
+        kernel_dim = kernel_dim - 1;
     end
 	%% Find the geodesic mean for the Data
 	gm = geodesic_mean(X);

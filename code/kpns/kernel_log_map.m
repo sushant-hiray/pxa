@@ -24,6 +24,7 @@ function [Out]= kernel_log_map(G,KData,v0)
     assert(size(v0,1) == num_points, 'vo not represented correctly in kernel feature space, kernel_lop_map');
     %G = generateGramMatrix(IData);
     D = (KData'*G*v0)';
+    %D = v0'*G*KData;
     % now replicate D for each and every entry
     D = D(ones(num_feat,1),:);
     alphaRep = v0(:,ones(1,num_points));
