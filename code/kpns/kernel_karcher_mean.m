@@ -1,8 +1,9 @@
 function [ mean ] = kernel_karcher_mean( data_in )
 % Computes the karcher Mean of the data points using gradient descent
 
-num_points = size(data_in, 2);
 
+num_points = size(data_in, 2);
+data_dim = size(data_in, 1);
 assert(num_points ~= 0,  '[kernel_karcher_mean]: No of Samples cannot be zero');
 threshold = 1E-5    ;
 step_size = 0.1;
@@ -10,20 +11,39 @@ assert(threshold < 1,  '[kernel_karcher_mean]: Threshold should be less than 1')
 
 G = generateGramMatrix(data_in,'Linear');
 delta = 0.001;
-mean = sum(data_in,2)/num_points;
+mean = diag(ones(num_points));
+mean = mean/num_points;
+size(mean)
 mean  = mean/kernel_norm(G, mean);
-prev_mean = mean - delta;
+prev_mean = mean;
+prev_mean(1) = prev_mean(1) - delta;
+prev_mean(2) = prev_mean(2) + delta;
 
 meanChange = 1; % difference in mean
-
+'mean size is'
+size(mean)
+'G size is '
+size(G)
+i=0;
 while(kernel_norm(G, meanChange) > threshold)
+    'iteration number'
+    i
+    
     sums = zeros(1,data_dim);
-    projected_data = kernel_log_map(G, mean, data_in);
+    'computing the projected data'
+    projected_data = kernel_log_map(G, eye(num_points), mean);
     sums = sum(projected_data, 2);
     gradient = -sums/num_points;
+    'computing new mean'
     mean = kernel_exp_map(G, mean, step_size*(-gradient));
-    mean = kernel_norm(G, mean);
+    'just after kernal exp map'
+    size(mean)
+    mean = mean/kernel_norm(G, mean);
+    'after computing norm'
+    size(mean)
+    'computing mean change'
     meanChange = kernel_log_map(G, prev_mean, mean)/2*pi;
     prev_mean = mean;
+    i=i+1;
 end
 
