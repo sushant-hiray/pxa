@@ -28,8 +28,10 @@ function [Mapping,BkGm,R,NewBPData,Res] = kernel_pnsMain(Data, debugMode,mode)
 		KData = kernel_projectData(G,KData,CurrentMapping);
 	    %assert(abs(norm(K(:,1)) -1) <1E-4, 'norm not 1'); 
         kernel_dim = kernel_dim + 1;
+        
     end
 	%% Find the geodesic mean for the Data
+    'computing kernel Karcher mean'
 	gm = kernel_karcher_mean(G,KData);
 	CurrentMapping.v = gm;
 	CurrentMapping.r = pi/2;
