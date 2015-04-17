@@ -1,5 +1,6 @@
 function K_center = generateGramMatrix(data_in,KernelType)
 K = zeros(size(data_in,2),size(data_in,2));
+sigma=1;
 for row = 1:size(data_in,2)
     for col = 1:row
         switch lower(KernelType)

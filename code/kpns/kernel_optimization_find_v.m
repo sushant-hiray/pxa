@@ -10,12 +10,13 @@ function [v] = kernel_optimization_find_v(G,KData,v0,prevMapping)
     prevRes = 2*pi;
     threshold = 1E-5;
     stepSize = 1E-3;
-    
-    while(abs(prevRes - currRes)/abs(prevRes) > threshold)
+    MAX_ITER =100;
+    curr_iter =0;
+    while(abs(prevRes - currRes)/abs(prevRes) > threshold && curr_iter <MAX_ITER)
       currGrad = kernel_grad_function(G,KData,currVD);
       currVD = currVD - stepSize*currGrad;
       tempRes = kernel_residual_function(G,KData,currVD);
-      if(tempRes < currRes)
+      if(tempRes <= currRes)
           prevRes = currRes;
           currRes = tempRes;
           stepSize = stepSize*1.1;
@@ -23,8 +24,10 @@ function [v] = kernel_optimization_find_v(G,KData,v0,prevMapping)
           currVD = currVD + 2*stepSize*currGrad;
           stepSize = stepSize/2;
       end
+      curr_iter = curr_iter+1;
     end
-    % update v0 
+    % update v0 o
+    currVD = currVD - ((currVD'*G*v0)/(v0'*G*v0))*v0;
     v = kernel_exp_map(G,currVD,v0);
 
 end

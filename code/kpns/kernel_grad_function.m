@@ -6,7 +6,9 @@ function [grad] = kernel_grad_function(G,KData,vdagger)
     
     E = KData -vRep;
     normE = E'*G*E;
-    normE = sqrt(diag(normE)');
+    normE = diag(normE);
+    normE = (normE<1E-27)*1E-27 + (normE>=1E-27).*normE;
+    normE = sqrt(normE');
     error = (normE -r).^2;
     errorRep = error(ones(num_feat,1),:);
     normERep = normE(ones(num_feat,1),:);

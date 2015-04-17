@@ -1,5 +1,5 @@
 in_dim =3;
-Data = randvonMisesFisherm(in_dim,1000, 100, [0 0 1]);
+Data = randvonMisesFisherm(in_dim,10, 100, [0 0 1]);
 Data(:,1) = zeros(in_dim,1);
 Data(end,1) = 1/sqrt(2);
 Data(1,1) = 1/sqrt(2);

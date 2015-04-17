@@ -11,10 +11,11 @@ function [Mapping,BkGm,R,NewBPData,Res] = kernel_pnsMain(Data, debugMode,mode)
     G = generateGramMatrix(Data,'Linear');
     num_points = size(Data,2);
     KData = eye(num_points,num_points);
-    kernel_dim = num_points;
+    kernel_dim = 0;
     KData = normalizeKernelData(G,KData);
-	while data_dim > 2
-        [v,r] = Kernel_findSphere(G,KData,Mapping,kernel_dim);
+    leftDims = size(Data,2);
+	while leftDims > 2
+        [v,r,leftDims] = Kernel_findSphere(G,KData,Mapping,kernel_dim,Data);
 		CurrentMapping.v = v;
 		CurrentMapping.r = r;
 % 		res = residualVec(KData,v,r);
@@ -24,12 +25,12 @@ function [Mapping,BkGm,R,NewBPData,Res] = kernel_pnsMain(Data, debugMode,mode)
 		fprintf('Error at Dim  %d is %f',data_dim,residual(KData,CurrentMapping.v,CurrentMapping.r));
         %Residual = [Residual residual(X,CurrentMapping.v,CurrentMapping.r)];
         %Update the Data dimensionality and rotate the data.
-		KData = kernel_projectData(KData,CurrentMapping);
+		KData = kernel_projectData(G,KData,CurrentMapping);
 	    %assert(abs(norm(K(:,1)) -1) <1E-4, 'norm not 1'); 
-        kernel_dim = kernel_dim - 1;
+        kernel_dim = kernel_dim + 1;
     end
 	%% Find the geodesic mean for the Data
-	gm = geodesic_mean(X);
+	gm = kernel_karcher_mean(G,KData);
 	CurrentMapping.v = gm;
 	CurrentMapping.r = pi/2;
 	Mapping = [Mapping CurrentMapping];

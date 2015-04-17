@@ -7,7 +7,9 @@ function [error] = kernel_residual_function(G,KData,vdagger)
     
     E = KData -vRep;
     normE = E'*G*E;
-    normE = sqrt(diag(normE));
+    normE = diag(normE);
+    normE = (normE<1E-27)*1E-27 + (normE>=1E-27).*normE;
+    normE = sqrt(normE);
     error = sum((normE -r).^2);
     error = error/num_points;
 end
