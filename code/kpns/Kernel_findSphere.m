@@ -15,7 +15,8 @@ function [center, r,leftDims] = Kernel_findSphere(G,KData,prevMapping,singular_v
     N = size(KData,2);
     NewK = KData'*G*KData;
     one_mat = ones(size(NewK))./N;
-    K_center = NewK - one_mat*NewK - NewK*one_mat + one_mat*NewK*one_mat;
+%   K_center = NewK - one_mat*NewK - NewK*one_mat + one_mat*NewK*one_mat;
+    K_center = NewK;
     [eigvec,eigval] = svd(K_center);
     eigval = diag(eigval);
     [~, index] = sort(eigval,'descend');
@@ -24,7 +25,8 @@ function [center, r,leftDims] = Kernel_findSphere(G,KData,prevMapping,singular_v
     
     V = eigvec(:,id(size(id,1) -singular_value));
     % Ignore Dimensions which have zero variance in them.
-    TempMat1 = -ones(size(NewK))/N + eye(size(NewK));
+    %TempMat1 = -ones(size(NewK))/N + eye(size(NewK));
+    TempMat1 = eye(size(NewK));
     Vfinal = KData*TempMat1*V;
     
     Vfinal = Vfinal/sqrt(Vfinal'*G*Vfinal);
@@ -35,7 +37,7 @@ function [center, r,leftDims] = Kernel_findSphere(G,KData,prevMapping,singular_v
 	% Initialization happens using V as the intial value of V0
     
     r=pi/2;
-    TData = kernel_log_map(G,KData,Vfinal);
-    center = kernel_optimization_find_v(G,TData,Vfinal,prevMapping);
+    %TData = kernel_log_map(G,KData,Vfinal);
+    center = kernel_optimization_find_v(G,KData,Vfinal,prevMapping,Data);
     leftDims = size(id) -1;
 end
