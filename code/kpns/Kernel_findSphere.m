@@ -22,8 +22,11 @@ function [center, r,leftDims] = Kernel_findSphere(G,KData,prevMapping,singular_v
     [~, index] = sort(eigval,'descend');
     %Remove the eigenVector that has zero variance (zero eig_val ) Threshold = 1E-10;
     id  = find(eigval > 1E-10);
-    
-    V = eigvec(:,id(size(id,1) -singular_value));
+    id
+%    V = eigvec(:,id(size(id,1) -singular_value));
+    V = eigvec(:,id(size(id,1)));
+   
+   
     % Ignore Dimensions which have zero variance in them.
     %TempMat1 = -ones(size(NewK))/N + eye(size(NewK));
     TempMat1 = eye(size(NewK));
@@ -39,5 +42,5 @@ function [center, r,leftDims] = Kernel_findSphere(G,KData,prevMapping,singular_v
     r=pi/2;
     %TData = kernel_log_map(G,KData,Vfinal);
     center = kernel_optimization_find_v(G,KData,Vfinal,prevMapping,Data);
-    leftDims = size(id) -1;
+    leftDims = size(id,1) -1;
 end

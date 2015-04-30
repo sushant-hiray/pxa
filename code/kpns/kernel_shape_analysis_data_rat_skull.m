@@ -51,10 +51,10 @@ axis equal tight;
 hold on;
 
 PGS =1;
-[Mapping,BkGm,R,NewBPData,Res] = pnsMain(scaled_pcaInput',1,PGS);
-
+[Mapping,BkGm,R,Res] = kernel_pnsMain(scaled_pcaInput',1,PGS);
+BkGm = (scaled_pcaInput')*BkGm;
 subplot(1,2,2)
 plot_rat_skull(BkGm,0);
 axis equal tight;
 hold on;
-plot_rat_skull_same(NewBPData,0);
+%plot_rat_skull_same(NewBPData,0);

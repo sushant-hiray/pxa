@@ -1,6 +1,7 @@
 rng(0);
 Data = generateTriangleDataSpl(10,1);
-[Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data,1);
+[Mapping,BkGm,R,Res] = kernel_pnsMain(Data,1);
+BkGm = Data*BkGm
 figure();
 subplot(1,2,1);
 plotTrianglesSpl(Data);

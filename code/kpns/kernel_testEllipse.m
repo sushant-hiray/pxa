@@ -1,7 +1,8 @@
 rng(0);
 PGS =1
 Data =  generate_ellipse(100,8)
-[Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data,1,PGS);
+[Mapping,BkGm,R,Res] = kernel_pnsMain(Data,1,PGS);
+BkGm = Data*BkGm;
 figure();
 subplot(1,2,1);
 plot_data(Data,0);
