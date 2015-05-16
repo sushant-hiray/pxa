@@ -6,10 +6,8 @@ DatabasePath='../../data/ORL/s'; % DatabasePath
 ss=10; % sample set size
 ns=40; % number of subjects
 
-
-% Data format: img x no of samples where img is 2d image reshaped into 1d
-% vector
-
+% No ofRows = no of pixels in one images
+% No of cols = no of images
 Data=[];
 
 for td = 1:ns
@@ -28,3 +26,9 @@ for td = 1:ns
 end
 
 Data = double(Data);
+% Each column of data is an image reduced to one dimension
+
+% preprocessing
+Data = Data - repmat(mean(Data), size(Data,1), 1);
+Data = normc(Data);
+
