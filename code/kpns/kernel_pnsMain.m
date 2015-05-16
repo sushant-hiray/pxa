@@ -1,4 +1,4 @@
-function [Mapping,BkGm,R,Res] = kernel_pnsMain(Data, debugMode,mode)
+function [Mapping,BkGm,R,Res] = kernel_pnsMain(Data, debugMode,mode,options)
 	%% Initialize with null, and start finding the modes of variation 
 	Mapping = [];
 
@@ -8,11 +8,12 @@ function [Mapping,BkGm,R,Res] = kernel_pnsMain(Data, debugMode,mode)
     RProd = 1;
     newMode =0;
     
-    G = generateGramMatrix(Data,'PolyPlus');
+    G = generateGramMatrix(Data,options);
+    
     num_points = size(Data,2);
     KData = eye(num_points,num_points);
     kernel_dim = 0;
-    KData = normalizeKernelData(G,KData);
+    %KData = normalizeKernelData(G,KData);
     leftDims = size(Data,2);
     Res = [];
 	while leftDims > 2

@@ -1,6 +1,7 @@
 %% This test generates data using the VonMissFischer Distribution and tries
 %  to compute modes of variations and geodesic mean. 
-Data = randvonMisesFisherm(3,100, 100, [0 0 1])
+rng(0)
+Data = randvonMisesFisherm(3,200, 100, [0 0 1])
 
 [Mapping,BkGm,R,NewBPData,Res] = pnsMain(Data,1,1);
 gm_intrinsic = geodesic_mean(Data);

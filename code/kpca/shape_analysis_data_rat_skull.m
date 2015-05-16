@@ -49,7 +49,7 @@ subplot(1,2,1)
 plot_rat_skull(scaled_pcaInput',0);
 axis equal tight;
 hold on;
-options.KernelType = 'PolyPlus'
+options.KernelType = 'Linear'
 [ eigvec, eig_val ] = kpca_main(scaled_pcaInput',options);
 100*eig_val/sum(eig_val)
 

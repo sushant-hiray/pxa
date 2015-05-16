@@ -32,7 +32,21 @@ function [ eigvec, eig_val, K_center ] = kpca_main(data_in, options)
 %% Using the Gaussian Kernel to construct the gram matrix K
 % K(x,y) = -exp((x-y)^2/(sigma)^2)
 sigma = 1;
-data_in
+data_in;
+switch lower(options.KernelType)
+        case {lower('Gaussian')}        %  e^{-(|x-y|^2)/2t^2
+           sigma = getSigma(data_in)
+        case {lower('PolyPlus')}      % (x'*y + 1)^d
+            d = 2;
+
+        case {lower('Polynomial')}      % (x'*y)^d
+            d = 2;
+
+        case {lower('Linear')}      % x'*y
+            'hi'
+        otherwise
+            error('KernelType does not exist!');
+end         
 K = zeros(size(data_in,2),size(data_in,2));
 for row = 1:size(data_in,2)
     for col = 1:row
@@ -42,7 +56,7 @@ for row = 1:size(data_in,2)
                 K(row,col) = exp(-temp)/(2*sigma*sigma);
             case {lower('PolyPlus')}      % (x'*y + 1)^d
                 d = 2;
-                K(row,col) = (data_in(:,row)'*data_in(:,col) + 1)^d;
+                K(row,col) = (data_in(:,row)'*data_in(:,col) )^d;
             case {lower('Polynomial')}      % (x'*y)^d
                 d = 2;
                 K(row,col) = (data_in(:,row)'*data_in(:,col))^d;
