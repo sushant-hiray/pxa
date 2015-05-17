@@ -4,7 +4,7 @@ close all
 rng(0)
 DatabasePath='../../data/ORL/s'; % DatabasePath
 ss=10; % sample set size
-ns=40; % number of subjects
+ns=16   ; % number of subjects
 
 % No ofRows = no of pixels in one images
 % No of cols = no of images

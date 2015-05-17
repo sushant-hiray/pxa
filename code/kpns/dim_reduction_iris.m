@@ -8,9 +8,11 @@ rng(0);
 PGS =1;
 iris = iris';
 
-options.KernelType='NPolynomial';
+options.KernelType='Linear';
 options.degree=5;
 [Mapping,BkGm,R_kernel,Res] = kernel_pnsMain(iris,1,PGS,options);
+
+%{
 [ eigvec, eig_val ] = kpca_main(iris,options);
 R_kpca_gauss = 100*eig_val/sum(eig_val);
 
@@ -27,8 +29,7 @@ R_kpca_5 = 100*eig_val/sum(eig_val);
 options.KernelType='Linear';
 [ eigvec, eig_val ] = kpca_main(iris,options);
 R_linear = 100*eig_val/sum(eig_val);
-% X_mean = mean(iris,2);
-% X_shift = iris -X_mean(:,ones(1,size(iris,2)));
-% [eigvec eigv ] = svd(X_shift);
+
 
 Total_R = [R_kernel(1:3) R_kpca_gauss(1:3) R_kpca_3(1:3) R_kpca_5(1:3) R_linear(1:3)]
+%}
