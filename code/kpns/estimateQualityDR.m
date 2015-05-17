@@ -1,4 +1,4 @@
-function estimateQualityDRPNScd(iData,KernelFeatureSpaceData,G,Mappings,Variances,noOfDims)
+function estimateQualityDR(iData,KernelFeatureSpaceData,G,Mappings,Variances,noOfDims)
     % iData: The data in input feature space
     % kernelFeatureSpaceData: The Data in Kerenl Feature 
     % G = Gram Matrix

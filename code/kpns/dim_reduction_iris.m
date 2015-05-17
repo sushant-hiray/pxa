@@ -8,11 +8,11 @@ rng(0);
 PGS =1;
 iris = iris';
 
-options.KernelType='Linear';
+options.KernelType='NPolynomial';
 options.degree=5;
 [Mapping,BkGm,R_kernel,Res] = kernel_pnsMain(iris,1,PGS,options);
 
-%{
+
 [ eigvec, eig_val ] = kpca_main(iris,options);
 R_kpca_gauss = 100*eig_val/sum(eig_val);
 
@@ -32,4 +32,3 @@ R_linear = 100*eig_val/sum(eig_val);
 
 
 Total_R = [R_kernel(1:3) R_kpca_gauss(1:3) R_kpca_3(1:3) R_kpca_5(1:3) R_linear(1:3)]
-%}
