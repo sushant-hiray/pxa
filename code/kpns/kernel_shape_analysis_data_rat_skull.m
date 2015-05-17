@@ -49,9 +49,10 @@ subplot(1,2,1)
 plot_rat_skull(scaled_pcaInput',0);
 axis equal tight;
 hold on;
-
+options.KernelType='Polynomial'
+options.degree=10
 PGS =1;
-[Mapping,BkGm,R,Res] = kernel_pnsMain(scaled_pcaInput',1,PGS);
+[Mapping,BkGm,R,Res] = kernel_pnsMain(scaled_pcaInput',1,PGS,options);
 BkGm = (scaled_pcaInput')*BkGm;
 subplot(1,2,2)
 plot_rat_skull(BkGm,0);

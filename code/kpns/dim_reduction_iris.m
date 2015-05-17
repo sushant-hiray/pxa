@@ -12,7 +12,6 @@ options.KernelType='NPolynomial';
 options.degree=5;
 [Mapping,BkGm,R_kernel,Res] = kernel_pnsMain(iris,1,PGS,options);
 
-
 [ eigvec, eig_val ] = kpca_main(iris,options);
 R_kpca_gauss = 100*eig_val/sum(eig_val);
 
