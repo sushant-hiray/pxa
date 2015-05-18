@@ -43,4 +43,5 @@ function [Mapping,BkGm,R,Res] = kernel_pnsMain(Data, debugMode,mode,options)
     %Modes = modesofVariation(Data,Mapping);
     R  = sum(Res.^2,2);
     R = R*100/sum(R);
+    QDR= estimateQualityDR(Data,eye(num_points,num_points),G,Mapping(1:end-1),R,10);
 end

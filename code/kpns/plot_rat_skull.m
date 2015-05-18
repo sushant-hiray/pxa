@@ -11,6 +11,4 @@ function plot_rat_skull( X,new_fig )
            hold on;
     end
     hold off;
-
 end
-

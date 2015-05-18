@@ -23,10 +23,13 @@ for row = 1:size(data_in,2)
                 temp = sum(((data_in(:,row) - data_in(:,col)).^2));
                 K(row,col) = exp(-temp/(2*sigma*sigma));
             case {lower('PolyPlus')}      % (x'*y + 1)^d
-               
                 K(row,col) = (data_in(:,row)'*data_in(:,col) + 1)^d;
             case {lower('NPolynomial')}      % (x'*y)^d
                 nx = sqrt((data_in(:,row)'*data_in(:,row))^d);
+                %row
+                %nx
+                assert(nx > 1E-18,'nx is very small')
+               
                 ny = sqrt((data_in(:,col)'*data_in(:,col))^d);
                 K(row,col) = (data_in(:,row)'*data_in(:,col))^d/(nx*ny);
             case {lower('Polynomial')}      % (x'*y)^d
