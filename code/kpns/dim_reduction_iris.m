@@ -9,7 +9,7 @@ PGS =1;
 iris = iris';
 
 options.KernelType='NPolynomial';
-options.degree=5;
+options.degree=3;
 [Mapping,BkGm,R_kernel,Res] = kernel_pnsMain(iris,1,PGS,options);
 
 [ eigvec, eig_val ] = kpca_main(iris,options);
