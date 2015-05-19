@@ -2,7 +2,6 @@
 
 
 load('../../data/liver.mat');
-liver = liver';
 rng(0);
 %transfusion = normc(transfusion');
 PGS =1;

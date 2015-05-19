@@ -4,9 +4,7 @@
 load('../../data/concreteslump.mat');
 concreteslump = concreteslump';
 rng(0);
-%transfusion = normc(transfusion');
 PGS =1;
-concreteslump = concreteslump';
 options.KernelType='Gaussian';
 options.sigma = 2;
 [Mapping,BkGm,R_kernel,Res] = kernel_pnsMain(concreteslump,1,PGS,options);

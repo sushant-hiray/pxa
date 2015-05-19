@@ -2,7 +2,6 @@
 
 
 load('../../data/vc.mat');
-vc = vc';
 rng(0);
 PGS =1;
 vc = vc';
