@@ -9,36 +9,40 @@ load('../../data/usps_all.mat');
 Data=[];
 
 i=1;
-while i <= 10
-    Data = [Data data(:,1:10,i)];
-    i=i+1;
-end
+Data = data(:,1:200,i);
 
+%{
+while i <= 1
+    Data = [Data data(:,:,i)];
+    i=i+1
+end
+%}
 Data = double(Data);
 % preprocessing
 Data = Data - repmat(mean(Data), size(Data,1), 1);
 Data = normc(Data);
 
+    Data = [Data data(:,:,i)];
 
 PGS =1;
 
 
 options.KernelType='Gaussian';
-[Mapping,BkGm,R_kernel,Res] = kernel_pnsMain(Data,1,PGS,options);
+%[Mapping,BkGm,R_kernel,Res] = kernel_pnsMain(Data,1,PGS,options);
 [ eigvec, eig_val ] = kpca_main(Data,options);
 R_kpca_gauss = 100*eig_val/sum(eig_val);
 
 
 options.KernelType='NPolynomial';
-options.degree=3;
-[Mapping,BkGm,R_kernel_np3,Res] = kernel_pnsMain(Data,1,PGS,options);
+options.degree=10;
+%[Mapping,BkGm,R_kernel_np3,Res] = kernel_pnsMain(Data,1,PGS,options);
 [ eigvec, eig_val ] = kpca_main(Data,options);
 R_kpca_np3 = 100*eig_val/sum(eig_val);
 
 
 options.KernelType='NPolynomial';
 options.degree=5;
-[Mapping,BkGm,R_kernel_np5,Res] = kernel_pnsMain(Data,1,PGS,options);
+%[Mapping,BkGm,R_kernel_np5,Res] = kernel_pnsMain(Data,1,PGS,options);
 [ eigvec, eig_val ] = kpca_main(Data,options);
 R_kpca_np5 = 100*eig_val/sum(eig_val);
 
@@ -53,11 +57,11 @@ options.degree=5;
 R_kpca_5 = 100*eig_val/sum(eig_val);
 
 options.KernelType='Linear';
-[Mapping,BkGm,R_pns,Res] = kernel_pnsMain(Data,1,PGS,options);
+%[Mapping,BkGm,R_pns,Res] = kernel_pnsMain(Data,1,PGS,options);
 [ eigvec, eig_val ] = kpca_main(Data,options);
 R_linear = 100*eig_val/sum(eig_val);
 % X_mean = mean(Data,2);
 % X_shift = Data -X_mean(:,ones(1,size(Data,2)));
 % [eigvec eigv ] = svd(X_shift);
 
-Total_R = [R_kernel(1:10) R_kpca_gauss(1:10) R_kernel_np3(1:10) R_kernel_np5(1:10) R_kpca_np3(1:10) R_kpca_np5(1:10) R_kpca_3(1:10) R_kpca_5(1:10) R_linear(1:10) R_pns(1:10)]
+%Total_R = [R_kernel(1:10) R_kpca_gauss(1:10) R_kernel_np3(1:10) R_kernel_np5(1:10) R_kpca_np3(1:10) R_kpca_np5(1:10) R_kpca_3(1:10) R_kpca_5(1:10) R_linear(1:10) R_pns(1:10)]

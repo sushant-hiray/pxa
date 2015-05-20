@@ -1,4 +1,4 @@
-function [ eigvec, eig_val, K_center ] = kpca_main(data_in, options)
+function [ eigvec, eig_val, QDR ] = kpca_main(data_in, options)
 %
 % This function does principal component analysis (non-linear) on the given
 % data set using the Kernel trick
@@ -32,8 +32,8 @@ function [ eigvec, eig_val, K_center ] = kpca_main(data_in, options)
 %% Using the Gaussian Kernel to construct the gram matrix K
 % K(x,y) = -exp((x-y)^2/(sigma)^2)
 K = zeros(size(data_in,2),size(data_in,2));
-K = generateGramMatrix(data_in,options);
-
+G = generateGramMatrix(data_in,options);
+K = G;
 % centering the data:
 % Appendix B: Kij = Kij - 1*K - K*1 + 1*K*1
 % here 1 refers to 1/M
@@ -70,7 +70,10 @@ eig_val;
 [~, index] = sort(eig_val,'descend');
 eigvec = eigvec(:,index);
 %eigvec = eigvec(:,1:4);
-
+R = (eig_val*100)/sum(eig_val);
+QDR= estimateQualityDRKPCA(data_in,eye(size(data_in,2),size(data_in,2)),G,eigvec,R,10);
+num_points = 1: size(data_in,2);
+QDR = [QDR;num_points];
 %% Projecting the data in lower dimensions
 % for now, num_dim = dimension of init data
 num_dim = size(data_in,1);

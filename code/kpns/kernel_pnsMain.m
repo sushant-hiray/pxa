@@ -1,4 +1,4 @@
-function [Mapping,BkGm,R,Res] = kernel_pnsMain(Data, debugMode,mode,options)
+function [Mapping,BkGm,R,Res,QDR] = kernel_pnsMain(Data, debugMode,mode,options)
 	%% Initialize with null, and start finding the modes of variation 
 	Mapping = [];
 
@@ -44,4 +44,5 @@ function [Mapping,BkGm,R,Res] = kernel_pnsMain(Data, debugMode,mode,options)
     R  = sum(Res.^2,2);
     R = R*100/sum(R);
     QDR= estimateQualityDR(Data,eye(num_points,num_points),G,Mapping(1:end-1),R,10);
+    QDR = [QDR;1:num_points];
 end
