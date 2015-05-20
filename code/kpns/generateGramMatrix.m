@@ -3,9 +3,10 @@ K = zeros(size(data_in,2),size(data_in,2));
 sigma=1;
 switch lower(options.KernelType)
         case {lower('Gaussian')}        %  e^{-(|x-y|^2)/2t^2
-           sigma = getSigma(data_in)
-           %sigma = 4
+           sigma = getSigma(data_in);
         case {lower('PolyPlus')}      % (x'*y + 1)^d
+            d = options.degree;
+        case {lower('NPolyPlus')}      % (x'*y + 1)^d
             d = options.degree;
         case {lower('Polynomial')}      % (x'*y)^d
             d = options.degree;
@@ -24,6 +25,15 @@ for row = 1:size(data_in,2)
                 K(row,col) = exp(-temp/(2*sigma*sigma));
             case {lower('PolyPlus')}      % (x'*y + 1)^d
                 K(row,col) = (data_in(:,row)'*data_in(:,col) + 1)^d;
+            case {lower('NPolyPlus')}      % (x'*y + 1)^d
+                nx = sqrt((data_in(:,row)'*data_in(:,row)+1)^d);
+                %row
+                %nx
+                assert(nx > 1E-18,'nx is very small')
+                ny = sqrt((data_in(:,col)'*data_in(:,col) +1 )^d);
+            
+                K(row,col) = (data_in(:,row)'*data_in(:,col) + 1)^d/(nx*ny);
+            
             case {lower('NPolynomial')}      % (x'*y)^d
                 nx = sqrt((data_in(:,row)'*data_in(:,row))^d);
                 %row
@@ -32,6 +42,7 @@ for row = 1:size(data_in,2)
                
                 ny = sqrt((data_in(:,col)'*data_in(:,col))^d);
                 K(row,col) = (data_in(:,row)'*data_in(:,col))^d/(nx*ny);
+         
             case {lower('Polynomial')}      % (x'*y)^d
                 K(row,col) = (data_in(:,row)'*data_in(:,col))^d;
             case {lower('Linear')}      % x'*y
