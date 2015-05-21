@@ -26,7 +26,6 @@ R_linear = 100*eig_val/sum(eig_val);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-f  =figure()
 plot(QDR_KPNS_Gauss(2,:),QDR_KPNS_Gauss(1,:),'r-');
 hold on;
 plot(QDR_KPCA_Gauss(2,:),QDR_KPCA_Gauss(1,:),'b-');
@@ -42,17 +41,16 @@ hold on
 plot(QDR_KPCA_linear(2,:),QDR_KPCA_linear(1,:),'k-');
 %%%%%%%%%%%%%%%
 filePath = strcat('../images/' , name);
-title(name);
-xlabel('k-Neighbourhood');
-ylabel('Quality of DR');
-legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly3','KPCA-NPoly3','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast');
-axis([1,size(Data,2),0,1.1]);
+title(name,'FontSize',14);
+xlabel('k-Neighbourhood','FontSize',14);
+ylabel('Quality of DR','FontSize',14);
+legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly3','KPCA-NPoly3','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast')
+axis([1,size(Data,2),0,1.1]) 
+set(gcf, 'Color', 'w');
+% set(findall(gcf,'type','text'),'fontSize',14);
+export_fig(filePath,'-nocrop', '-opengl','-png');
 
-
-
-saveas(f,filePath,'png');
 minDim = min([size(R_kpns_gauss,1) size(R_kpca_gauss,1) size(R_kpns_np3,1) size(R_kpns_np5,1) size(R_kpca_np3,1) size(R_kpca_np5,1) size(R_linear,1) 10]);
-
- Total_R = [R_kpns_gauss(1:minDim) R_kpca_gauss(1:minDim) R_kpns_np3(1:minDim)  R_kpca_np3(1:minDim) R_kpns_np5(1:minDim) R_kpca_np5(1:minDim) R_linear(1:minDim)];
+Total_R = [R_kpns_gauss(1:minDim) R_kpca_gauss(1:minDim) R_kpns_np3(1:minDim)  R_kpca_np3(1:minDim) R_kpns_np5(1:minDim) R_kpca_np5(1:minDim) R_linear(1:minDim)];
 
 end
