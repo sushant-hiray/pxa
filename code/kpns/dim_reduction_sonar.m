@@ -7,5 +7,5 @@ rng(0);
 %sonar = normc(sonar');
 PGS =1;
 
-Total_R = dim_reduction_data(sonar,'sonar');
+Total_R = dim_reduction_data(sonar,'Sonar');
 Total_R
