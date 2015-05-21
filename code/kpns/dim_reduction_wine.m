@@ -7,5 +7,5 @@ rng(0);
 wine = wine'
 %wine = normc(wine');
 PGS =1;
-Total_R = dim_reduction_data(wine,'wine');
+Total_R = dim_reduction_data(wine,'Wine');
 Total_R

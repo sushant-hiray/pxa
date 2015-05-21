@@ -1,5 +1,10 @@
 %% COmments : KPNS > KPCA Guassian kernel 3-4%
 
+clc
+clear all
+close all
+rng(0)
+
 
 load('../../data/concreteslump.mat');
 concreteslump = concreteslump';
