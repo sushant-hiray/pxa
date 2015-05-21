@@ -50,6 +50,18 @@ set(gcf, 'Color', 'w');
 % set(findall(gcf,'type','text'),'fontSize',14);
 export_fig(filePath,'-nocrop', '-opengl','-png');
 
+
+% http://stackoverflow.com/questions/3546756/how-do-i-save-a-matrix-of-integers-to-a-text-file-in-matlab
+
+dlmwrite(strcat(filePath, 'QDR_KPNS_QUASS.txt'), QDR_KPNS_Gauss);
+dlmwrite(strcat(filePath, 'QDR_KPCA_Gauss.txt'), QDR_KPCA_Gauss);
+dlmwrite(strcat(filePath, 'QDR_KPNS_NPoly_3.txt'), QDR_KPNS_NPoly_3);
+dlmwrite(strcat(filePath, 'QDR_KPCA_NPoly_3.txt'), QDR_KPCA_NPoly_3);
+dlmwrite(strcat(filePath, 'QDR_KPNS_NPoly_5.txt'), QDR_KPNS_NPoly_5);
+dlmwrite(strcat(filePath, 'QDR_KPCA_NPoly_5.txt'), QDR_KPCA_NPoly_5);
+dlmwrite(strcat(filePath, 'QDR_KPCA_linear.txt'), QDR_KPCA_linear);
+
+
 minDim = min([size(R_kpns_gauss,1) size(R_kpca_gauss,1) size(R_kpns_np3,1) size(R_kpns_np5,1) size(R_kpca_np3,1) size(R_kpca_np5,1) size(R_linear,1) 10]);
 Total_R = [R_kpns_gauss(1:minDim) R_kpca_gauss(1:minDim) R_kpns_np3(1:minDim)  R_kpca_np3(1:minDim) R_kpns_np5(1:minDim) R_kpca_np5(1:minDim) R_linear(1:minDim)];
 
