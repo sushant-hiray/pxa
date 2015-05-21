@@ -1,5 +1,5 @@
-dim_reduction_iris
-dim_reduction_blood
+%dim_reduction_iris
+%dim_reduction_blood
 dim_reduction_ecoli
 dim_reduction_wine
 dim_reduction_concreteslump
