@@ -1,10 +1,12 @@
 %% COmments : KPNS > KPCA Guassian kernel 3-4%
 
+clc
+clear all
+close all
 
 load('../../data/ecoli.mat');
 ecoli = ecoli(:,2:end-1);
 rng(0);
-%ecoli = normc(ecoli');
 PGS =1;
 ecoli = ecoli';
 
