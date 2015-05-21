@@ -4,7 +4,6 @@ clc
 clear all
 close all
 rng(0)
-addpath('../../altmany-export_fig-bdf6154/')
 load('../../data/bt.mat');
 Data=bt';
 PGS =1;
