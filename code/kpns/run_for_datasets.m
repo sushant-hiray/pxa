@@ -1,0 +1,10 @@
+dim_reduction_iris
+dim_reduction_blood
+dim_reduction_ecoli
+dim_reduction_wine
+dim_reduction_concreteslump
+dim_reduction_forestfire
+dim_reduction_leaf
+dim_reduction_liver
+dim_reduction_sonar
+dim_reduction_parkinsons
