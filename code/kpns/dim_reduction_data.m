@@ -26,19 +26,20 @@ R_linear = 100*eig_val/sum(eig_val);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-plot(QDR_KPNS_Gauss(2,:),QDR_KPNS_Gauss(1,:),'r-');
+linewidth = 4;
+plot(QDR_KPNS_Gauss(2,:),QDR_KPNS_Gauss(1,:),'r-','LineWidth',linewidth);
 hold on;
-plot(QDR_KPCA_Gauss(2,:),QDR_KPCA_Gauss(1,:),'b-');
+plot(QDR_KPCA_Gauss(2,:),QDR_KPCA_Gauss(1,:),'b-','LineWidth',linewidth);
 hold on;
-plot(QDR_KPNS_NPoly_3(2,:),QDR_KPNS_NPoly_3(1,:),'y-','LineWidth',2);
+plot(QDR_KPNS_NPoly_3(2,:),QDR_KPNS_NPoly_3(1,:),'y-','LineWidth',linewidth);
 hold on;
-plot(QDR_KPCA_NPoly_3(2,:),QDR_KPCA_NPoly_3(1,:),'g-');
+plot(QDR_KPCA_NPoly_3(2,:),QDR_KPCA_NPoly_3(1,:),'g-','LineWidth',linewidth);
 hold on;
-plot(QDR_KPNS_NPoly_5(2,:),QDR_KPNS_NPoly_5(1,:),'m-');
+plot(QDR_KPNS_NPoly_5(2,:),QDR_KPNS_NPoly_5(1,:),'m-','LineWidth',linewidth);
 hold on
-plot(QDR_KPCA_NPoly_5(2,:),QDR_KPCA_NPoly_5(1,:),'c-');
+plot(QDR_KPCA_NPoly_5(2,:),QDR_KPCA_NPoly_5(1,:),'c-','LineWidth',linewidth);
 hold on
-plot(QDR_KPCA_linear(2,:),QDR_KPCA_linear(1,:),'k-');
+plot(QDR_KPCA_linear(2,:),QDR_KPCA_linear(1,:),'k-','LineWidth',linewidth);
 %%%%%%%%%%%%%%%
 filePath = strcat('../images/' , name);
 title(name,'FontSize',14);
@@ -48,7 +49,7 @@ legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly3','KPCA-NPoly3','KPNS-NPoly5','KPCA
 axis([1,size(Data,2),0,1.1]) 
 set(gcf, 'Color', 'w');
 % set(findall(gcf,'type','text'),'fontSize',14);
-export_fig(filePath,'-nocrop', '-opengl','-png');
+export_fig(filePath,'-nocrop', '-painters','-m2', '-png');
 
 
 % http://stackoverflow.com/questions/3546756/how-do-i-save-a-matrix-of-integers-to-a-text-file-in-matlab
