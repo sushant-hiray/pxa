@@ -3,7 +3,7 @@ clear all
 close all
 rng(0)
 DatabasePath='../../data/ORL/s'; % DatabasePath
-ss=10; % sample set size
+ss=200; % sample set size
 ns=1   ; % number of subjects
 
 % No ofRows = no of pixels in one images
