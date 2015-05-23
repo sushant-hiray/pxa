@@ -7,5 +7,6 @@ rng(0);
 
 PGS =1;
 iris = iris';
-Total_R = dim_reduction_data(iris,'iris');
-Total_R
+%Total_R = dim_reduction_data(iris,'iris');
+%Total_R
+A =dim_reduction_sampling(iris,'iris',1);

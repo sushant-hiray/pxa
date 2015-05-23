@@ -22,7 +22,14 @@ function QDR= estimateQualityDRKPCA(iData,KernelFeatureSpaceData,G,EigVec,Varian
     %ProjectData along all the dimensions on Mappings. Choose a threshold
     %1E-5 after which you will stop projections
     FilteredMapping = [];
-    for i=1:size(EigVec,2)
+%     for i=1:size(EigVec,2)
+%         if(Variances(i) > 1E-5)
+%             FilteredMapping = [FilteredMapping EigVec(:,i)];
+%         else
+%             break;
+%         end
+%     end
+    for i=1:noOfDims
         if(Variances(i) > 1E-5)
             FilteredMapping = [FilteredMapping EigVec(:,i)];
         else
