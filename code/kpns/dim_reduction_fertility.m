@@ -11,4 +11,4 @@ rng(0);
 % 
 % Total_R = dim_reduction_data(fertility,'Ferility');
 % Total_R
-plot_QDR(fertility,'Ferility');
+dim_reduction_sampling(fertility,'Ferility',5);
