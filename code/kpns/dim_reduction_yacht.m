@@ -7,4 +7,4 @@ rng(0);
 PGS =1;
 % Total_R = dim_reduction_data(yacht,'Yacht');
 % Total_R
-plot_QDR(yacht,'Yacht');
+dim_reduction_sampling(yacht,'Yacht',5);
