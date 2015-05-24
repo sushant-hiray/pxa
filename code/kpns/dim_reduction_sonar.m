@@ -9,4 +9,4 @@ PGS =1;
 % 
 % Total_R = dim_reduction_data(sonar,'Sonar');
 % Total_R
-plot_QDR(sonar,'Sonar');
+dim_reduction_sampling(sonar,'Sonar',5);
