@@ -9,5 +9,5 @@ PGS =1;
 % Total_R = dim_reduction_data(SPECT,'SPECT');
 % Total_R 
 % plot_QDR(SPECT,'SPECT');
-% A =dim_reduction_sampling(SPECT,'SPECT',5);
-boxplot_QDR(SPECT,'SPECT',5);
+dim_reduction_sampling(SPECT,'SPECT',5);
+% boxplot_QDR(SPECT,'SPECT',5);
