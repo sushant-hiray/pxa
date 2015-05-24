@@ -10,4 +10,4 @@ load('../../data/concreteslump.mat');
 concreteslump = concreteslump';
 % Total_R = dim_reduction_data(concreteslump,'Concrete Slump');
 % Total_R
-plot_QDR(concreteslump,'Concrete Slump');
+dim_reduction_sampling(concreteslump,'Concrete Slump',5);
