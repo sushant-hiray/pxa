@@ -13,4 +13,4 @@ rng(0);
 % Total_R = dim_reduction_data(gi,'Glass Identification');
 % Total_R
 
-plot_QDR(gi,'Glass Identification');
+dim_reduction_sampling(gi,'Glass Identification',5);
