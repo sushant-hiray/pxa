@@ -9,4 +9,4 @@ wine = wine';
 PGS =1;
 % Total_R = dim_reduction_data(wine,'Wine');
 % Total_R
-plot_QDR(wine,'Wine');
+dim_reduction_sampling(wine,'Wine',5);
