@@ -28,4 +28,4 @@ PGS =1;
 % Total_R = dim_reduction_data(Data,'USPS Dataset');
 % Total_R
 
-plot_QDR(Data,'USPS Dataset');
+dim_reduction_sampling(Data,'USPS Dataset',5);
