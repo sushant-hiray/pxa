@@ -9,4 +9,4 @@ iris = iris';
 % plot_QDR(iris,'Iris');
 %Total_R = dim_reduction_data(iris,'iris');
 %Total_R
-dim_reduction_sampling(iris,'iris',1);
+dim_reduction_sampling(iris,'iris',5);
