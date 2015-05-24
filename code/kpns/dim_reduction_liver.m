@@ -13,4 +13,4 @@ PGS =1;
 liver = liver';
 % Total_R = dim_reduction_data(liver,'ILPD (Indian Liver Patient Dataset)');
 % Total_R
-plot_QDR(liver,'ILPD (Indian Liver Patient Dataset)');
+dim_reduction_sampling(liver,'ILPD (Indian Liver Patient Dataset)',5);
