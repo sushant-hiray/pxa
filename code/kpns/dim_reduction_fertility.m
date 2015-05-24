@@ -8,6 +8,7 @@ close all
 load('../../data/fertility.mat');
 fertility = fertility';
 rng(0);
-
-Total_R = dim_reduction_data(fertility,'Ferility');
-Total_R
+% 
+% Total_R = dim_reduction_data(fertility,'Ferility');
+% Total_R
+plot_QDR(fertility,'Ferility');

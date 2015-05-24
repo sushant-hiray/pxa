@@ -9,6 +9,8 @@ close all
 load('../../data/gi.mat');
 gi = gi';
 rng(0);
+% 
+% Total_R = dim_reduction_data(gi,'Glass Identification');
+% Total_R
 
-Total_R = dim_reduction_data(gi,'Glass Identification');
-Total_R
+plot_QDR(gi,'Glass Identification');

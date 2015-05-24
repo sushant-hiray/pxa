@@ -9,5 +9,7 @@ load('../../data/pk.mat');
 Data=pk';
 PGS =1;
 
-Total_R = dim_reduction_data(Data,'Parkinsons');
-Total_R
+% Total_R = dim_reduction_data(Data,'Parkinsons');
+% Total_R
+
+plot_QDR(Data,'Parkinsons');

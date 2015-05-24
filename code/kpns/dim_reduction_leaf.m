@@ -12,5 +12,6 @@ Data = double(Data);
 
 PGS =1;
 
-Total_R = dim_reduction_data(Data,'Leaf');
-Total_R
+% Total_R = dim_reduction_data(Data,'Leaf');
+% Total_R
+plot_QDR(Data,'Leaf');

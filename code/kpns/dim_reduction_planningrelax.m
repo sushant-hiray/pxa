@@ -5,5 +5,6 @@ load('../../data/planningrelax.mat');
 planningrelax = planningrelax';
 rng(0);
 PGS =1;
-Total_R = dim_reduction_data(planningrelax,'Planning Relax');
-Total_R
+% Total_R = dim_reduction_data(planningrelax,'Planning Relax');
+% Total_R
+plot_QDR(planningrelax,'Planning Relax');

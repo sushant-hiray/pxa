@@ -8,5 +8,6 @@ rng(0)
 load('../../data/cb.mat');
 cb = cb';
 
-Total_R = dim_reduction_data(cb,'Connectionist Bench (Sonar, Mines vs. Rocks)');
-Total_R
+% Total_R = dim_reduction_data(cb,'Connectionist Bench (Sonar, Mines vs. Rocks)');
+% Total_R
+plot_QDR(cb,'Connectionist Bench (Sonar, Mines vs. Rocks)');

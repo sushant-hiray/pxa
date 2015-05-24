@@ -4,8 +4,9 @@
 load('../../data/wine.mat');
 wine = wine(1:59,:);
 rng(0);
-wine = wine'
+wine = wine';
 %wine = normc(wine');
 PGS =1;
-Total_R = dim_reduction_data(wine,'Wine');
-Total_R
+% Total_R = dim_reduction_data(wine,'Wine');
+% Total_R
+plot_QDR(wine,'Wine');

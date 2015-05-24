@@ -9,5 +9,6 @@ rng(0)
 load('../../data/cancer.mat');
 cancer = cancer';
 
-Total_R = dim_reduction_data(cancer,'Lung Cancer');
-Total_R
+% Total_R = dim_reduction_data(cancer,'Lung Cancer');
+% Total_R
+plot_QDR(cancer,'Lung Cancer');

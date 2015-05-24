@@ -5,5 +5,6 @@ load('../../data/vc.mat');
 rng(0);
 PGS =1;
 vc = vc';
-Total_R = dim_reduction_data(vc,'Vertebral Column');
-Total_R
+% Total_R = dim_reduction_data(vc,'Vertebral Column');
+% Total_R
+plot_QDR(vc,'Vertebral Column');

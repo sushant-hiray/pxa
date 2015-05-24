@@ -17,6 +17,7 @@ Data = normc(Data);
 
 
 PGS =1;
-
-Total_R = dim_reduction_data(Data,'MNIST Class 0 Dataset');
-Total_R
+% 
+% Total_R = dim_reduction_data(Data,'MNIST Class 0 Dataset');
+% Total_R
+plot_QDR(Data,'MNIST Class 0 Dataset');

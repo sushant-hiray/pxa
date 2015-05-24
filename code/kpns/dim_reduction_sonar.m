@@ -6,6 +6,7 @@ sonar = sonar(:,1:end-1);
 rng(0);
 %sonar = normc(sonar');
 PGS =1;
-
-Total_R = dim_reduction_data(sonar,'Sonar');
-Total_R
+% 
+% Total_R = dim_reduction_data(sonar,'Sonar');
+% Total_R
+plot_QDR(sonar,'Sonar');

@@ -10,5 +10,6 @@ rng(0);
 PGS =1;
 ecoli = ecoli';
 
-Total_R = dim_reduction_data(ecoli,'Ecoli');
-Total_R
+% Total_R = dim_reduction_data(ecoli,'Ecoli');
+% Total_R
+plot_QDR(ecoli,'Ecoli');
