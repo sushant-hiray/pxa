@@ -38,4 +38,4 @@ PGS =1;
 % Total_R = dim_reduction_data(Data,'ORL Face Dataset');
 % Total_R
 
-plot_QDR(Data,'ORL Face Dataset');
+dim_reduction_sampling(Data,'ORL Face Dataset',5);
