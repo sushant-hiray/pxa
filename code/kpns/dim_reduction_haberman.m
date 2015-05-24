@@ -9,4 +9,4 @@ PGS =1;
 haberman = haberman';
 % Total_R = dim_reduction_data(haberman,'haberman');
 % Total_R
-plot_QDR(haberman,'Haberman');
+dim_reduction_sampling(haberman,'Haberman',5);
