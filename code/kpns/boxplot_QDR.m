@@ -26,11 +26,11 @@ function [A] =  boxplot_QDR(Data,filename,noSamples)
     hChildren = findall(get(hLegend,'Children'), 'Type','Line');
     set(hChildren(2),'Color',Col(7,:));
     set(hChildren(4),'Color',Col(6,:));
+    set(hChildren(6),'Color',Col(5,:));
     set(hChildren(8),'Color',Col(4,:));
     set(hChildren(10),'Color',Col(3,:));
     set(hChildren(12),'Color',Col(2,:));
     set(hChildren(14),'Color',Col(1,:));
-    set(hChildren(6),'Color',Col(5,:));
     set(gcf, 'Color', 'w');
     filePath = strcat('../images/boxplot_', filename);
     export_fig(filePath,'-nocrop', '-painters','-m2', '-png');
