@@ -10,4 +10,4 @@ cb = cb';
 
 % Total_R = dim_reduction_data(cb,'Connectionist Bench (Sonar, Mines vs. Rocks)');
 % Total_R
-plot_QDR(cb,'Connectionist Bench (Sonar, Mines vs. Rocks)');
+dim_reduction_sampling(cb,'Connectionist Bench (Sonar, Mines vs. Rocks)',5);
