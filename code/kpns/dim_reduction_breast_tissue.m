@@ -10,4 +10,4 @@ PGS =1;
 
 % Total_R = dim_reduction_data(Data,'Breast Tissue');
 % Total_R
-plot_QDR(Data,'Breast Tissue');
+dim_reduction_sampling(Data,'Breast Tissue',5);
