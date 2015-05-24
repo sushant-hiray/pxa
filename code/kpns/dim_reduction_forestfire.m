@@ -10,4 +10,4 @@ Data=ff';
 PGS =1;
 % Total_R = dim_reduction_data(Data,'lForest Fire');
 % Total_R
-plot_QDR(ff,'lForest Fire');
+dim_reduction_sampling(ff,'lForest Fire',5);
