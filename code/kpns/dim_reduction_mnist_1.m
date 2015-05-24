@@ -20,4 +20,4 @@ PGS =1;
 % 
 % Total_R = dim_reduction_data(Data,'MNIST Class 1 Dataset');
 % Total_R
-plot_QDR(Data,'MNIST Class 1 Dataset');
+dim_reduction_sampling(Data,'MNIST Class 1 Dataset',5);
