@@ -11,4 +11,4 @@ cancer = cancer';
 
 % Total_R = dim_reduction_data(cancer,'Lung Cancer');
 % Total_R
-plot_QDR(cancer,'Lung Cancer');
+dim_reduction_sampling(cancer,'Lung Cancer',5);
