@@ -25,42 +25,42 @@ options.KernelType='Linear';
 R_linear = 100*eig_val/sum(eig_val);
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-linewidth = 4;
-plot(QDR_KPNS_Gauss(2,:),QDR_KPNS_Gauss(1,:),'r-','LineWidth',linewidth);
-hold on;
-plot(QDR_KPCA_Gauss(2,:),QDR_KPCA_Gauss(1,:),'b-','LineWidth',linewidth);
-hold on;
-plot(QDR_KPNS_NPoly_3(2,:),QDR_KPNS_NPoly_3(1,:),'y-','LineWidth',linewidth);
-hold on;
-plot(QDR_KPCA_NPoly_3(2,:),QDR_KPCA_NPoly_3(1,:),'g-','LineWidth',linewidth);
-hold on;
-plot(QDR_KPNS_NPoly_5(2,:),QDR_KPNS_NPoly_5(1,:),'m-','LineWidth',linewidth);
-hold on
-plot(QDR_KPCA_NPoly_5(2,:),QDR_KPCA_NPoly_5(1,:),'c-','LineWidth',linewidth);
-hold on
-plot(QDR_KPCA_linear(2,:),QDR_KPCA_linear(1,:),'k-','LineWidth',linewidth);
-%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%
+% linewidth = 4;
+% plot(QDR_KPNS_Gauss(2,:),QDR_KPNS_Gauss(1,:),'r-','LineWidth',linewidth);
+% hold on;
+% plot(QDR_KPCA_Gauss(2,:),QDR_KPCA_Gauss(1,:),'b-','LineWidth',linewidth);
+% hold on;
+% plot(QDR_KPNS_NPoly_3(2,:),QDR_KPNS_NPoly_3(1,:),'y-','LineWidth',linewidth);
+% hold on;
+% plot(QDR_KPCA_NPoly_3(2,:),QDR_KPCA_NPoly_3(1,:),'g-','LineWidth',linewidth);
+% hold on;
+% plot(QDR_KPNS_NPoly_5(2,:),QDR_KPNS_NPoly_5(1,:),'m-','LineWidth',linewidth);
+% hold on
+% plot(QDR_KPCA_NPoly_5(2,:),QDR_KPCA_NPoly_5(1,:),'c-','LineWidth',linewidth);
+% hold on
+% plot(QDR_KPCA_linear(2,:),QDR_KPCA_linear(1,:),'k-','LineWidth',linewidth);
+% %%%%%%%%%%%%%%%
 filePath = strcat('../images/' , name);
-title(name,'FontSize',14);
-xlabel('k-Neighbourhood','FontSize',14);
-ylabel('Quality of DR','FontSize',14);
-legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly3','KPCA-NPoly3','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast')
-axis([1,size(Data,2),0,1.1]) 
-set(gcf, 'Color', 'w');
-% set(findall(gcf,'type','text'),'fontSize',14);
-export_fig(filePath,'-nocrop', '-painters','-m2', '-png');
+% title(name,'FontSize',14);
+% xlabel('k-Neighbourhood','FontSize',14);
+% ylabel('Quality of DR','FontSize',14);
+% legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly3','KPCA-NPoly3','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast')
+% axis([1,size(Data,2),0,1.1]) 
+% set(gcf, 'Color', 'w');
+% % set(findall(gcf,'type','text'),'fontSize',14);
+% export_fig(filePath,'-nocrop', '-painters','-m2', '-png');
 
 
 % http://stackoverflow.com/questions/3546756/how-do-i-save-a-matrix-of-integers-to-a-text-file-in-matlab
 
-dlmwrite(strcat(filePath, 'QDR_KPNS_QUASS.txt'), QDR_KPNS_Gauss);
-dlmwrite(strcat(filePath, 'QDR_KPCA_Gauss.txt'), QDR_KPCA_Gauss);
-dlmwrite(strcat(filePath, 'QDR_KPNS_NPoly_3.txt'), QDR_KPNS_NPoly_3);
-dlmwrite(strcat(filePath, 'QDR_KPCA_NPoly_3.txt'), QDR_KPCA_NPoly_3);
-dlmwrite(strcat(filePath, 'QDR_KPNS_NPoly_5.txt'), QDR_KPNS_NPoly_5);
-dlmwrite(strcat(filePath, 'QDR_KPCA_NPoly_5.txt'), QDR_KPCA_NPoly_5);
-dlmwrite(strcat(filePath, 'QDR_KPCA_linear.txt'), QDR_KPCA_linear);
+dlmwrite(strcat(filePath, 'QDR_KPNS_QUASS.txt'), QDR_KPNS_Gauss(1,:));
+dlmwrite(strcat(filePath, 'QDR_KPCA_Gauss.txt'), QDR_KPCA_Gauss(1,:));
+dlmwrite(strcat(filePath, 'QDR_KPNS_NPoly_3.txt'), QDR_KPNS_NPoly_3(1,:));
+dlmwrite(strcat(filePath, 'QDR_KPCA_NPoly_3.txt'), QDR_KPCA_NPoly_3(1,:));
+dlmwrite(strcat(filePath, 'QDR_KPNS_NPoly_5.txt'), QDR_KPNS_NPoly_5(1,:));
+dlmwrite(strcat(filePath, 'QDR_KPCA_NPoly_5.txt'), QDR_KPCA_NPoly_5(1,:));
+dlmwrite(strcat(filePath, 'QDR_KPCA_linear.txt'), QDR_KPCA_linear(1,:));
 
 
 minDim = min([size(R_kpns_gauss,1) size(R_kpca_gauss,1) size(R_kpns_np3,1) size(R_kpns_np5,1) size(R_kpca_np3,1) size(R_kpca_np5,1) size(R_linear,1) 10]);

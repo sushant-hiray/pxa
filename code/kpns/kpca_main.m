@@ -71,7 +71,7 @@ eig_val;
 eigvec = eigvec(:,index);
 %eigvec = eigvec(:,1:4);
 R = (eig_val*100)/sum(eig_val);
-QDR= estimateQualityDRKPCA(data_in,eye(size(data_in,2),size(data_in,2)),G,eigvec,R,10);
+QDR= estimateQualityDRKPCA(data_in,eye(size(data_in,2),size(data_in,2)),G,eigvec,R,2);
 num_points = 1: size(data_in,2);
 QDR = [QDR;num_points];
 %% Projecting the data in lower dimensions

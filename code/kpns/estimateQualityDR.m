@@ -22,13 +22,21 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
     %ProjectData along all the dimensions on Mappings. Choose a threshold
     %1E-5 after which you will stop projections
     FilteredMapping = [];
-    for i=1:size(Mapping)
+%     for i=1:size(Mapping)
+%         if(Variances(i) > 1E-5)
+%             FilteredMapping = [FilteredMapping Mapping(i)];
+%         else
+%             break;
+%         end
+%     end
+    for i=1:noOfDims
         if(Variances(i) > 1E-5)
             FilteredMapping = [FilteredMapping Mapping(i)];
         else
             break;
         end
     end
+
     ProjectedData = kernel_applyMappings(KernelFeatureSpaceData,FilteredMapping,G);
     for i=1:N
         for j=1:i

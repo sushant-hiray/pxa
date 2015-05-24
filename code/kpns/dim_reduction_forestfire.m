@@ -8,6 +8,6 @@ rng(0)
 load('../../data/ff.mat');
 Data=ff';
 PGS =1;
-Total_R = dim_reduction_data(ff,'lForest Fire');
-Total_R
+% Total_R = dim_reduction_data(Data,'lForest Fire');
+% Total_R
 plot_QDR(ff,'lForest Fire');

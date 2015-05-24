@@ -106,9 +106,9 @@ for col = 1:size(eigvec,2)
 end
 eig_val;
 [~, index] = sort(eig_val,'descend');
-eigvec = eigvec(:,index(1:4));
+eigvec = eigvec(:,index);
 %eigvec = eigvec(:,1:4);
-
+QDR= estimateQualityDRKPCA(Data,eye(num_points,num_points),G,eigvec,R,10);
 %% Projecting the data in lower dimensions
 % for now, num_dim = dimension of init data
 num_dim = size(data_in,1);
