@@ -7,4 +7,4 @@ PGS =1;
 vc = vc';
 % Total_R = dim_reduction_data(vc,'Vertebral Column');
 % Total_R
-plot_QDR(vc,'Vertebral Column');
+dim_reduction_sampling(vc,'Vertebral Column',5);

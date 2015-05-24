@@ -41,4 +41,4 @@ Data = normc(Data);
 PGS =1;
 % Total_R = dim_reduction_data(Data,'Yale Image for one class');
 % Total_R
-plot_QDR(Data,'Yale Image for one class');
+dim_reduction_sampling(Data,'Yale Image for one class',5);
