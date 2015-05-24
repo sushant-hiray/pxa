@@ -12,4 +12,4 @@ ecoli = ecoli';
 
 % Total_R = dim_reduction_data(ecoli,'Ecoli');
 % Total_R
-plot_QDR(ecoli,'Ecoli');
+dim_reduction_sampling(ecoli,'Ecoli',5);
