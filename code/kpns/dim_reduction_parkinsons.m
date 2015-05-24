@@ -12,4 +12,4 @@ PGS =1;
 % Total_R = dim_reduction_data(Data,'Parkinsons');
 % Total_R
 
-plot_QDR(Data,'Parkinsons');
+dim_reduction_sampling(Data,'Parkinsons',5);
