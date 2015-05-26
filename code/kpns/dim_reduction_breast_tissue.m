@@ -8,6 +8,6 @@ load('../../data/bt.mat');
 Data=bt';
 PGS =1;
 
-% Total_R = dim_reduction_data(Data,'Breast Tissue');
-% Total_R
-plot_QDR(Data,'Breast Tissue');
+Total_R = dim_reduction_data(Data,'Breast Tissue',1);
+Total_R
+%plot_QDR(Data,'Breast Tissue');

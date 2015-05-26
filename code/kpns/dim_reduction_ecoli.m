@@ -10,5 +10,5 @@ rng(0);
 PGS =1;
 ecoli = ecoli';
 
-Total_R = dim_reduction_data(ecoli,'Ecoli');
+Total_R = dim_reduction_data(ecoli,'Ecoli',1);
 Total_R

@@ -8,5 +8,5 @@ addpath('../../altmany-export_fig-bdf6154/')
 %sonar = normc(sonar');
 PGS =1;
 haberman = haberman';
-Total_R = dim_reduction_data(haberman,'haberman');
+Total_R = dim_reduction_data(haberman,'haberman',1);
 Total_R

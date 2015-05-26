@@ -1,4 +1,5 @@
 function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances,noOfDims)
+    global criteria;
     % iData: The data in input feature space
     % kernelFeatureSpaceData: The Data in Kerenl Feature 
     % G = Gram Matrix
@@ -29,15 +30,29 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
 %             break;
 %         end
 %     end
-    for i=1:noOfDims
-        if(Variances(i) > 1E-5)
-            FilteredMapping = [FilteredMapping Mapping(i)];
-        else
-            break;
+
+    if(criteria ==1)
+        finalDim = noOfDims;
+        
+    else
+        totalVar = 0;
+        finalDim = 1;
+        for i=1:size(Mapping,2)
+           if(totalVar > 95)
+                break;
+           end
+           totalVar = totalVar + Variances(i);
+           finalDim = finalDim+1;
         end
     end
-
+    
+    for i = 1:(size(Mapping,2) - finalDim)
+        FilteredMapping = [FilteredMapping Mapping(i)];
+    end    
+           
+    
     ProjectedData = kernel_applyMappings(KernelFeatureSpaceData,FilteredMapping,G);
+    
     for i=1:N
         for j=1:i
             temp = ProjectedData(:,i) - ProjectedData(:,j);
@@ -47,8 +62,7 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
     rhoMatrix = max(rhoMatrix,rhoMatrix');
     
     for i =1:N
-        [X,Y] = sort(dMatrix(i,:));
-     
+        [X,Y] = sort(dMatrix(i,:));    
         for j=1:N
             etaMatrix(i,Y(j)) = j;
         end
