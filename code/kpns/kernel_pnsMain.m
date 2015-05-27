@@ -34,7 +34,7 @@ function [Mapping,BkGm,R,Res,QDR] = kernel_pnsMain(Data, debugMode,mode,options)
     'computing kernel Karcher mean'
 	gm = kernel_karcher_mean(G,KData);
 	CurrentMapping.v = gm;
-	CurrentMapping.r = pi/2;
+	CurrentMapping.r = pi/2
 	Mapping = [Mapping CurrentMapping];
 	BkGm = gm;
     res = kernel_residualGM(G,KData,gm);
@@ -43,6 +43,6 @@ function [Mapping,BkGm,R,Res,QDR] = kernel_pnsMain(Data, debugMode,mode,options)
     %Modes = modesofVariation(Data,Mapping);
     R  = sum(Res.^2,2);
     R = R*100/sum(R);
-    QDR= estimateQualityDR(Data,eye(num_points,num_points),G,Mapping(1:end-1),R,2);
+    QDR= estimateQualityDR(Data,eye(num_points,num_points),G,Mapping(1:end-1),R,options.maxDims);
     QDR = [QDR;1:num_points];
 end

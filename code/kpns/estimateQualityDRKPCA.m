@@ -1,4 +1,5 @@
 function QDR= estimateQualityDRKPCA(iData,KernelFeatureSpaceData,G,EigVec,Variances,noOfDims)
+    global criteria
     % iData: The data in input feature space
     % kernelFeatureSpaceData: The Data in Kerenl Feature 
     % G = Gram Matrix
@@ -14,7 +15,7 @@ function QDR= estimateQualityDRKPCA(iData,KernelFeatureSpaceData,G,EigVec,Varian
     %Fill in dMatrix
     for i=1:N
         for j=1:i
-            temp = iData(:,i) -iData(:,j);
+            temp = iData(:,i) -iData(:,j);  
             dMatrix(i,j) = sqrt(temp'*temp);
         end
     end
@@ -29,15 +30,31 @@ function QDR= estimateQualityDRKPCA(iData,KernelFeatureSpaceData,G,EigVec,Varian
 %             break;
 %         end
 %     end
-    for i=1:noOfDims
-        if(Variances(i) > 1E-5)
-            FilteredMapping = [FilteredMapping EigVec(:,i)];
-        else
-            break;
+%     for i=1:noOfDims
+%         if(Variances(i) > 1E-5)
+%             FilteredMapping = [FilteredMapping EigVec(:,i)];
+%         else
+%             break;
+%         end
+%     end
+    
+   if(criteria ==1)
+        for i=1:noOfDims
+             FilteredMapping = [FilteredMapping EigVec(:,i)];
+        end
+    else
+        totalVar = 0;
+        for i=1:size(EigVec,2)
+           if(totalVar > 95)
+                break;
+           end
+           FilteredMapping = [FilteredMapping EigVec(:,i)];
+           totalVar = totalVar + Variances(i);
         end
     end
     
-    ProjectedData = kernel_applyMappingsKPCA(KernelFeatureSpaceData,FilteredMapping,G);
+    
+    ProjectedData = kernel_applyMappingsKPCA(KernelFeatureSpaceData,FilteredMapping,G,iData);
     for i=1:N
         for j=1:i
             temp = ProjectedData(:,i) - ProjectedData(:,j);

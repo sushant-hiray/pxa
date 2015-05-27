@@ -4,6 +4,7 @@ function [grad] = kernel_grad_function(G,KData,vdagger)
     num_feat = size(KData,1);
     vRep = vdagger(:,ones(1,num_points));
     
+    
     E = KData -vRep;
     normE = E'*G*E;
     normE = diag(normE);
@@ -13,6 +14,7 @@ function [grad] = kernel_grad_function(G,KData,vdagger)
     errorRep = error(ones(num_feat,1),:);
     normERep = normE(ones(num_feat,1),:);
     
-    grad = -2*E.*errorRep./normERep;
+    grad  = -2*(G*E).*errorRep./normERep;
+    grad1 = -2*(  E).*errorRep./normERep;
     grad = sum(grad,2);
 end
