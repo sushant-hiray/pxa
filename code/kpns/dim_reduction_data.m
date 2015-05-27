@@ -48,7 +48,7 @@ title(name,'FontSize',14);
 xlabel('k-Neighbourhood','FontSize',14);
 ylabel('Quality of DR','FontSize',14);
 legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly3','KPCA-NPoly3','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast')
-axis([1,size(Data,2),0,1.1]) 
+axis([1,size(Data,2),0,1.1])
 set(gcf, 'Color', 'w');
 % set(findall(gcf,'type','text'),'fontSize',14);
 export_fig(filePath,'-nocrop', '-painters','-m2', '-png');

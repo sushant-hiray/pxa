@@ -1,7 +1,7 @@
-function [] =  dim_reduction_sampling(Data,filename,noSamples)
+function [] =  dim_reduction_sampling(Data,filename,noSamples,maxDims)
     NoGraphs = 7;
     TotalPoints = size(Data,2);
-    maxDims = size(Data,1)
+    
     for i=1:noSamples
         tempFileName = strcat(filename , int2str(i));
         DataSampled = datasample(Data,ceil(0.8*TotalPoints),2);

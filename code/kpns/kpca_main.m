@@ -1,4 +1,4 @@
-function [ eigvec, eig_val, QDR ] = kpca_main(data_in, options)
+function [ eigvec, eig_val, QDR,G ] = kpca_main(data_in, options)
 %
 % This function does principal component analysis (non-linear) on the given
 % data set using the Kernel trick
