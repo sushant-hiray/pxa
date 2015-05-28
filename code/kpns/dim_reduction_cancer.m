@@ -9,6 +9,5 @@ rng(0)
 load('../../data/cancer.mat');
 cancer = cancer';
 
-% Total_R = dim_reduction_data(cancer,'Lung Cancer');
-% Total_R
-dim_reduction_sampling(cancer,'Lung Cancer',5);
+Total_R = dim_reduction_data2(cancer,'Lung Cancer',1);
+Total_R

@@ -1,4 +1,4 @@
-function [ eigvec, eig_val, QDR ] = kpca_main(data_in, options)
+function [ eigvec, eig_val, QDR,G ] = kpca_main(data_in, options)
 %
 % This function does principal component analysis (non-linear) on the given
 % data set using the Kernel trick
@@ -71,7 +71,7 @@ eig_val;
 eigvec = eigvec(:,index);
 %eigvec = eigvec(:,1:4);
 R = (eig_val*100)/sum(eig_val);
-QDR= estimateQualityDRKPCA(data_in,eye(size(data_in,2),size(data_in,2)),G,eigvec,R,2);
+QDR= estimateQualityDRKPCA(data_in,eye(size(data_in,2),size(data_in,2)),G,eigvec,R,options.maxDims);
 num_points = 1: size(data_in,2);
 QDR = [QDR;num_points];
 %% Projecting the data in lower dimensions

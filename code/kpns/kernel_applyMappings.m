@@ -1,5 +1,5 @@
 function [PData]  = kernel_applyMappings(KData,Mapping,G)
-    noOfProjections= size(Mapping);
+    noOfProjections= size(Mapping,2);
     PData = KData;
     for i =1:noOfProjections
         v0 = Mapping(i).v;

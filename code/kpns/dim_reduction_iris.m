@@ -6,7 +6,8 @@ rng(0);
 
 PGS =1;
 iris = iris';
+
 % plot_QDR(iris,'Iris');
-%Total_R = dim_reduction_data(iris,'iris');
-%Total_R
-dim_reduction_sampling(iris,'Iris',5);
+Total_R = dim_reduction_data2(iris,'iris',4);
+Total_R
+%dim_reduction_sampling(iris,'Iris',5,2);
