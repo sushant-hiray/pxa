@@ -23,7 +23,7 @@ function [Mapping,BkGm,R,Res,QDR,G] = kernel_pnsMain(Data, debugMode,mode,option
         res = kernel_residual_vec(G,KData,v,r);
         Res = [res;Res];
         Mapping = [Mapping CurrentMapping];
-		fprintf('Error at Dim  %d is %f',data_dim,residual(KData,CurrentMapping.v,CurrentMapping.r));
+		fprintf('Error at Dim  %d is %f\n',leftDims,residual(KData,CurrentMapping.v,CurrentMapping.r));
         %Residual = [Residual residual(X,CurrentMapping.v,CurrentMapping.r)];
         %Update the Data dimensionality and rotate the data.
 		KData = kernel_projectData(G,KData,CurrentMapping);

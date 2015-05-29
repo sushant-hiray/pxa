@@ -10,6 +10,6 @@ rng(0);
 PGS =1;
 ecoli = ecoli';
 
-% Total_R = dim_reduction_data(ecoli,'Ecoli');
+Total_R = dim_reduction_data2(ecoli,'Ecoli',2,1);
 % Total_R
-dim_reduction_sampling(ecoli,'Ecoli',5);
+%dim_reduction_sampling(ecoli,'Ecoli',5);

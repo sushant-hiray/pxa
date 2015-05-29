@@ -18,9 +18,9 @@ prev_mean(2) = prev_mean(2) + delta;
 prev_mean = prev_mean/kernel_norm(G,prev_mean);
 meanChange = mean-prev_mean; % difference in mean
 %'mean size is'
-size(mean)
+size(mean);
 %'G size is '
-size(G)
+size(G);
 i=0;
 data_dim = size(KData,1);
 while(kernel_norm(G, meanChange) > threshold)
@@ -32,10 +32,10 @@ while(kernel_norm(G, meanChange) > threshold)
 %    'computing new mean'
     mean = kernel_exp_map(G, mean, step_size*(-gradient));
 %    'just after kernal exp map'
-    size(mean)
+    size(mean);
     mean = mean/kernel_norm(G, mean);
 %   'after computing norm'
-    size(mean)
+    size(mean);
 %    'computing mean change'
     meanChange = kernel_log_map(G, prev_mean, mean)/2*pi;
     prev_mean = mean;

@@ -22,7 +22,7 @@ function [center, r,leftDims] = Kernel_findSphere(G,KData,prevMapping,singular_v
     [~, index] = sort(eigval,'descend');
     %Remove the eigenVector that has zero variance (zero eig_val ) Threshold = 1E-10;
     id  = find(eigval > 1E-10);
-    id
+   
 %    V = eigvec(:,id(size(id,1) -singular_value));
     V = eigvec(:,id(size(id,1)));
    

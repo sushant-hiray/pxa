@@ -10,6 +10,6 @@ CNAE9 = CNAE9(:,2:end);
 rng(0);
 CNAE9 = normc(CNAE9');
 
-Total_R = dim_reduction_data(CNAE9,'CNAE-9');
+Total_R = dim_reduction_data2(CNAE9,'CNAE-9',1,0);
 Total_R
-plot_QDR(CNAE9,'CNAE-9');
+%plot_QDR(CNAE9,'CNAE-9');

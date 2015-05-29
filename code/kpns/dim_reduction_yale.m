@@ -1,6 +1,4 @@
 clc
-clear all
-close all
 rng(0)
 DatabasePath='../../data/CroppedYale/yaleB'; % DatabasePath
 ss=10; % sample set size
@@ -39,6 +37,6 @@ Data = normc(Data);
 
 
 PGS =1;
-% Total_R = dim_reduction_data(Data,'Yale Image for one class');
-% Total_R
-dim_reduction_sampling(Data,'Yale Image for one class',5);
+Total_R = dim_reduction_data2(Data,'Yale Image for one class',0,1);
+Total_R
+%dim_reduction_sampling(Data,'Yale Image for one class',5);

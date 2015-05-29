@@ -8,5 +8,5 @@ rng(0)
 
 load('../../data/breastwiscosin.mat');
 breastwiscosin = breastwiscosin';
-Total_R = dim_reduction_data(breastwiscosin,'Breast Cancer Wiscosin (Original)');
-dim_reduction_sampling(breastwiscosin,'Breast Cancer Wiscosin (Original)',5);
+Total_R = dim_reduction_data2(breastwiscosin,'Breast Cancer Wiscosin (Original)',1,0);
+%dim_reduction_sampling(breastwiscosin,'Breast Cancer Wiscosin (Original)',5);

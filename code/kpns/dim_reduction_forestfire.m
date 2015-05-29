@@ -8,6 +8,6 @@ rng(0)
 load('../../data/ff.mat');
 Data=ff';
 PGS =1;
-% Total_R = dim_reduction_data(Data,'lForest Fire');
+Total_R = dim_reduction_data2(Data,'lForest Fire',1,1);
 % Total_R
-dim_reduction_sampling(ff,'lForest Fire',5);
+%dim_reduction_sampling(ff,'lForest Fire',5);

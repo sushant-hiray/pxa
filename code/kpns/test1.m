@@ -1,4 +1,4 @@
-%% This test generates data using the VonMissFischer Distribution and tries
+n%% This test generates data using the VonMissFischer Distribution and tries
 %  to compute modes of variations and geodesic mean. 
 rng(0)
 Data = randvonMisesFisherm(3,200, 100, [0 0 1])

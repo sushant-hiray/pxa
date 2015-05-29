@@ -6,8 +6,8 @@ close all
 
 
 load('../../data/fertility.mat');
-fertilityDiagnosis = fertilityDiagnosis';
+fertility = fertility';
 rng(0);
 
-Total_R = dim_reduction_data(fertilityDiagnosis,'Ferility',1);
+Total_R = dim_reduction_data2(fertility,'Ferility',1,0);
 Total_R

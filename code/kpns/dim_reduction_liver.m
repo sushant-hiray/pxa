@@ -11,6 +11,6 @@ load('../../data/liver.mat');
 %transfusion = normc(transfusion');
 PGS =1;
 liver = liver';
-% Total_R = dim_reduction_data(liver,'ILPD (Indian Liver Patient Dataset)');
+Total_R = dim_reduction_data2(liver,'ILPD (Indian Liver Patient Dataset)',1,1);
 % Total_R
-dim_reduction_sampling(liver,'ILPD (Indian Liver Patient Dataset)',5);
+%dim_reduction_sampling(liver,'ILPD (Indian Liver Patient Dataset)',5);

@@ -17,7 +17,7 @@ function [v] = kernel_optimization_find_v(G,KDataS,v0,prevMapping,Data)
     stepSize = 0.1;
     MAX_ITER =100;
     curr_iter =0;
-    fprintf('objective function values');
+    %fprintf('objective function values');
     %KData = Data in tangent feature space.
    while(abs(prevResOuter - currResOuter)/abs(prevResOuter) > threshold)
         run_atleast_once = true;
@@ -37,7 +37,7 @@ function [v] = kernel_optimization_find_v(G,KDataS,v0,prevMapping,Data)
               stepSize = stepSize/2;
           end
           curr_iter = curr_iter+1;
-          currRes
+          currRes;
           run_atleast_once = false;
         end
         currVD = currVD - ((currVD'*G*v0)/(v0'*G*v0))*v0;
@@ -51,5 +51,5 @@ function [v] = kernel_optimization_find_v(G,KDataS,v0,prevMapping,Data)
     % update v0 o
     
    
-    fprintf('iterations : %d  & stepsize %f',curr_iter,stepSize);
+    %fprintf('iterations : %d  & stepsize %f',curr_iter,stepSize);
 end

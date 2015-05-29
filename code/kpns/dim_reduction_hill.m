@@ -6,8 +6,8 @@ close all
 rng(0)
 
 load('../../data/HillValley.mat');
-HillValleywithnoiseTraining = HillValleywithnoiseTraining'
+HillValleywithnoiseTraining = HillValleywithnoiseTraining';
 
-% Total_R = dim_reduction_data(HillValleywithnoiseTraining,'Hill Valley');
-% Total_R
-dim_reduction_sampling(HillValleywithnoiseTraining,'Hill Valley',5);
+Total_R = dim_reduction_data2(HillValleywithnoiseTraining,'Hill Valley',1,1);
+Total_R
+%dim_reduction_sampling(HillValleywithnoiseTraining,'Hill Valley',5);

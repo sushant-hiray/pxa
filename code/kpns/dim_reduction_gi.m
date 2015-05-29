@@ -10,7 +10,7 @@ load('../../data/gi.mat');
 gi = gi';
 rng(0);
 % 
-% Total_R = dim_reduction_data(gi,'Glass Identification');
-% Total_R
+Total_R = dim_reduction_data2(gi,'Glass Identification',1,1);
+Total_R
 
-dim_reduction_sampling(gi,'Glass Identification',5);
+%dim_reduction_sampling(gi,'Glass Identification',5);
