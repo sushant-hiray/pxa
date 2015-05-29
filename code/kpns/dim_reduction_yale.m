@@ -37,6 +37,6 @@ Data = normc(Data);
 
 
 PGS =1;
-Total_R = dim_reduction_data2(Data,'Yale Image for one class',0,1);
+Total_R = dim_reduction_data2(Data,'Yale Image for one class',0,0);
 Total_R
 %dim_reduction_sampling(Data,'Yale Image for one class',5);

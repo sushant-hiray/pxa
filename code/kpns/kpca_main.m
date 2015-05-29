@@ -45,7 +45,7 @@ clear K;
 X_mean = mean(data_in,2);
 X_shift = data_in -X_mean(:,ones(1,size(data_in,2)));
 %% Find the mininum value in kcenter and then add 1/100 of it to the diagonal
-K_center = K_center + 0.01*eye(size(K_center));
+K_center = K_center + 1E-3*min(abs(K_center(:)))*eye(size(K_center));
 size(K_center);
 
 

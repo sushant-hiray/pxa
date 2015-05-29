@@ -20,5 +20,5 @@ dim_reduction_concreteslump
 dim_reduction_cb
 dim_reduction_cancer
 dim_reduction_breast_tissue
-dim_reduction_blood
-dim_reduction_ecoli
+%dim_reduction_blood
+%dim_reduction_ecoli

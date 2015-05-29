@@ -1,16 +1,18 @@
 function [Total_R] = dim_reduction_data2(Data,name,maxDims,loadData)
 PGS =1;
+loadData = 0;
 global QRcriteria;
-QRcriteria = 0; 
+QRcriteria = 1; 
 close all;
-maxDims =2;
+QRmaxDims =4;
 filePath = strcat('../images/' , name);
+percentage = 80;
 if(loadData==0) 
     mkdir(filePath)
     filePath = strcat(strcat(filePath,'/'), name);
     options.KernelType='Gaussian';
     options.degree=3;
-    options.maxDims =maxDims;
+    options.maxDims =QRmaxDims;
 
     [Mapping_KPNS_Gauss,BkGm,R_kpns_gauss,Res,QDR_KPNS_Gauss,G_KPNS_Gauss] = kernel_pnsMain(Data,1,PGS,options);
 
@@ -39,11 +41,12 @@ end
 dim95 = zeros(1,5);
 minDim = min([size(R_kpns_gauss,1) size(R_kpca_gauss,1) size(R_kpns_np5,1) size(R_kpca_np5,1) size(R_linear,1) 10]);
 Total_R = [R_kpns_gauss(1:minDim) R_kpca_gauss(1:minDim) R_kpns_np5(1:minDim) R_kpca_np5(1:minDim) R_linear(1:minDim)];
+
 if(QRcriteria==1)
     for i=1:5
         totalVar =0;
-        while((totalVar <= 95 ) )
-            if(dim95(i)<size(Total_R(:,i)))
+        while((totalVar <= percentage ) )
+            if(dim95(i)<size(Total_R(:,i),1))
                 dim95(i) = dim95(i) + 1;
                 totalVar = totalVar + Total_R(dim95(i),i);
             else
@@ -55,8 +58,10 @@ end
 
 if(QRcriteria ==1)
     options.maxDims = min(dim95);
+    '95% dim'
+    options.maxDims
 else
-    options.maxDims = maxDims;
+    options.maxDims = QRmaxDims;
 end
 
 QDR_KPNS_Gauss  = estimateQualityDR    (Data,eye(size(Data,2)),G_KPNS_Gauss,Mapping_KPNS_Gauss,R_kpns_gauss,options.maxDims);
@@ -78,12 +83,16 @@ hold on
 plot(xAxis,QDR_KPCA_NPoly_5(1,:),'c-','LineWidth',linewidth);
 hold on
 plot(xAxis,QDR_KPCA_linear(1,:),'k-','LineWidth',linewidth);
+
 %%%%%%%%%%%%%%%
-imagePath = strcat(filePath,strcat('_',strcat(int2str(QRcriteria),strcat('_',int2str(maxDims)))));
+imagePath = strcat(filePath,strcat('_',strcat(int2str(QRcriteria),strcat('_',int2str(options.maxDims)))));
+if(QRcriteria ==1)
+    imagePath = strcat(imagePath,strcat('_',int2str(percentage)));
+end
 title(name,'FontSize',14);
 xlabel('k-Neighbourhood','FontSize',14);
 ylabel('Quality of DR','FontSize',14);
-legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast')
+legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA','PNS','Location', 'southeast')
 axis([1,size(Data,2),0,1.1])
 set(gcf, 'Color', 'w');
 % set(findall(gcf,'type','text'),'fontSize',14);

@@ -37,22 +37,11 @@ function QDR= estimateQualityDRKPCA(iData,KernelFeatureSpaceData,G,EigVec,Varian
 %             break;
 %         end
 %     end
-    
-   if(criteria ==1)
-        for i=1:noOfDims
-             FilteredMapping = [FilteredMapping EigVec(:,i)];
-        end
-    else
-        totalVar = 0;
-        for i=1:size(EigVec,2)
-           if(totalVar > 95)
-                break;
-           end
-           FilteredMapping = [FilteredMapping EigVec(:,i)];
-           totalVar = totalVar + Variances(i);
-        end
+   
+    for i=1:noOfDims
+         FilteredMapping = [FilteredMapping EigVec(:,i)];
     end
-    
+
     
     ProjectedData = kernel_applyMappingsKPCA(KernelFeatureSpaceData,FilteredMapping,G,iData);
     for i=1:N

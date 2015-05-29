@@ -31,21 +31,8 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
 %         end
 %     end
 
-    if(criteria ==1)
-        finalDim = noOfDims;
-    else
-        totalVar = 0;
-        finalDim = 1;
-        for i=1:size(Mapping,2)
-           if(totalVar > 95)
-                break;
-           end
-           totalVar = totalVar + Variances(i);
-           finalDim = finalDim+1;
-        end
-    end
-    
-    for i = 1:(size(Mapping,2) - finalDim-1)
+    finalDim = noOfDims;
+    for i = 1:(size(Mapping,2) - finalDim)
         FilteredMapping = [FilteredMapping Mapping(i)];
     end    
            
