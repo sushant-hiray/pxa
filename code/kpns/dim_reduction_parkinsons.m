@@ -13,3 +13,4 @@ Total_R = dim_reduction_data2(Data,'Parkinsons',1,1);
 Total_R
 
 %dim_reduction_sampling(Data,'Parkinsons',5);
+new_boxplot(Data,'Parkinsons',5);
