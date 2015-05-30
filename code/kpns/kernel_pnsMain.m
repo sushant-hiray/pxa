@@ -27,7 +27,7 @@ function [Mapping,BkGm,R,Res,QDR,G] = kernel_pnsMain(Data, debugMode,mode,option
 		fprintf('Error at Dim  %d is %f\n',leftDims,residual(KData,CurrentMapping.v,CurrentMapping.r));
         %Residual = [Residual residual(X,CurrentMapping.v,CurrentMapping.r)];
         %Update the Data dimensionality and rotate the data.
-		KData = kernel_projectData(G,KData,CurrentMapping,Data,Mapping)
+		KData = kernel_projectData(G,KData,CurrentMapping,Data,Mapping);
 	    %assert(abs(norm(K(:,1)) -1) <1E-4, 'norm not 1'); 
         kernel_dim = kernel_dim + 1;
     end
@@ -63,6 +63,6 @@ function [Mapping,BkGm,R,Res,QDR,G] = kernel_pnsMain(Data, debugMode,mode,option
     A = Vecs'*G*Vecs;
     A = A -eye(size(A));
     max(abs(A(:)))
-    %assert(max(abs(A(:))) < 1E-4, 'Mappings are not perp');
+    assert(max(abs(A(:))) < 1E-4, 'Mappings are not perp');
     
 end

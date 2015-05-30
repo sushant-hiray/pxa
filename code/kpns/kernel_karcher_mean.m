@@ -25,9 +25,9 @@ kmean = kmean - sum(Vecs.*dotPsRep,2);
 kmean = kmean / sqrt(kmean'*G*kmean);
 
 while (1)
-'---------------------------------------------------------------'
+%'---------------------------------------------------------------'
     tangentSpace_data = kernel_log_map(G, KData, kmean);
-    objOld = mean(diag(tangentSpace_data'*G*tangentSpace_data))
+    objOld = mean(diag(tangentSpace_data'*G*tangentSpace_data));
     
     gradient = mean (tangentSpace_data, 2);
     
@@ -40,16 +40,15 @@ while (1)
     
     % relative change
     tangentSpace_data = kernel_log_map(G, KData, kmean);
-    objNew = mean(diag(tangentSpace_data'*G*tangentSpace_data))
+    objNew = mean(diag(tangentSpace_data'*G*tangentSpace_data));
     
     if (abs (objNew - objOld) / objOld < 1e-6)
        break
     end
 end
-'================================================================== '
+%'================================================================== '
 tangentSpace_data = kernel_log_map(G, KData, kmean);
-obj = mean(diag(tangentSpace_data'*G*tangentSpace_data))
-'================================================================== '
-pause
+objFinal = mean(diag(tangentSpace_data'*G*tangentSpace_data));
+'================================================================== ';
 
 return

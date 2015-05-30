@@ -53,18 +53,18 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
         UNormalized = U./NormsURep;
         'diag'
         diag(S(1:20,1:20))'
-    
+      
         finalDim
         size(find(diag(S) > 1E-3 ) ,1)
         
         if(size(find(diag(S) > 1E-3 ) ,1) <= finalDim)
             reduce_flag =0;
             TempMat1 = -ones(size(TG))/N + eye(size(TG));
-            CenterdData = TData*TempMat1;
-            DotP =UNormalized(:,1:finalDim)'*TG*eye(size(TG));
+            
+            ComputedCoordinates =UNormalized(:,1:finalDim)'*TG*eye(size(TG));
             break;
         end
-        ProjectedData =  kernel_applyMappings(KernelFeatureSpaceData,Mapping(i),G);
+        ProjectedData =  kernel_applyMappings(ProjectedData,Mapping(i),G);
         i = i+1;
     end
     
@@ -74,8 +74,8 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
         
     for i=1:N
         for j=1:i
-            temp = ProjectedData(:,i) - ProjectedData(:,j);
-            rhoMatrix(i,j) = sqrt(temp'*G*temp);
+            temp = ComputedCoordinates(:,i) - ComputedCoordinates(:,j);
+            rhoMatrix(i,j) = sqrt(temp'*temp);
         end
     end
     rhoMatrix = max(rhoMatrix,rhoMatrix');
