@@ -54,7 +54,6 @@ function [center, r,leftDims] = Kernel_findSphere(G,KData,prevMapping,singular_v
         dotPsRep = dotPs(ones(size(Vfinal,1),1),:);
         Vfinal = Vfinal - sum(Vecs.*dotPsRep,2);
         Vfinal = Vfinal/sqrt(Vfinal'*G*Vfinal);
-
         Vfinal'*G*Vecs;
     end
     %TData = kernel_log_map(G,KData,Vfinal);

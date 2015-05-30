@@ -1,4 +1,4 @@
-%% COmments : KPNS > KPCA Guassian kernel 3-4%
+    %% COmments : KPNS > KPCA Guassian kernel 3-4%
 
 clc
 clear all

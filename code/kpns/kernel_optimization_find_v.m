@@ -59,7 +59,7 @@ function [v] = kernel_optimization_find_v(G,KDataS,v0,prevMapping,Data)
             dotPsRep = dotPs(ones(size(v,1),1),:);
             v = v - sum(Vecs.*dotPsRep,2);
             v = v/sqrt(v'*G*v);
-            v'*G*Vecs
+            v'*G*Vecs;
         end
         %%
         KData = kernel_log_map(G,KDataS,v);

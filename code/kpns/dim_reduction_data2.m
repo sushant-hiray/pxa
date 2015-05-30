@@ -1,10 +1,10 @@
 function [Total_R] = dim_reduction_data2(Data,name,maxDims,loadData)
 PGS =1;
-loadData =0;
+loadData =1;
 global QRcriteria;
 QRcriteria = 0; 
 close all;
-QRmaxDims =2;
+QRmaxDims =1;
 filePath = strcat('../images/' , name);
 percentage =80;
 if(loadData==0) 
@@ -62,7 +62,7 @@ if(QRcriteria ==1)
     '95% dim'
     options.maxDims
 else
-    QRmaxDims =5;
+    QRmaxDims =1;
     options.maxDims = QRmaxDims;
 end
 
