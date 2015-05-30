@@ -8,7 +8,7 @@ rng(0)
 load('../../data/usps_all.mat');
 Data=[];
 
-i=1;
+i=3;
 Data = data(:,1:200,i);
 
 %{
@@ -19,8 +19,8 @@ end
 %}
 Data = double(Data);
 % preprocessing
-Data = Data - repmat(mean(Data), size(Data,1), 1);
-Data = normc(Data);
+%Data = Data - repmat(mean(Data), size(Data,1), 1);
+%Data = normc(Data);
 
 
 PGS =1;

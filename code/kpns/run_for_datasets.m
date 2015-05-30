@@ -1,4 +1,4 @@
-dim_reduction_yale
+%dim_reduction_yale
 dim_reduction_yacht
 dim_reduction_wine
 dim_reduction_vc

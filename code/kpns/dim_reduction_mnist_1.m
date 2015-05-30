@@ -12,8 +12,8 @@ Data = double(Data);
 Data = Data';
 
 % preprocessing
-Data = Data - repmat(mean(Data), size(Data,1), 1);
-Data = normc(Data);
+%Data = Data - repmat(mean(Data), size(Data,1), 1);
+%Data = normc(Data);
 
 
 PGS =1;

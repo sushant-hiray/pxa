@@ -32,15 +32,45 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
 %     end
 
     finalDim = noOfDims;
-    for i = 1:(size(Mapping,2) - finalDim)
-        FilteredMapping = [FilteredMapping Mapping(i)];
-    end    
-           
+    reduce_flag = 1;
     
-    ProjectedData = kernel_applyMappings(KernelFeatureSpaceData,FilteredMapping,G);
+    ProjectedData = KernelFeatureSpaceData;
+    i = 1;
+    gm = Mapping(end).v;
     
-    %Now take log map with respect to the geodesic mean.
-    %ProjectedData = kernel_log_map(G,ProjectedData,Mapping(end).v);
+    ComputedCoordinates  = zeros(size(finalDim,size(KernelFeatureSpaceData,2)));
+    
+    while(reduce_flag ==1)
+       
+        TData = kernel_log_map(G,ProjectedData,gm);
+        TG =TData'*G*TData;
+        one_mat = ones(size(TG))./N;
+        TG = TG - one_mat*TG - TG*one_mat + one_mat*TG*one_mat;
+        [U S] = svd(TG);
+        NormsU = sqrt(max(diag(U'*TG*U)', 1E-10));
+        NormsU = (NormsU <1E-10)*1 + NormsU;
+        NormsURep = NormsU(ones(size(U,1),1),:);
+        UNormalized = U./NormsURep;
+        'diag'
+        diag(S(1:20,1:20))'
+    
+        finalDim
+        size(find(diag(S) > 1E-3 ) ,1)
+        
+        if(size(find(diag(S) > 1E-3 ) ,1) <= finalDim)
+            reduce_flag =0;
+            TempMat1 = -ones(size(TG))/N + eye(size(TG));
+            CenterdData = TData*TempMat1;
+            DotP =UNormalized(:,1:finalDim)'*TG*eye(size(TG));
+            break;
+        end
+        ProjectedData =  kernel_applyMappings(KernelFeatureSpaceData,Mapping(i),G);
+        i = i+1;
+    end
+    
+    
+    
+    
         
     for i=1:N
         for j=1:i

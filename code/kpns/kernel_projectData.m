@@ -1,4 +1,4 @@
-function [pData] = kernel_projectData(G,KData,Mapping)
+function [pData] = kernel_projectData(G,KData,Mapping,iData,prevMapping)
     v0 = Mapping.v;
     %Find component perp to
     num_feat = size(KData,1);
@@ -8,6 +8,7 @@ function [pData] = kernel_projectData(G,KData,Mapping)
     
     %Subtract the component
     pData = KData-perpComp;
+    
     % scale data to fit on the sphere
     pNorm = sqrt(diag(pData'*G*pData)');
     pNormRep = pNorm(ones(num_feat,1),:);

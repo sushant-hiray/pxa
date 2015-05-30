@@ -2,17 +2,18 @@ function [Total_R] = dim_reduction_data2(Data,name,maxDims,loadData)
 PGS =1;
 loadData = 0;
 global QRcriteria;
-QRcriteria = 1; 
+QRcriteria = 0; 
 close all;
-QRmaxDims =4;
+QRmaxDims =1;
 filePath = strcat('../images/' , name);
-percentage = 80;
+percentage =80;
 if(loadData==0) 
     mkdir(filePath)
     filePath = strcat(strcat(filePath,'/'), name);
+     options.maxDims =QRmaxDims;
+
     options.KernelType='Gaussian';
     options.degree=3;
-    options.maxDims =QRmaxDims;
 
     [Mapping_KPNS_Gauss,BkGm,R_kpns_gauss,Res,QDR_KPNS_Gauss,G_KPNS_Gauss] = kernel_pnsMain(Data,1,PGS,options);
 

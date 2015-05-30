@@ -25,16 +25,17 @@ function [Out]= kernel_log_map(G,KData,v0)
    % size(KData)
     assert(size(v0,1) == num_feat, 'vo not represented correctly in kernel feature space, kernel_lop_map');
     %G = generateGramMatrix(IData);
-    D = (KData'*G*v0)';
-    %D = v0'*G*KData;
+    % D = (KData'*G*v0)';
+    D = v0'*G*KData;
     % now replicate D for each and every entry
     D = D(ones(num_feat,1),:);
     alphaRep = v0(:,ones(1,num_points));
-    Gamma = KData- (D.*alphaRep);
+    Gamma = KData - (D.*alphaRep);
+    
     NormGamma = Gamma'*G*Gamma; % Diagonal of this matrix corresponds to norms
+    
     L = sqrt(diag(NormGamma));
-    L = L';
-    L = (L> 1E-10).*L + (L<1E-10)*1E-10;
+    L = max (1e-10, L');
     L = L(ones(num_feat,1),:);
     ACosD = acos(D);
     Out = (Gamma.*(ACosD./L));
