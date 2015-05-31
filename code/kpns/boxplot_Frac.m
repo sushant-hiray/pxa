@@ -1,7 +1,7 @@
 function   boxplot_QDR(A,name)
     scrsz = get(0,'ScreenSize');
     figure('Position',scrsz); hold on;
-    new_A = A(:,1:5:end,:);
+    new_A = A;
     Col = hsv(7);
     size_new_A = size(new_A);
     index = 1:size_new_A(2);
@@ -67,7 +67,7 @@ function   boxplot_QDR(A,name)
     ylabel ('Quality DR', 'FontSize', 50);
     title(name,'FontSize',50);
     axis tight; a = axis; a(3) = a(3) - 0.05; axis (a); grid on;axis tight;
-    filePath = strcat('../images/',name,'/boxplot_QDR', name,'_',int2str(size(A,1)));
+    filePath = strcat('../images/',name,'/boxplot_Frac_', name,'_',int2str(size(A,1)));
     export_fig(filePath,'-nocrop', '-painters','-a2', '-png');
 
 end
