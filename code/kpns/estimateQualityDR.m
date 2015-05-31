@@ -51,11 +51,11 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
         NormsU = (NormsU <1E-10)*1 + NormsU;
         NormsURep = NormsU(ones(size(U,1),1),:);
         UNormalized = U./NormsURep;
-        'diag'
+        'diag';
         diag(S(1:20,1:20))';
       
-        finalDim
-        size(find(diag(S) > 1E-3 ) ,1)
+        finalDim;
+        size(find(diag(S) > 1E-3 ) ,1);
         
         if(size(find(diag(S) > 1E-3 ) ,1) <= finalDim)
             reduce_flag =0;

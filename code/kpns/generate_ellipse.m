@@ -1,5 +1,5 @@
 function [ ellipse_data ] = generate_ellipse(no_of_ellipse,N)
-    theta = 0:2*pi/(N):2*pi
+    theta = 0:2*pi/(N):2*pi;
     theta = theta(1:end-1);
     f_half = cos(theta);
     f_half = repmat(f_half,no_of_ellipse,1);
@@ -9,9 +9,9 @@ function [ ellipse_data ] = generate_ellipse(no_of_ellipse,N)
     a = ones(no_of_ellipse,1);
     %a = randn(no_of_ellipse,1);
     b = 0.5:0.5/(no_of_ellipse-1):1;
-    b =b'
-    a = repmat(a,1,N)
-    b = repmat(b,1,N)
+    b =b';
+    a = repmat(a,1,N);
+    b = repmat(b,1,N);
     
    
     f_half = f_half.*a;

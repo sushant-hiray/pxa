@@ -1,4 +1,4 @@
-function [Total_R] = dim_reduction_data2(Data,name,maxDims,loadData,sampleNo)
+function [Total_R] = dim_reduction_data4(Data,name,maxDims,loadData,sampleNo)
 close all;
 %Removing unique 
 %scalingFactor = sqrt (mean ( (abs(Data(:))).^2 ))
@@ -48,7 +48,7 @@ if(loadData==0)
     R_linear = 100*eig_val/sum(eig_val);
     save(strcat(filePath,'.mat'));
 else
-    filePath = strcat(strcat(filePath,'/'), name);
+    filePath = strcat(strcat(filePath,'/'), strcat(name,int2str(sampleNo)));
     load(strcat(filePath,'.mat'));
 end
 
@@ -62,14 +62,14 @@ dimReduced = min (sum (FracCumSum < percentage) + 1)
 %dimReduced = 2
 fractionalVarianceCaptureInReducedDim = FracCumSum (dimReduced,:)
 '-------------------------------------'
-pause
+
 
 if(QRcriteria ==1)
-options.maxDims = dimReduced;
-options.maxDims
+    options.maxDims = dimReduced;
+    options.maxDims
 else
-options.maxDims = dimReduced;
-options.maxDims
+    options.maxDims = dimReduced;   
+    options.maxDims
 end
 
 
@@ -96,8 +96,9 @@ plot(xAxis,QDR_KPCA_linear(1,:),'k-','LineWidth',linewidth);
 %%%%%%%%%%%%%%%
 imagePath = strcat(filePath,strcat('_',strcat(int2str(QRcriteria),strcat('_',int2str(options.maxDims)))));
 if(QRcriteria ==1)
-    imagePath = strcat(imagePath,strcat('_',int2str(percentage)));
+    imagePath = strcat(imagePath,strcat(strcat('_',int2str(percentage))));
 end
+%imagePath = strcat(imagePath,strcat('_',int2str(sampleNo)));
 title(name,'FontSize',14);
 xlabel('k-Neighbourhood','FontSize',14);
 ylabel('Quality of DR','FontSize',14);

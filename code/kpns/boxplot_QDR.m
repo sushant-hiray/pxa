@@ -1,49 +1,73 @@
-function [new_A] =  boxplot_QDR(Data,filename,noSamples)
-    TotalPoints = size(Data,2);
-    NoGraphs = 7;
-    A  = zeros(noSamples,ceil(0.8*TotalPoints),NoGraphs);
-    for i=1:noSamples
-        name_temp = strcat(filename,int2str(i));
-        name_temp = strcat('../images/',name_temp);
-        A(i,:,1) = dlmread(strcat(name_temp, 'QDR_KPNS_QUASS.txt'));
-        A(i,:,2) = dlmread(strcat(name_temp, 'QDR_KPCA_Gauss.txt'));
-        A(i,:,3) = dlmread(strcat(name_temp, 'QDR_KPNS_NPoly_3.txt'));
-        A(i,:,4) = dlmread(strcat(name_temp, 'QDR_KPCA_NPoly_3.txt'));
-        A(i,:,5) = dlmread(strcat(name_temp, 'QDR_KPNS_NPoly_5.txt'));
-        A(i,:,6) = dlmread(strcat(name_temp, 'QDR_KPCA_NPoly_5.txt'));
-        A(i,:,7) = dlmread(strcat(name_temp, 'QDR_KPCA_linear.txt'));
-    end
-    'Done'
+function   boxplot_QDR(A,name)
     scrsz = get(0,'ScreenSize');
     figure('Position',scrsz); hold on;
-    axis([0 ceil(0.08*TotalPoints) 0 1])
-    new_A = A(:,1:20:end,:);
+    new_A = A(:,1:5:end,:);
     Col = hsv(7);
     size_new_A = size(new_A);
-    index = 1:2:2*size_new_A(2);
-%     for i =1 : NoGraphs
-%         start = i;
-%         boxplot(new_A(:,:,i),index + start,'colors',Col(i,:), 'symbol', '', 'notch', 'off', 'whisker', 1.5 );
-%         hold on;
-%     end
-    i=1;
-    bp = boxplot(new_A(:,:,i),'positions', index + i,'colors',Col(i,:), 'symbol', '', 'notch', 'off', 'whisker', 1.5 );
-    hLegend = legend(findall(gca,'Tag','Box'), {'KPNS-Gauss','KPCA-Gauss','KPNS-NPoly3','KPCA-NPoly3','KPNS-NPoly5','KPCA-NPoly5','PCA'},'Location', 'southeast');
+    index = 1:size_new_A(2);
+    
+    % Medians
+    plot( index-0.2, median(new_A(:,:,1), 1), '-', index-0.2, median(new_A(:,:,1), 1), '*','Color',Col(1,:),'LineWidth',2);
+    plot( index-0.1, median(new_A(:,:,2), 1), '-', index-0.1, median(new_A(:,:,2), 1), '*','Color',Col(2,:),'LineWidth',2);
+    plot( index+0.1, median(new_A(:,:,3), 1), '-', index+0.1, median(new_A(:,:,3), 1), '*','Color',Col(3,:),'LineWidth',2);
+    plot( index+0.2, median(new_A(:,:,4), 1), '-', index+0.2, median(new_A(:,:,4), 1), '*','Color',Col(4,:),'LineWidth',2);
+    plot( index    , median(new_A(:,:,5), 1), '-', index    , median(new_A(:,:,5), 1), '*','Color',Col(5,:),'LineWidth',2);
+
+
+    
+    %Box Plots
+    i=1; 
+    bp = boxplot(new_A(:,:,i),'positions', index - 0.2, 'symbol', '', 'notch', 'off', 'whisker', 1.5 , 'widths', 0.3);
+    set (bp (:,1:end), 'color', Col(i,:), 'linewidth', 1);
+    hold on;
+    delete (findobj (gca, 'Type', 'text'));
+    
+    i=2;
+    bp = boxplot(new_A(:,:,i),'positions', index - 0.1, 'symbol', '', 'notch', 'off', 'whisker', 1.5 ,'widths', 0.3);
+    set (bp (:,1:end), 'color', Col(i,:) , 'linewidth', 1);
+    delete (findobj (gca, 'Type', 'text'));
+    
+    i=3; 
+    bp = boxplot(new_A(:,:,i),'positions', index + 0.1, 'symbol', '', 'notch', 'off', 'whisker', 1.5 ,'widths', 0.3);
+    set (bp (:,1:end), 'color', Col(i,:) , 'linewidth', 1);
+    delete (findobj (gca, 'Type', 'text'));
+    
+    
+    i=4;
+    bp = boxplot(new_A(:,:,i),'positions', index + 0.2, 'symbol', '', 'notch', 'off', 'whisker', 1.5,'widths', 0.3);
+    set (bp (:,1:end), 'color', Col(i,:) , 'linewidth', 1);
+    delete (findobj (gca, 'Type', 'text'));
+    
+    i=5;
+    indexshow = num2str (index');
+    indexshow (2:4:end,:) = ' '; indexshow (3:4:end,:) = ' '; indexshow (4:4:end,:) = ' ';
+    bp = boxplot(new_A(:,:,i),'positions', index,'color', Col(i,:), 'symbol', '', 'notch', 'off', 'whisker', 1.5 , 'Labels', indexshow,'widths', 0.3);
+    
+    
+    %Legend
+    hLegend = legend(findall(gca,'Tag','Box'), {'KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA'},'Location', 'southeast');
+    set(hLegend,'FontSize',30);
     hChildren = findall(get(hLegend,'Children'), 'Type','Line');
-    set(hChildren(2),'Color',Col(7,:));
-    set(hChildren(4),'Color',Col(6,:));
-    set(hChildren(6),'Color',Col(5,:));
-    set(hChildren(8),'Color',Col(4,:));
-    set(hChildren(10),'Color',Col(3,:));
-    set(hChildren(12),'Color',Col(2,:));
-    set(hChildren(14),'Color',Col(1,:));
+    set(hChildren(2),'Color',Col(5,:), 'linewidth', 2);
+    set(hChildren(4),'Color',Col(4,:), 'linewidth', 2);
+    set(hChildren(6),'Color',Col(3,:), 'linewidth', 2);
+    set(hChildren(8),'Color',Col(2,:), 'linewidth', 2);
+    set(hChildren(10),'Color',Col(1,:), 'linewidth', 2);
     set(gcf, 'Color', 'w');
-    grid on
-    xlabel ('k-Neighbourhood', 'FontSize', 14);
-    ylabel ('Quality of Dimensionality Reduction', 'FontSize', 14);
-    title(filename,'FontSize',14);
-    set (findobj (gca, 'Type', 'text'), 'FontSize', 10)
-    filePath = strcat('../images/boxplot_', filename);
-    export_fig(filePath,'-nocrop', '-painters','-m2', '-png');
+    
+%   This is for y-axis labels
+    set(gca,'fontsize',30);
+
+%   This is for x-axis labels
+    txt = findobj(gca,'Type','text');
+    set(txt(3:end),'VerticalAlignment', 'Middle');
+    set(findobj(gca,'Type','text'),'FontSize',30);
+
+    xlabel ('k-Neighbourhood', 'FontSize', 50);
+    ylabel ('Quality DR', 'FontSize', 50);
+    title(name,'FontSize',50);
+    axis tight; a = axis; a(3) = a(3) - 0.05; axis (a); grid on;axis tight;
+    filePath = strcat('../images/',name,'/boxplot_', name,'_',int2str(size(A,1)));
+    export_fig(filePath,'-nocrop', '-painters','-a2', '-png');
 
 end
