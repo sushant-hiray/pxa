@@ -51,7 +51,7 @@ function   boxplot_QDR(A,name)
 
 %   This is for x-axis labels
     txt = findobj(gca,'Type','text');
-    set(txt(3:end),'VerticalAlignment', 'Middle');
+    set(txt(1:end),'VerticalAlignment', 'Middle');
     set(findobj(gca,'Type','text'),'FontSize',30);
 
     xlabel ('k-Neighbourhood', 'FontSize', 50,'VerticalAlignment', 'Top');
