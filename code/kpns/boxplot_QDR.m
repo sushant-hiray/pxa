@@ -57,7 +57,7 @@ function   boxplot_QDR(A,name)
     xlabel ('k-Neighbourhood', 'FontSize', 50,'VerticalAlignment', 'Top');
     ylabel ('Quality DR', 'FontSize', 50);
     axis tight; a = axis; a(3) = a(3) - 0.05; axis (a); grid on;axis tight;
-    filePath = strcat('../images/',name,'/boxplot_', name,'_',int2str(size(A,1)));
+    filePath = strcat('../images/',name,'/boxplot_QDR', name,'_',int2str(size(A,1)));
     export_fig(filePath,'-nocrop', '-painters','-a2', '-png');
 
 end
