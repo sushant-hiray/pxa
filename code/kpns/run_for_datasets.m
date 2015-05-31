@@ -1,40 +1,42 @@
 
-return;
-
-% Good on Frac_Var None good as compared to PCA
-
-dim_reduction_iris  %sigma 0.5 %percentage 70 %polynomial 25
-dim_reduction_parkinsons %sigma 0.25 %percentage 70 %polynomial 13   
-
-dim_reduction_spect % sigma 0.3 %percentage 70 %polynomial 13
-dim_reduction_sonar %sigma 0.25 %poly 0.25 not good on npoly
-
-return; 
-
-dim_reduction_leaf
-dim_reduction_vc
-dim_reduction_leaf
-dim_reduction_liver
-%dim_reduction_seeds
-
+% BAD
+dim_reduction_breast_tissue 
+dim_reduction_spect
 dim_reduction_yacht
-dim_reduction_wine
 
-dim_reduction_usps
+% good frac_var
+
+% good QR
+dim_reduction_concreteslump % sigmaFactor 0.5, nPolyDegree 20, percentage 70
+dim_reduction_wine % sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_haberman % sigmaFactor 0.8, nPolyDegree 13, percentage 70
+
+% good BOTH
+dim_reduction_ecoli % sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_blood % sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_leaf % sigmaFactor 0.5, nPolyDegree 18, percentage 70
+dim_reduction_seeds % sigmaFactor 0.5, nPolyDegree 4, percentage 70
+dim_reduction_vc % sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_fertility % sigmaFactor 0.7, nPolyDegree 4, percentage 70
+dim_reduction_gi % sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_usps % sigmaFactor 0.5, nPolyDegree 5, percentage 70
+dim_reduction_planningrelax % sigmaFactor 1.4, nPolyDegree 8, percentage 70
+dim_reduction_cb % sigmaFactor 1, nPolyDegree 13, percentage 70
+dim_reduction_cancer % sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_yale % sigmaFactor 0.9, nPolyDegree 13, percentage 70
+dim_reduction_liver % sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_forestfire % sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_parkinsons % sigmaFactor 0.5, nPolyDegree 23, percentage 70
+dim_reduction_iris% sigmaFactor 0.5, nPolyDegree 33, percentage 70 as you increase the poly degreee the shift increases
+dim_reduction_mnist_3% sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_mnist_1% sigmaFactor 0.5, nPolyDegree 13, percentage 70
+dim_reduction_mnist_8% sigmaFactor 0.5, nPolyDegree 13, percentage 70
 
 
 
-%dim_reduction_concreteslump
-dim_reduction_planningrelax
-dim_reduction_parkinsons
-dim_reduction_haberman
 
-dim_reduction_forestfire
-dim_reduction_fertility
+return
+
+% Not performing good
+dim_reduction_sonar 
 dim_reduction_ellipse
-
-%dim_reduction_cb
-%dim_reduction_cancer
-%dim_reduction_breast_tissue
-%dim_reduction_blood
-%dim_reduction_ecoli
