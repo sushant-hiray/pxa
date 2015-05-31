@@ -3,7 +3,7 @@ K = zeros(size(data_in,2),size(data_in,2));
 sigma=1;
 switch lower(options.KernelType)
         case {lower('Gaussian')}        %  e^{-(|x-y|^2)/2t^2
-           sigma = getSigma(data_in);
+           sigma = options.sigma;
         case {lower('PolyPlus')}      % (x'*y + 1)^d
             d = options.degree;
         case {lower('NPolyPlus')}      % (x'*y + 1)^d
@@ -17,6 +17,7 @@ switch lower(options.KernelType)
         otherwise
             error('KernelType does not exist!');
 end         
+                
 for row = 1:size(data_in,2)
     for col = 1:row
         switch lower(options.KernelType)

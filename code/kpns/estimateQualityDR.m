@@ -52,7 +52,7 @@ function QDR= estimateQualityDR(iData,KernelFeatureSpaceData,G,Mapping,Variances
         NormsURep = NormsU(ones(size(U,1),1),:);
         UNormalized = U./NormsURep;
         'diag'
-        diag(S(1:20,1:20))'
+        diag(S(1:20,1:20))';
       
         finalDim
         size(find(diag(S) > 1E-3 ) ,1)

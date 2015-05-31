@@ -1,4 +1,4 @@
-function [ eigvec, eig_val, QDR,G ] = kpca_main(data_in, options)
+function [ eigvec, eig_val, QDR,G] = kpca_main(data_in, options)
 %
 % This function does principal component analysis (non-linear) on the given
 % data set using the Kernel trick
@@ -45,7 +45,7 @@ clear K;
 X_mean = mean(data_in,2);
 X_shift = data_in -X_mean(:,ones(1,size(data_in,2)));
 %% Find the mininum value in kcenter and then add 1/100 of it to the diagonal
-K_center = K_center + 1E-3*min(abs(K_center(:)))*eye(size(K_center));
+K_center = K_center ;%+ 1E-3*min(abs(K_center(:)))*eye(size(K_center));
 size(K_center);
 
 
@@ -59,7 +59,7 @@ opts.isreal = 1;
 neigs = 30;
 %[eigvec, eig_val] = eig(K_center);
 [eigvec eig_val V] = svd(K_center);
-
+    
 eig_val = eig_val./size(data_in,2); % Normalizing the lambda
 eig_val = diag(eig_val);
 % 1 = lamda*<alpha,alpha> (Equation 2.14)
@@ -71,12 +71,10 @@ eig_val;
 eigvec = eigvec(:,index);
 %eigvec = eigvec(:,1:4);
 R = (eig_val*100)/sum(eig_val);
-QDR= estimateQualityDRKPCA(data_in,eye(size(data_in,2),size(data_in,2)),G,eigvec,R,options.maxDims);
-num_points = 1: size(data_in,2);
-QDR = [QDR;num_points];
+QDR=0;
 %% Projecting the data in lower dimensions
 % for now, num_dim = dimension of init data
-num_dim = size(data_in,1);
+
 % num_dim = 1;
 end
 

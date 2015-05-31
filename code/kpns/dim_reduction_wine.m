@@ -2,7 +2,7 @@
 
 
 load('../../data/wine.mat');
-wine = wine(1:59,:);
+
 rng(0);
 wine = wine';
 %wine = normc(wine');

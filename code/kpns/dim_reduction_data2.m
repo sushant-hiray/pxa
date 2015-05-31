@@ -1,18 +1,27 @@
 function [Total_R] = dim_reduction_data2(Data,name,maxDims,loadData)
-PGS =1;
-loadData =1;
-global QRcriteria;
-QRcriteria = 0; 
 close all;
+%Removing unique 
+%scalingFactor = sqrt (mean ( (abs(Data(:))).^2 ))
+%scalingFactor = 1
+%Data = Data / scalingFactor;
+%RoundedData = roundn(Data,-4);
+%Data = unique(RounddData','rows')';
+%Data = Data * scalingFactor;
+
+
+PGS =1;
+loadData =0;
+QRcriteria = 1; 
+
 QRmaxDims =1;
 filePath = strcat('../images/' , name);
-percentage =80;
 if(loadData==0) 
     mkdir(filePath)
     filePath = strcat(strcat(filePath,'/'), name);
      options.maxDims =QRmaxDims;
 
     options.KernelType='Gaussian';
+    options.sigma = getSigma(Data)*0.5
     options.degree=3;
 
     [Mapping_KPNS_Gauss,BkGm,R_kpns_gauss,Res,QDR_KPNS_Gauss,G_KPNS_Gauss] = kernel_pnsMain(Data,1,PGS,options);
@@ -21,8 +30,10 @@ if(loadData==0)
     [eigvec_gauss, eig_val,QDR_KPCA_Gauss,G_KPCA_Gauss] = kpca_main(Data,options);
     R_kpca_gauss = 100*eig_val/sum(eig_val);
 
-    options.KernelType='NPolynomial';
-    options.degree=5;
+    options.KernelType = 'NPolynomial'
+    options.degree = 13
+
+    
     [Mapping_KPNS_NPoly_5,BkGm,R_kpns_np5,Res,QDR_KPNS_NPoly_5,G_KPNS_NPoly_5] = kernel_pnsMain(Data,1,PGS,options);
 
     [ eigvec_npoly, eig_val,QDR_KPCA_NPoly_5,G_KPCA_NPoly_5] = kpca_main(Data,options);
@@ -39,32 +50,25 @@ else
 end
 
 % get the min dim for which the criteria of 95% is satisfied
-dim95 = zeros(1,5);
-minDim = min([size(R_kpns_gauss,1) size(R_kpca_gauss,1) size(R_kpns_np5,1) size(R_kpca_np5,1) size(R_linear,1) 10]);
-Total_R = [R_kpns_gauss(1:minDim) R_kpca_gauss(1:minDim) R_kpns_np5(1:minDim) R_kpca_np5(1:minDim) R_linear(1:minDim)];
+minDim = min ([size(R_kpns_gauss,1) size(R_kpca_gauss,1) size(R_kpns_np5,1) size(R_kpca_np5,1) size(R_linear,1) inf]);
+Frac_R = [R_kpns_gauss(1:minDim) R_kpca_gauss(1:minDim) R_kpns_np5(1:minDim) R_kpca_np5(1:minDim) R_linear(1:minDim)];
 
-if(QRcriteria==1)
-    for i=1:5
-        totalVar =0;
-        while((totalVar <= percentage ) )
-            if(dim95(i)<size(Total_R(:,i),1))
-                dim95(i) = dim95(i) + 1;
-                totalVar = totalVar + Total_R(dim95(i),i);
-            else
-                break;
-            end
-        end
-    end
-end
+FracCumSum = cumsum (Frac_R, 1);
+percentage = 70
+dimReduced = min (sum (FracCumSum < percentage) + 1)
+%dimReduced = 2
+fractionalVarianceCaptureInReducedDim = FracCumSum (dimReduced,:)
+'-------------------------------------'
+pause
 
 if(QRcriteria ==1)
-    options.maxDims = min(dim95);
-    '95% dim'
-    options.maxDims
+options.maxDims = dimReduced;
+options.maxDims
 else
-    QRmaxDims =1;
-    options.maxDims = QRmaxDims;
+options.maxDims = dimReduced;
+options.maxDims
 end
+
 
 QDR_KPNS_Gauss  = estimateQualityDR    (Data,eye(size(Data,2)),G_KPNS_Gauss,Mapping_KPNS_Gauss,R_kpns_gauss,options.maxDims);
 QDR_KPCA_Gauss  = estimateQualityDRKPCA(Data,eye(size(Data,2)),G_KPCA_Gauss,eigvec_gauss,R_kpca_gauss,options.maxDims);
@@ -111,5 +115,7 @@ dlmwrite(strcat(filePath, 'QDR_KPCA_linear.txt'), QDR_KPCA_linear(1,:));
 
 
 minDim = min([size(R_kpns_gauss,1) size(R_kpca_gauss,1) size(R_kpns_np5,1) size(R_kpca_np5,1) size(R_linear,1) 10]);
-Total_R = [R_kpns_gauss(1:minDim) R_kpca_gauss(1:minDim) R_kpns_np5(1:minDim) R_kpca_np5(1:minDim) R_linear(1:minDim)];
+Total_R = [R_kpns_gauss(1:minDim) R_kpca_gauss(1:minDim) R_kpns_np5(1:minDim) R_kpca_np5(1:minDim) R_linear(1:minDim)]
+
+
 end

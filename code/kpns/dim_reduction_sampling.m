@@ -5,7 +5,7 @@ function [] =  dim_reduction_sampling(Data,filename,noSamples,maxDims)
     for i=1:noSamples
         tempFileName = strcat(filename , int2str(i));
         DataSampled = datasample(Data,ceil(0.8*TotalPoints),2);
-        dim_reduction_data(DataSampled,tempFileName,maxDims);
+        dim_reduction_data2(DataSampled,tempFileName,maxDims);
     end
     boxplot_QDR(Data,filename,noSamples);
 end

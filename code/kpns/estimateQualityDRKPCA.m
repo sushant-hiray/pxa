@@ -15,6 +15,7 @@ function QDR= estimateQualityDRKPCA(iData,KernelFeatureSpaceData,G,EigVec,Varian
     %Fill in dMatrix
     for i=1:N
         for j=1:i
+            
             temp = iData(:,i) -iData(:,j);  
             dMatrix(i,j) = sqrt(temp'*temp);
         end
@@ -22,35 +23,26 @@ function QDR= estimateQualityDRKPCA(iData,KernelFeatureSpaceData,G,EigVec,Varian
     dMatrix = max(dMatrix,dMatrix');
     %ProjectData along all the dimensions on Mappings. Choose a threshold
     %1E-5 after which you will stop projections
-    FilteredMapping = [];
-%     for i=1:size(EigVec,2)
-%         if(Variances(i) > 1E-5)
-%             FilteredMapping = [FilteredMapping EigVec(:,i)];
-%         else
-%             break;
-%         end
-%     end
-%     for i=1:noOfDims
-%         if(Variances(i) > 1E-5)
-%             FilteredMapping = [FilteredMapping EigVec(:,i)];
-%         else
-%             break;
-%         end
-%     end
-   
-    for i=1:noOfDims
-         FilteredMapping = [FilteredMapping EigVec(:,i)];
-    end
-
+    FilteredMapping = EigVec(:,1:noOfDims);
     
-    ProjectedData = kernel_applyMappingsKPCA(KernelFeatureSpaceData,FilteredMapping,G,iData);
+    [ProjectedData, G_center,iData_centered] = kernel_applyMappingsKPCA(KernelFeatureSpaceData,FilteredMapping,G,iData);
+    rhoMatrix1 = zeros(size(rhoMatrix));
+    
     for i=1:N
         for j=1:i
-            temp = ProjectedData(:,i) - ProjectedData(:,j);
-            rhoMatrix(i,j) = sqrt(temp'*G*temp);
+            temp = ProjectedData(:,i) - ProjectedData(:,j);            
+            rhoMatrix(i,j) = sqrt(max(temp'*G_center*temp,1E-20));
         end
     end
     rhoMatrix = max(rhoMatrix,rhoMatrix');
+
+    for i=1:N
+        for j=1:i
+           temp3 = iData_centered(:,i) - iData_centered(:,j);
+           rhoMatrix1(i,j) = norm(temp3);
+        end
+    end
+    rhoMatrix1 = max(rhoMatrix1,rhoMatrix1');
     
     for i =1:N
         [X,Y] = sort(dMatrix(i,:));
@@ -86,6 +78,5 @@ function QDR= estimateQualityDRKPCA(iData,KernelFeatureSpaceData,G,EigVec,Varian
         
     Ks = N*(1:N);
     FK = FK./Ks;
-%    plot(1:N,FK,'r-');
     QDR= FK;
 end

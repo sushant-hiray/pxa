@@ -9,14 +9,24 @@ function [Mapping,BkGm,R,Res,QDR,G] = kernel_pnsMain(Data, debugMode,mode,option
     newMode =0;
     
     G = generateGramMatrix(Data,options);
-    
+   
     num_points = size(Data,2);
     KData = eye(num_points,num_points);
     kernel_dim = 0;
     %KData = normalizeKernelData(G,KData);
     leftDims = size(Data,2);
     Res = [];
-	while leftDims > 2
+    DistancesInKernelSpace = zeros(size(G));
+    for i=1:size(Data,2)
+        for j=1:i
+            temp = KData(:,i)-KData(:,j);
+            DistancesInKernelSpace(i,j) = sqrt(temp'*G*temp);
+        end
+    end
+%     DistancesInKernelSpace = max(DistancesInKernelSpace,DistancesInKernelSpace');
+%     imagesc(DistancesInKernelSpace);colorbar;
+%   pause;
+    while leftDims > 2
         [v,r,leftDims] = Kernel_findSphere(G,KData,Mapping,kernel_dim,Data);
 	
         CurrentMapping.v = v;
@@ -30,6 +40,7 @@ function [Mapping,BkGm,R,Res,QDR,G] = kernel_pnsMain(Data, debugMode,mode,option
 		KData = kernel_projectData(G,KData,CurrentMapping,Data,Mapping);
 	    %assert(abs(norm(K(:,1)) -1) <1E-4, 'norm not 1'); 
         kernel_dim = kernel_dim + 1;
+        
     end
 	%% Find the geodesic mean for the Data
     'computing kernel Karcher mean'
