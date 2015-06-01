@@ -19,26 +19,40 @@ function [v] = kernel_optimization_find_v(G,KDataS,v0,prevMapping,Data)
     curr_iter =0;
     %fprintf('objective function values');
     %KData = Data in tangent feature space.
+    Vecs= [];
+    if(size(prevMapping,2)>0)
+        Vecs = zeros(size(prevMapping(1).v,1),size(prevMapping,2));
+    end
+    for i=1:size(prevMapping,2)
+        Vecs(:,i) = prevMapping(i).v;
+        
+    end
    while(abs(prevResOuter - currResOuter)/abs(prevResOuter) > threshold)
         run_atleast_once = true;
         currVD = zeros(size(v0));
         stepSize = 0.1;
         currRes = kernel_residual_function(G,KData,currVD);
         while(run_atleast_once ||abs(prevRes - currRes)/abs(prevRes) > threshold && curr_iter <MAX_ITER)
-          currGrad = kernel_grad_function(G,KData,currVD);
-          currVD = currVD - stepSize*currGrad;
-          tempRes = kernel_residual_function(G,KData,currVD);
-          if(tempRes < currRes)
+            currGrad = kernel_grad_function(G,KData,currVD);
+            if(size(Vecs,2) >0)
+                dotPs = currGrad'*G*Vecs;
+                dotPsRep = dotPs(ones(size(currGrad,1),1),:);
+                currGrad = currGrad - sum(Vecs.*dotPsRep,2);
+            end
+            currVD = currVD - stepSize*currGrad;
+            tempRes = kernel_residual_function(G,KData,currVD);
+
+            if(tempRes < currRes)
               prevRes = currRes;
               currRes = tempRes;
               stepSize = stepSize*1.1;
-          else
+            else
               currVD = currVD + stepSize*currGrad;
               stepSize = stepSize/2;
-          end
-          curr_iter = curr_iter+1;
-          currRes;
-          run_atleast_once = false;
+            end
+            curr_iter = curr_iter+1;
+            currRes;
+            run_atleast_once = false;
         end
         %currVD = currVD - ((currVD'*G*v0)/(v0'*G*v0))*v0;
         currVD = currVD - ((currVD'*G*v)/(v'*G*v))*v;
@@ -46,14 +60,6 @@ function [v] = kernel_optimization_find_v(G,KDataS,v0,prevMapping,Data)
         
         %%
         % Make v perpendicular to prevMappings
-        Vecs= [];
-        if(size(prevMapping,2)>0)
-            Vecs = zeros(size(prevMapping(1).v,1),size(prevMapping,2));
-        end
-        for i=1:size(prevMapping,2)
-            Vecs(:,i) = prevMapping(i).v;
-            
-        end
         %'Inside find v'
         if(size(Vecs,2) >0)
             dotPs = v'*G*Vecs;

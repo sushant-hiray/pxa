@@ -8,5 +8,6 @@ rng(0)
 load('../../data/transfusion.mat');
 transfusion = transfusion(:,2:end-1);
 transfusion = transfusion';
-Total_R = dim_reduction_data2(transfusion,'Blood Transfusion',1,1);
+%Total_R = dim_reduction_data2(transfusion,'Blood Transfusion',1,1);
+dim_reduction_sampling(transfusion,'Blood Transfusion',25,2,0);
 %plot_QDR(transfusion,'Blood Transfusion');

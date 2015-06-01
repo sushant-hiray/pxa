@@ -9,5 +9,6 @@ load('../../data/fertility.mat');
 fertility = fertility';
 rng(0);
 
-Total_R = dim_reduction_data2(fertility,'Ferility',1,1);
-Total_R
+%Total_R = dim_reduction_data2(fertility,'Ferility',1,1);
+%Total_R
+dim_reduction_sampling(fertility,'Fertility',25,2,0);
