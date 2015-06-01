@@ -25,7 +25,7 @@ if(loadData==0)
 
     options.KernelType='Gaussian';
     options.sigma = getSigma(Data)*0.5;
-    options.degree=3;
+    options.degree=8;
 
     [Mapping_KPNS_Gauss,BkGm,R_kpns_gauss,Res,QDR_KPNS_Gauss,G_KPNS_Gauss] = kernel_pnsMain(Data,1,PGS,options);
 
