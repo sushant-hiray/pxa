@@ -3,7 +3,7 @@ function   boxplot_QDR(A,name)
     figure('Position',scrsz); hold on;
     new_A = A(:,1:5:end,:);
     size_new_A = size(new_A);
-    index = 1:size_new_A(2);
+    index = 1:5:5*size_new_A(2);
     
     % Medians
     plot( index-0.2, median(new_A(:,:,1), 1), 'r.-', ...

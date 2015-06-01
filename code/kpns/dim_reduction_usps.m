@@ -25,7 +25,7 @@ Data = double(Data);
 
 PGS =1;
 % 
-Total_R = dim_reduction_data2(Data,'USPS Dataset',0,1);
-Total_R
+% Total_R = dim_reduction_s(Data,'USPS Dataset',25,2,0);
+% Total_R
 
-%dim_reduction_sampling(Data,'USPS Dataset',5);
+dim_reduction_sampling(Data,'USPS Dataset',25,2,0);

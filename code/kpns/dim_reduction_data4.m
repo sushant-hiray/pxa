@@ -34,7 +34,7 @@ if(loadData==0)
     R_kpca_gauss = 100*eig_val/sum(eig_val);
 
     options.KernelType = 'NPolynomial'
-    options.degree = 18
+    options.degree = 5
 
     
     [Mapping_KPNS_NPoly_5,BkGm,R_kpns_np5,Res,QDR_KPNS_NPoly_5,G_KPNS_NPoly_5] = kernel_pnsMain(Data,1,PGS,options);
