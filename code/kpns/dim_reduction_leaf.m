@@ -12,6 +12,6 @@ Data = double(Data);
 
 PGS =1;
 
-Total_R = dim_reduction_data2(Data,'Leaf',1,1);
-Total_R
-%dim_reduction_sampling(Data,'Leaf',5);
+% Total_R = dim_reduction_data2(Data,'Leaf',1,1);
+% Total_R
+dim_reduction_sampling(Data,'Leaf',25,2,0);

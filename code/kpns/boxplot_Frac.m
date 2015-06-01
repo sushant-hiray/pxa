@@ -1,5 +1,5 @@
 function   boxplot_Frac(A,name)
-     scrsz = get(0,'ScreenSize');
+    scrsz = get(0,'ScreenSize');
     figure('Position',scrsz); hold on;
     new_A = A;
     size_new_A = size(new_A);
