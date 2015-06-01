@@ -3,7 +3,7 @@ function [ kmean ] = kernel_karcher_mean(G,KData,Mapping)
 
 num_points = size(KData, 2);
 assert(num_points ~= 0,  '[kernel_karcher_mean]: No of Samples cannot be zero');
-threshold = 1E-3;
+threshold = 1E-2;
 step_size = 0.1;
 assert(threshold < 1,  '[kernel_karcher_mean]: Threshold should be less than 1');
 
@@ -22,11 +22,13 @@ end
 dotPs = kmean'*G*Vecs;
 dotPsRep = dotPs(ones(size(Vecs,1),1),:);
 kmean = kmean - sum(Vecs.*dotPsRep,2);
-kmean = kmean / sqrt(kmean'*G*kmean);
-
-while (1)
+kmean = kmean / max (1e-5, sqrt(max(kmean'*G*kmean,1E-20)));
+meanChange = 1;
+while(1)
+%while (meanChange > 1E-3)
 %'---------------------------------------------------------------'
     tangentSpace_data = kernel_log_map(G, KData, kmean);
+    tangentSpace_data(:,1)
     objOld = mean(diag(tangentSpace_data'*G*tangentSpace_data));
     
     gradient = mean (tangentSpace_data, 2);
@@ -35,10 +37,22 @@ while (1)
     dotPsRep = dotPs(ones(size(Vecs,1),1),:);
     gradient = gradient - sum(Vecs.*dotPsRep,2);
     
+    %gradient should also be perp to kmean
+    gradient = gradient - (kmean'*G*gradient)*kmean;    
     % new mean
+    gradient'*G*kmean
+    prevKmean = kmean;
     kmean = kernel_exp_map(G,step_size*(gradient), kmean);
-    
+    meanChange = kernel_log_map(G,kmean, prevKmean);
+    fprintf('mean change norm %f\n' ,meanChange'*G*meanChange);
+    fprintf('mean and Mapping dot products %f\n',max(max(abs(Vecs'*G*kmean))))
+    '-----'
+    fprintf('Squared Norm updated kmean %f \n',kmean'*G*kmean)
+    if(abs(kmean'*G*kmean -1 )>=1E-4)
+      error ('********************************* mean norm NOT 1 ********************************************************');
+    end
     % relative change
+    kmean = kmean / max (1e-5, sqrt(max(kmean'*G*kmean,1E-21)));
     tangentSpace_data = kernel_log_map(G, KData, kmean);
     objNew = mean(diag(tangentSpace_data'*G*tangentSpace_data));
     

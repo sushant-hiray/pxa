@@ -40,7 +40,8 @@ function [v] = kernel_optimization_find_v(G,KDataS,v0,prevMapping,Data)
           currRes;
           run_atleast_once = false;
         end
-        currVD = currVD - ((currVD'*G*v0)/(v0'*G*v0))*v0;
+        %currVD = currVD - ((currVD'*G*v0)/(v0'*G*v0))*v0;
+        currVD = currVD - ((currVD'*G*v)/(v'*G*v))*v;
         v = kernel_exp_map(G,currVD,v);
         
         %%
@@ -58,7 +59,7 @@ function [v] = kernel_optimization_find_v(G,KDataS,v0,prevMapping,Data)
             dotPs = v'*G*Vecs;
             dotPsRep = dotPs(ones(size(v,1),1),:);
             v = v - sum(Vecs.*dotPsRep,2);
-            v = v/sqrt(v'*G*v);
+            v = v/sqrt(max(v'*G*v,1E-21));
             v'*G*Vecs;
         end
         %%

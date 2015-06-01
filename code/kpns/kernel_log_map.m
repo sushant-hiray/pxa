@@ -34,7 +34,7 @@ function [Out]= kernel_log_map(G,KData,v0)
     
     NormGamma = Gamma'*G*Gamma; % Diagonal of this matrix corresponds to norms
     
-    L = sqrt(diag(NormGamma));
+    L = sqrt(max(diag(NormGamma),1E-21));
     L = max (1e-10, L');
     L = L(ones(num_feat,1),:);
     ACosD = acos(D);
