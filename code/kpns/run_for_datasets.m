@@ -24,7 +24,8 @@ return
 %dim_reduction_leaf % sigmaFactor 0.5, nPolyDegree 18, percentage 70 D
 %dim_reduction_seeds % sigmaFactor 0.5, nPolyDegree 4, percentage 70 D
 %dim_reduction_fertility % sigmaFactor 0.7, nPolyDegree 4, percentage 70 D
-%dim_reduction_planningrelax % sigmaFactor 1.4, nPolyDegree 8, percentage 70
+%dim_reduction_planningrelax % sigmaFactor 1.4, nPolyDegree 8, percentage
+%70 D
 %dim_reduction_cb % sigmaFactor 1, nPolyDegree 13, percentage 70
 
 dim_reduction_parkinsons % sigmaFactor 0.5, nPolyDegree 23, percentage 70
