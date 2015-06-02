@@ -18,31 +18,31 @@ function   boxplot_QDR(A,name)
     
     %Box Plots
     i=1; 
-    bp = boxplot(new_A(:,:,i),'positions', index - 0.2, 'symbol', '', 'notch', 'off', 'whisker', 1.5 , 'widths', 0.3);
+    bp = boxplot(new_A(:,:,i),'positions', index - 0.2, 'symbol', '', 'notch', 'off', 'whisker', 1.5 , 'widths', 0.5);
     set (bp (:,1:end), 'color', 'r', 'linewidth', 1);
     hold on;
     delete (findobj (gca, 'Type', 'text'));
     
     i=2;
-    bp = boxplot(new_A(:,:,i),'positions', index - 0.1, 'symbol', '', 'notch', 'off', 'whisker', 100 ,'widths', 0.3);
+    bp = boxplot(new_A(:,:,i),'positions', index - 0.1, 'symbol', '', 'notch', 'off', 'whisker', 100 ,'widths', 0.5);
     set (bp (:,1:end), 'color', 'b' , 'linewidth', 1);
     delete (findobj (gca, 'Type', 'text'));
     
     i=3; 
-    bp = boxplot(new_A(:,:,i),'positions', index + 0.1, 'symbol', '', 'notch', 'off', 'whisker', 100 ,'widths', 0.3);
+    bp = boxplot(new_A(:,:,i),'positions', index + 0.1, 'symbol', '', 'notch', 'off', 'whisker', 100 ,'widths', 0.5);
     set (bp (:,1:end), 'color', 'm' , 'linewidth', 1);
     delete (findobj (gca, 'Type', 'text'));
     
     
     i=4;
-    bp = boxplot(new_A(:,:,i),'positions', index + 0.2, 'symbol', '', 'notch', 'off', 'whisker', 100,'widths', 0.3);
+    bp = boxplot(new_A(:,:,i),'positions', index + 0.2, 'symbol', '', 'notch', 'off', 'whisker', 100,'widths', 0.5);
     set (bp (:,1:end), 'color', 'c' , 'linewidth', 1);
     delete (findobj (gca, 'Type', 'text'));
     
     i=5;
     indexshow = num2str (index');
     indexshow (2:4:end,:) = ' '; indexshow (3:4:end,:) = ' '; indexshow (4:4:end,:) = ' ';
-    bp = boxplot(new_A(:,:,i),'positions', index,'color', 'k', 'symbol', '', 'notch', 'off', 'whisker', 100 , 'Labels', indexshow,'widths', 0.3);
+    bp = boxplot(new_A(:,:,i),'positions', index,'color', 'k', 'symbol', '', 'notch', 'off', 'whisker', 100 , 'Labels', indexshow,'widths', 0.5);
 
     set(gcf, 'Color', 'w');
     

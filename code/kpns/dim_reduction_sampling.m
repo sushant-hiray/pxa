@@ -14,7 +14,7 @@ function  dim_reduction_sampling(Data,name,noSamples,maxDims,loadData)
             dim_reduction_data4(DataSampled,name,maxDims,0,i);
         end
     end
-    minDim = 10;
+    minDim = 20;
     A = zeros(noSamples,ceil(0.8*TotalPoints),noOfGraphs);
     B = zeros(noSamples,minDim,noOfGraphs);
     filePath = strcat('../images/',name);
