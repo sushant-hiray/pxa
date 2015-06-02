@@ -9,9 +9,10 @@ function   boxplot_Frac(A,name)
     plot( index-0.2, median(new_A(:,:,1), 1), 'r.-', ...
     index-0.1, median(new_A(:,:,2), 1), 'b.-', ...
     index+0.1, median(new_A(:,:,3), 1), 'm.-', ...
-    index+0.2, median(new_A(:,:,4), 1), 'c.-',...
-    index    , median(new_A(:,:,5), 1), 'k.-','LineWidth',2, 'MarkerSize', 25 );
-    hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast');
+    index    , median(new_A(:,:,4), 1), 'c.-','LineWidth',2, 'MarkerSize', 25 );
+ %  hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast');
+    hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','Location', 'southeast');
+  
     set(hLegend,'FontSize',30);
     
 
@@ -33,16 +34,10 @@ function   boxplot_Frac(A,name)
     set (bp (:,1:end), 'color', 'm' , 'linewidth', 1);
     delete (findobj (gca, 'Type', 'text'));
     
-    
     i=4;
-    bp = boxplot(new_A(:,:,i),'positions', index + 0.2, 'symbol', '', 'notch', 'off', 'whisker', 100,'widths', 0.2);
-    set (bp (:,1:end), 'color', 'c' , 'linewidth', 1);
-    delete (findobj (gca, 'Type', 'text'));
-    
-    i=5;
     indexshow = num2str (index');
     indexshow (2:2:end,:) = ' ';
-    bp = boxplot(new_A(:,:,i),'positions', index,'color', 'k', 'symbol', '', 'notch', 'off', 'whisker', 100 , 'Labels', indexshow,'widths', 0.2);
+    bp = boxplot(new_A(:,:,i),'positions', index,'color', 'c', 'symbol', '', 'notch', 'off', 'whisker', 100 , 'Labels', indexshow,'widths', 0.2);
 
     set(gcf, 'Color', 'w');
     
@@ -54,7 +49,7 @@ function   boxplot_Frac(A,name)
     set(txt(1:end),'VerticalAlignment', 'Middle');
     set(findobj(gca,'Type','text'),'FontSize',30);
 
-    xlabel ('Number of Modes', 'FontSize', 50,'VerticalAlignment', 'Top');
+    xlabel ('Modes of Variation', 'FontSize', 50,'VerticalAlignment', 'Top');
     ylabel ('Quality DR', 'FontSize', 50);
     axis tight; a = axis; a(3) = a(3) - 0.05; axis (a); grid on;axis tight;
     filePath = strcat('../images/',name,'/boxplot_Frac', name,'_',int2str(size(A,1)));

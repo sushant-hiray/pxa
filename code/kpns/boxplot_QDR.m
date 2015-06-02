@@ -10,39 +10,53 @@ function   boxplot_QDR(A,name)
     index-0.1, median(new_A(:,:,2), 1), 'b.-', ...
     index+0.1, median(new_A(:,:,3), 1), 'm.-', ...
     index+0.2, median(new_A(:,:,4), 1), 'c.-',...
-    index    , median(new_A(:,:,5), 1), 'k.-','LineWidth',2, 'MarkerSize', 25 );
-    hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast');
+    index-0.3, median(new_A(:,:,7), 1), 'y.-',...
+    index+0.3, median(new_A(:,:,8), 1), 'g.-',...
+    index    , median(new_A(:,:,6), 1), 'k.-','LineWidth',2, 'MarkerSize', 25 );
+    hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly','KPCA-NPoly','NPE','LDA','MDS','Location', 'southeast');
     set(hLegend,'FontSize',30);
     
 
     
     %Box Plots
     i=1; 
-    bp = boxplot(new_A(:,:,i),'positions', index - 0.2, 'symbol', '', 'notch', 'off', 'whisker', 1.5 , 'widths', 0.5);
+    bp = boxplot(new_A(:,:,i),'positions', index - 0.2, 'symbol', '', 'notch', 'off', 'whisker', 1.0 , 'widths', 0.3);
     set (bp (:,1:end), 'color', 'r', 'linewidth', 1);
     hold on;
     delete (findobj (gca, 'Type', 'text'));
     
     i=2;
-    bp = boxplot(new_A(:,:,i),'positions', index - 0.1, 'symbol', '', 'notch', 'off', 'whisker', 100 ,'widths', 0.5);
+    bp = boxplot(new_A(:,:,i),'positions', index - 0.1, 'symbol', '', 'notch', 'off', 'whisker', 100 ,'widths', 0.3);
     set (bp (:,1:end), 'color', 'b' , 'linewidth', 1);
     delete (findobj (gca, 'Type', 'text'));
     
     i=3; 
-    bp = boxplot(new_A(:,:,i),'positions', index + 0.1, 'symbol', '', 'notch', 'off', 'whisker', 100 ,'widths', 0.5);
+    bp = boxplot(new_A(:,:,i),'positions', index + 0.1, 'symbol', '', 'notch', 'off', 'whisker', 100 ,'widths', 0.3);
     set (bp (:,1:end), 'color', 'm' , 'linewidth', 1);
     delete (findobj (gca, 'Type', 'text'));
-    
-    
+
     i=4;
-    bp = boxplot(new_A(:,:,i),'positions', index + 0.2, 'symbol', '', 'notch', 'off', 'whisker', 100,'widths', 0.5);
+    bp = boxplot(new_A(:,:,i),'positions', index + 0.2, 'symbol', '', 'notch', 'off', 'whisker', 100,'widths', 0.3);
     set (bp (:,1:end), 'color', 'c' , 'linewidth', 1);
     delete (findobj (gca, 'Type', 'text'));
     
-    i=5;
+    i=7;
+    bp = boxplot(new_A(:,:,i),'positions', index - 0.3, 'symbol', '', 'notch', 'off', 'whisker', 100,'widths', 0.3);
+    set (bp (:,1:end), 'color', 'y' , 'linewidth', 1);
+    delete (findobj (gca, 'Type', 'text'));
+    
+    
+    i=8;
+    bp = boxplot(new_A(:,:,i),'positions', index + 0.3, 'symbol', '', 'notch', 'off', 'whisker', 100,'widths', 0.3);
+    set (bp (:,1:end), 'color', 'g' , 'linewidth', 1);
+    delete (findobj (gca, 'Type', 'text'));
+    
+    
+    i=6;
     indexshow = num2str (index');
-    indexshow (2:4:end,:) = ' '; indexshow (3:4:end,:) = ' '; indexshow (4:4:end,:) = ' ';
-    bp = boxplot(new_A(:,:,i),'positions', index,'color', 'k', 'symbol', '', 'notch', 'off', 'whisker', 100 , 'Labels', indexshow,'widths', 0.5);
+%     indexshow (2:4:end,:) = ' '; indexshow (3:4:end,:) = ' '; indexshow (4:4:end,:) = ' ';
+    indexshow (2:2:end,:) = ' ';
+    bp = boxplot(new_A(:,:,i),'positions', index,'color', 'k', 'symbol', '', 'notch', 'off', 'whisker', 100 , 'Labels', indexshow,'widths', 0.3);
 
     set(gcf, 'Color', 'w');
     
