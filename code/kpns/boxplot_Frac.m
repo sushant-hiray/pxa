@@ -11,9 +11,8 @@ function   boxplot_Frac(A,name)
     index+0.1, median(new_A(:,:,3), 1), 'm.-', ...
     index    , median(new_A(:,:,4), 1), 'c.-','LineWidth',2, 'MarkerSize', 25 );
  %  hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast');
-    hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','Location', 'southeast');
-  
-    set(hLegend,'FontSize',30);
+    hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','Location', 'east');
+    set(hLegend,'FontSize',40);
     
 
     

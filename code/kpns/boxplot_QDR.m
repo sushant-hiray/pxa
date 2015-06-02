@@ -54,8 +54,8 @@ function   boxplot_QDR(A,name)
     
     i=6;
     indexshow = num2str (index');
-%     indexshow (2:4:end,:) = ' '; indexshow (3:4:end,:) = ' '; indexshow (4:4:end,:) = ' ';
-    indexshow (2:2:end,:) = ' ';
+    indexshow (2:4:end,:) = ' '; indexshow (3:4:end,:) = ' '; indexshow (4:4:end,:) = ' ';
+%     indexshow (2:2:end,:) = ' ';
     bp = boxplot(new_A(:,:,i),'positions', index,'color', 'k', 'symbol', '', 'notch', 'off', 'whisker', 100 , 'Labels', indexshow,'widths', 0.3);
 
     set(gcf, 'Color', 'w');
