@@ -28,7 +28,7 @@ return
 %70 D
 %dim_reduction_cb % sigmaFactor 1, nPolyDegree 13, percentage 70 D
 
-dim_reduction_parkinsons % sigmaFactor 0.5, nPolyDegree 23, percentage 70
+dim_reduction_parkinsons % sigmaFactor 0.5, nPolyDegree 23, percentage 70 D
 dim_reduction_iris% sigmaFactor 0.5, nPolyDegree 33, percentage 70 as you increase the poly degreee the shift increases
 
 % good QR
