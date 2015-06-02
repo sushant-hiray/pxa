@@ -8,6 +8,6 @@ rng(0)
 
 load('../../data/concreteslump.mat');
 concreteslump = concreteslump';
-Total_R = dim_reduction_data2(concreteslump,'Concrete Slump',1,1);
-Total_R
-%dim_reduction_sampling(concreteslump,'Concrete Slump',5);
+% Total_R = dim_reduction_data2(concreteslump,'Concrete Slump',1,1);
+% Total_R
+dim_reduction_sampling(concreteslump,'Concrete Slump',25,2,1);
