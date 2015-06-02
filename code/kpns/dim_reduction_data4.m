@@ -24,7 +24,7 @@ if(loadData==0)
     options.maxDims =QRmaxDims;
 
     options.KernelType='Gaussian';
-    options.sigma = getSigma(Data)*1.4;
+    options.sigma = getSigma(Data)*1;
     options.degree=8;
 
     [Mapping_KPNS_Gauss,BkGm,R_kpns_gauss,Res,QDR_KPNS_Gauss,G_KPNS_Gauss] = kernel_pnsMain(Data,1,PGS,options);
@@ -34,7 +34,7 @@ if(loadData==0)
     R_kpca_gauss = 100*eig_val/sum(eig_val);
 
     options.KernelType = 'NPolynomial'
-    options.degree = 8;
+    options.degree = 13;
 
     
     [Mapping_KPNS_NPoly_5,BkGm,R_kpns_np5,Res,QDR_KPNS_NPoly_5,G_KPNS_NPoly_5] = kernel_pnsMain(Data,1,PGS,options);
