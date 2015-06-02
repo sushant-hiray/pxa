@@ -9,9 +9,6 @@ function  dim_reduction_sampling(Data,name,noSamples,maxDims,loadData)
     fprintf('Working on %s Dataset\n ', name);
     if(loadData==0)
         for i=1:noSamples
-            if(i==1)
-                continue;
-            end
             DataSampled = datasample(Data,ceil(0.8*TotalPoints),2);
             dim_reduction_data4(DataSampled,name,maxDims,0,i);
         end

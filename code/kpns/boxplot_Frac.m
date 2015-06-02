@@ -10,8 +10,8 @@ function   boxplot_Frac(A,name)
     index-0.1, median(new_A(:,:,2), 1), 'b.-', ...
     index+0.1, median(new_A(:,:,3), 1), 'm.-', ...
     index    , median(new_A(:,:,4), 1), 'c.-','LineWidth',2, 'MarkerSize', 25 );
-    hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast');
-%     hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','Location', 'east');
+%     hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','PCA','Location', 'southeast');
+    hLegend = legend('KPNS-Gauss','KPCA-Gauss','KPNS-NPoly5','KPCA-NPoly5','Location', 'east');
     set(hLegend,'FontSize',40);
     
 
@@ -49,7 +49,7 @@ function   boxplot_Frac(A,name)
     set(findobj(gca,'Type','text'),'FontSize',30);
 
     xlabel ('Modes of Variation', 'FontSize', 50,'VerticalAlignment', 'Top');
-    ylabel ('Quality DR', 'FontSize', 50);
+    ylabel ('Cumulative Variance', 'FontSize', 50);
     axis tight; a = axis; a(3) = a(3) - 0.05; axis (a); grid on;axis tight;
     filePath = strcat('../images/',name,'/boxplot_Frac', name,'_',int2str(size(A,1)));
     export_fig(filePath,'-nocrop', '-painters','-a2', '-png');

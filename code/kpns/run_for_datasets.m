@@ -26,7 +26,7 @@ return
 %dim_reduction_fertility % sigmaFactor 0.7, nPolyDegree 4, percentage 70 D
 %dim_reduction_planningrelax % sigmaFactor 1.4, nPolyDegree 8, percentage
 %70 D
-%dim_reduction_cb % sigmaFactor 1, nPolyDegree 13, percentage 70
+%dim_reduction_cb % sigmaFactor 1, nPolyDegree 13, percentage 70 D
 
 dim_reduction_parkinsons % sigmaFactor 0.5, nPolyDegree 23, percentage 70
 dim_reduction_iris% sigmaFactor 0.5, nPolyDegree 33, percentage 70 as you increase the poly degreee the shift increases
